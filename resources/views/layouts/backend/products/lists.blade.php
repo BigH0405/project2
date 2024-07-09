@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="{{asset('backend/css/styles.css')}}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -62,7 +64,7 @@
                         </thead>
                         <tbody>
                             @if (!empty($allProduct))
-                            @foreach($allProduct as $key => $item)
+                            @foreach ($allProduct as $key => $item)
                             <tr>
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->name}}</td>
@@ -81,8 +83,8 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="11" class="text-center" style="color: red">Không có sản phẩm nào</td>
-                            </tr>
+                                <td colspan="13" class="text-center" style="color: red">Không có người dùng</td>
+                              </tr>
                             @endif
                         </tbody>
                     </table>
