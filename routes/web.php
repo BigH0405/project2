@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,5 +47,17 @@ Route::get('/login', function () {
 
 Route::get('/contact', function () {
     return view('layouts/contact');
+});
+
+
+Route::prefix('/admin')->name('admin.')->group(function(){
+    Route::get('/', function(){
+        return view('layouts.backend.backend');
+    });
+
+
+Route::prefix('/product')->name('product.')->group(function(){
+    Route:: get('/product', [ProductController::class,'index'])->name('lists');
+});
 });
 
