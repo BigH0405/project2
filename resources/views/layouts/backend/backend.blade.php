@@ -19,7 +19,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         @include('parts.backend.page_title')
-                       @yield('content')
+                       <h1 class="text-center">Trang chủ Admin</h1>
                     </div>
                 </main>
                     @include('parts.backend.footer')

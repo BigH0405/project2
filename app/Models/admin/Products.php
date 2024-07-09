@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,9 +16,9 @@ class Products extends Model
     public $timestamps = true;
 
     protected $attributes = [
-
+        
     ];
 
+    const CREATED_AT = 'create_at';
+    const UPDATED_AT = 'update_at';
 }
-
-

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\clients\HomeController;
+use App\Http\Controllers\admin\ProductCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,8 +59,18 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 
 
 Route::prefix('/product')->name('product.')->group(function(){
-    Route:: get('/product', [ProductController::class,'index'])->name('lists');
+    Route:: get('/', [ProductController::class,'index'])->name('index');
 });
+
+Route::prefix('/cate')->name('cate.')->group(function(){
+    Route:: get('/', [ProductCategoryController::class,'index'])->name('index');
+    Route::get('/add',[ProductCategoryController::class,'add'])->name('add');
+    Route:: post('/add', [ProductCategoryController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [ProductCategoryController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [ProductCategoryController::class,'postEdit'])->name('post-edit');
+    Route:: get('/delete/{id}', [ProductCategoryController::class,'delete'])->name('delete');
+});
+
 });
 // Kết thúc route admin
 

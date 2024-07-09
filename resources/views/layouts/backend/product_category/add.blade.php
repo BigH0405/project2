@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Danh sách sản phẩm</title>
+    <title>{{$title}}</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="{{asset('backend/css/styles.css')}}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -23,27 +23,21 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{$title}}</h1>
-                    <a href="#" class="btn btn-warning mb-3">Quay về</a>
+                    <a href="{{route('admin.cate.index')}}" class="btn btn-warning mb-3">Quay về</a>
                     <form action="" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Tên sản phẩm</label>
-                                    <input type="text" class="form-control" id="name" name="name" required value="{{old('name')}}">
-                                    @if ($errors->has('name'))
-                                        <div class="alert alert-danger">
-                                            {{ $errors->first('name') }}
-                                        </div>
-                                    @endif
-                                </div>
+                            <div class="">
+                                <label for="">Tên danh mục</label>
+                                <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục..." value="{{old('name')}}">
+                                @error('name')
+                                <span style="color: red">{{$message}}</span>
+                                @enderror
                             </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="price">Giá sản phẩm</label>
-                                    <input type="number" class="form-control" id="price" name="price" required value="{{old('price')}}">
-                                    @if ($errors->has('price'))
-                                        <div class="alert alert-danger">
+                            <div class="mt-3">
+                                <button class="btn btn-success" type="submit">Thêm mới</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </main>
