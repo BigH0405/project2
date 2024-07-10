@@ -4,6 +4,7 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\admin\Products;
 
 class ProductCategory extends Model
 {
@@ -32,4 +33,8 @@ class ProductCategory extends Model
      public static function postEdit($id, $data){
         return ProductCategory::where('id', $id)->update($data);
      }
+
+     public function products() {
+        return $this->hasMany(Products::class, 'product_category');
+    }
 }

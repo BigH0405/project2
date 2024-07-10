@@ -29,20 +29,10 @@
                     <a href="{{route('admin.cate.add')}}" class="btn btn-primary mb-3">Thêm người dùng</a>
                     <form action="" method="GET">
                         <div class="row">
-                            <div class="col-3">
-                                <select name="" id="" class="form-control">
-                                    <option value="0">Danh mục điện thoại</option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select name="" id="" class="form-control">
-                                    <option value="0">Danh mục giảm giá</option>
-                                </select>
-                            </div>
                             <div class="col-4">
                                 <input type="search" name="keywords" id="" class="form-control mb-3" placeholder="Nhập từ khóa tìm kiếm..." value="{{request()->keywords}}">
                             </div>
-                            <div class="col-2">
+                            <div class="col-1">
                                 <button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
                             </div>
                         </div>
@@ -77,6 +67,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="float-right">
+                        {{$allCate->links()}}
+                      </div>
                 </div>
             </main>
             @include('parts.backend.footer')

@@ -8,10 +8,17 @@ use App\Models\admin\ProductCategory;
 use App\Http\Requests\admin\ProductCategoryRequest;
 class ProductCategoryController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $title = "Danh sách sản phẩm";
+        $search = null;
+        $search = $request->input('keywords');
+        $query = ProductCategory::query();
 
-        $allCate = ProductCategory::all();
+        if ($search) {
+        $query->where('name', 'like', '%'.$search.'%');
+        }
+
+        $allCate = $query->paginate(3)->withQueryString();
         return view('layouts.backend.product_category.lists',compact('title','allCate'));
     }
 
@@ -48,17 +55,30 @@ class ProductCategoryController extends Controller
             'name' => $request->name,
         ];
 
-        // Gọi phương thức tĩnh từ model để cập nhật danh mục sản phẩm
         ProductCategory::postEdit($id, $dataUpdate);
 
         return back()->with('msg', "Sửa danh mục thành công");
     }
 
-    public function delete($id){
+    public function delete($id) {
         $cate = ProductCategory::find($id);
-        ProductCategory::destroy($id);
-        return redirect()->route('admin.cate.index')->with('msg',"Xóa danh mục thành công");
-
-
+    
+        if ($cate) {
+            // Đếm số sản phẩm liên quan đến danh mục sản phẩm
+            $productCount = $cate->products()->count();
+    
+            // Kiểm tra nếu có sản phẩm liên quan
+            if ($productCount > 0) {
+                // Hiển thị thông báo lỗi và trả về trang danh mục sản phẩm
+                return redirect()->route('admin.cate.index')
+                                 ->with('msg', "Không thể xóa danh mục này vì còn $productCount sản phẩm đang sử dụng!");
+            }
+    
+            // Tiến hành xóa danh mục sản phẩm
+            ProductCategory::destroy($id);
+            return redirect()->route('admin.cate.index')->with('msg', "Xóa danh mục thành công");
+        }
+    
+        return redirect()->route('admin.cate.index')->with('msg', "Danh mục không tồn tại.");
     }
 }
