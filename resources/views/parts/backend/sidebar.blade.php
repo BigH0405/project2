@@ -47,7 +47,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{route('admin.sale.index')}}">Danh sách</a>
-                        <a class="nav-link" href="">Thêm mới</a>
+                        <a class="nav-link" href="{{route('admin.sale.add')}}">Thêm mới</a>
                     </nav>
                 </div>
                 <!-- Hết mã khuyến mãi -->
