@@ -23,6 +23,9 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{$title}}</h1>
+                    @if (session('msg_warning'))
+                    <div class="alert alert-danger">{{session('msg_warning')}}</div>
+                    @endif
                     <a href="#" class="btn btn-warning mb-3">Quay về</a>
                     <form action="" method="POST">
                         @csrf
