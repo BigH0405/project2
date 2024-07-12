@@ -35,12 +35,15 @@ class ProductCategoryController extends Controller
             'create_at'=>date('Y-m-d H:i:s')
         ];
         ProductCategory::create($dataInsert);
-        return redirect()->route('admin.cate.index')->with('msg',"Thêm danh mục thành công");
+        return redirect()->route('admin.cate.index')->with('msg',"Thêm danh mục thành công");   
     }
 
     public function edit($id){
-        $title = "Sửa danh mục sản phẩm";
+        $title = "Cập nhập danh mục sản phẩm";
         $cate = ProductCategory::find($id);
+        if(!$cate) {
+            return redirect()->route('admin.cate.index')->with('msg_warning', 'Danh mục không tồn tại');
+        }
         return view('layouts.backend.product_category.edit',compact('title','cate'));
     }
 
@@ -48,7 +51,7 @@ class ProductCategoryController extends Controller
         $cate = ProductCategory::find($id);
 
         if(!$cate) {
-            return redirect()->route('admin.cate.index')->with('msg', 'Danh mục không tồn tại');
+            return redirect()->route('admin.cate.index')->with('msg_warning', 'Danh mục không tồn tại');
         }
 
         $dataUpdate = [
@@ -71,7 +74,7 @@ class ProductCategoryController extends Controller
             if ($productCount > 0) {
                 // Hiển thị thông báo lỗi và trả về trang danh mục sản phẩm
                 return redirect()->route('admin.cate.index')
-                                 ->with('msg', "Không thể xóa danh mục này vì còn $productCount sản phẩm đang sử dụng!");
+                                 ->with('msg_warning', "Không thể xóa danh mục này vì còn $productCount sản phẩm đang sử dụng!");
             }
     
             // Tiến hành xóa danh mục sản phẩm
@@ -79,6 +82,6 @@ class ProductCategoryController extends Controller
             return redirect()->route('admin.cate.index')->with('msg', "Xóa danh mục thành công");
         }
     
-        return redirect()->route('admin.cate.index')->with('msg', "Danh mục không tồn tại.");
+        return redirect()->route('admin.cate.index')->with('msg_warning', "Danh mục không tồn tại.");
     }
 }
