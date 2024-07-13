@@ -45,7 +45,7 @@ class PromotionsRequest extends FormRequest
            'start_day.after_or_equal'=>'Ngày phải >= ngày hiện tại',
            'end_day.required'=> 'Thời gian không được để trống',
            'end_day.date' => 'Dữ liệu bạn nhập vào không phải thời gian',
-           'end_day.after_or_equal'=>'Ngày phải >= ngày hiện tại',
+           'end_day.after_or_equal'=>'Ngày phải >= ngày bắt đầu',
            'status.required'=>'Trạng thái không được để trống'
 
 
