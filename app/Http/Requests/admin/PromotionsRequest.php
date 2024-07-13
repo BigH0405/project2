@@ -26,7 +26,7 @@ class PromotionsRequest extends FormRequest
             'discount' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
             'start_day' => 'required|date|after_or_equal:today',
-            'end_day' => 'required|date|after_or_equal:today',
+            'end_day' => 'required|date|after_or_equal:start_day',
             'status'=> 'required'
         ];
     }
