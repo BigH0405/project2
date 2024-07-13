@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\clients\HomeController;
 use App\Http\Controllers\admin\ProductCategoryController;
+<<<<<<< HEAD
 
+=======
+use App\Http\Controllers\admin\PromotionController;
+use App\Http\Controllers\clients\HomeController;
+>>>>>>> e8fdb9afd2f26fdf9f53297b7b5e73c9a853e3ec
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,11 +62,12 @@ Route::prefix('/admin')->name('admin.')->group(function(){
         return view('layouts.backend.backend');
     });
 
-
+//Route sản phẩm
 Route::prefix('/product')->name('product.')->group(function(){
     Route:: get('/', [ProductController::class,'index'])->name('index');
 });
 
+// Route danh sách sản phẩm
 Route::prefix('/cate')->name('cate.')->group(function(){
     Route:: get('/', [ProductCategoryController::class,'index'])->name('index');
     Route::get('/add',[ProductCategoryController::class,'add'])->name('add');
@@ -72,6 +77,15 @@ Route::prefix('/cate')->name('cate.')->group(function(){
     Route:: get('/delete/{id}', [ProductCategoryController::class,'delete'])->name('delete');
 });
 
+// Route khuyến mãi
+Route::prefix('/sale')->name('sale.')->group(function(){
+    Route::get('/',[PromotionController::class, 'index'])->name('index');
+    Route::get('/add',[PromotionController::class,'add'])->name('add');
+    Route:: post('/add', [PromotionController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [PromotionController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [PromotionController::class,'postEdit'])->name('post-edit');
+    Route:: get('/delete/{id}', [PromotionController::class,'delete'])->name('delete');
+});
 });
 // Kết thúc route admin
 

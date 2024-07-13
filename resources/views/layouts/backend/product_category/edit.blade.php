@@ -26,6 +26,9 @@
                     @if (session('msg'))
                     <div class="alert alert-success">{{session('msg')}}</div>
                     @endif
+                    @if (session('msg_warning'))
+                    <div class="alert alert-danger">{{session('msg_warning')}}</div>
+                    @endif
                     <a href="{{route('admin.cate.index')}}" class="btn btn-warning mb-3">Quay về</a>
                     <form action="" method="POST">
                         @csrf
@@ -38,7 +41,7 @@
                                 @enderror
                             </div>
                             <div class="mt-3">
-                                <button class="btn btn-success" type="submit">Thêm mới</button>
+                                <button class="btn btn-success" type="submit">Cập nhập</button>
                             </div>
                         </div>
                     </form>
