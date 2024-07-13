@@ -3,12 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
-<<<<<<< HEAD
-
-=======
 use App\Http\Controllers\admin\PromotionController;
 use App\Http\Controllers\clients\HomeController;
->>>>>>> e8fdb9afd2f26fdf9f53297b7b5e73c9a853e3ec
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,5 +92,5 @@ Route::prefix('/')->name('clients.')->group(function(){
     
 
 });
-// Kết thúc route clients
+// Kết thúc route clientssw
 
