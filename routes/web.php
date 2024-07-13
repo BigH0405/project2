@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\clients\HomeController;
 use App\Http\Controllers\admin\ProductCategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
