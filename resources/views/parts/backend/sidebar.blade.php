@@ -19,7 +19,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{route('admin.product.index')}}">Danh sách</a>
-                        <a class="nav-link" href="#">Thêm mới</a>
+                        <a class="nav-link" href="{{route('admin.product.add')}}">Thêm mới</a>
                     </nav>
                 </div>
                 <!-- Hết sản phẩm -->
