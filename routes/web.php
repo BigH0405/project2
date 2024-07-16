@@ -16,41 +16,28 @@ use App\Http\Controllers\clients\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Route::get('/admin', function () {
-//     return view('layouts/backend');
-// });
 
-// Route::get('/client', function () {
-//     return view('layouts/clients');
-// });
 
-// Route::get('/product', function () {
-//     return view('layouts/products');
-// });
+Route::get('/detail', function () {
+    return view('layouts/product_detail');
+});
 
-// Route::get('/detail', function () {
-//     return view('layouts/product_detail');
-// });
+Route::get('/blog', function () {
+    return view('layouts/blog');
+});
 
-// Route::get('/blog', function () {
-//     return view('layouts/blog');
-// });
+Route::get('/blog-detail', function () {
+    return view('layouts/blog_detail');
+});
 
-// Route::get('/blog-detail', function () {
-//     return view('layouts/blog_detail');
-// });
+Route::get('/login', function () {
+    return view('layouts/auth_login');
+});
 
-// Route::get('/login', function () {
-//     return view('layouts/auth_login');
-// });
-
-// Route::get('/contact', function () {
-//     return view('layouts/contact');
-// });
+Route::get('/contact', function () {
+    return view('layouts/contact');
+});
 
 // Route admin
 Route::prefix('/admin')->name('admin.')->group(function(){
