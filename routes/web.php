@@ -48,6 +48,11 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 //Route sản phẩm
 Route::prefix('/product')->name('product.')->group(function(){
     Route:: get('/', [ProductController::class,'index'])->name('index');
+    Route::get('/add',[ProductController::class,'add'])->name('add');
+    Route:: post('/add', [ProductController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [ProductController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [ProductController::class,'postEdit'])->name('post-edit');
+    Route:: get('/delete/{id}', [ProductController::class,'delete'])->name('delete');
 });
 
 // Route danh sách sản phẩm

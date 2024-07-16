@@ -7,7 +7,6 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Tổng quan
                 </a>
-
                 {{-- @include('parts.backend.menu_item', [
                     'title' => 'Sản phẩm',
                     'name' => 'product',
