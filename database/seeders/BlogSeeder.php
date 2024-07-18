@@ -20,9 +20,8 @@ class BlogSeeder extends Seeder
             'image'=>'Không có',
             'description'=>'đasad',
             'views'=>'1',
-            'blog_id'=> '1',
+            'blog_id'=> '4',
             'user_id'=> '4',
-            'comment_id'=>1,
             'created_at'=> date('Y-m-d H:i:s'),
             'updated_at'=> date('Y-m-d H:i:s'),
         ]);
@@ -31,13 +30,12 @@ class BlogSeeder extends Seeder
         for($i = 1; $i<=10;$i++){
             DB::table('blogs')->insert([
                 'title'=> 'Tiêu đề '.rand(2,10),
-                'short_description'=> $faker->text,
+                'short_description'=> $faker->sentence,
                 'image'=>'Không có',
                 'description'=>$faker->text,
                 'views'=>rand(0,100),
                 'blog_id'=> rand(0,10),
                 'user_id'=>rand(4,14),
-                'comment_id'=>rand(1,19),
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at'=> date('Y-m-d H:i:s'),
             ]);

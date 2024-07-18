@@ -32,7 +32,7 @@ class productSeeder extends Seeder
                 'name'=> 'Sản phẩm '.rand(1,10),
                 'price'=> rand(10000,1000000),
                 'image'=>'Không có',
-                'product_category'=>rand(2,17),
+                'product_category'=>rand(1,10),
                 'quanlity'=>rand(1,100),
                 'short_description'=>$faker->sentence,
                 'description'=>$faker->sentence,

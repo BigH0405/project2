@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'phone'=>'0123456789',
             'address'=>'Hà Nội',
             'status'=>1,
-            'group_id'=>34,
+            'group_id'=>1,
             'created_at'=> date('Y-m-d H:i:s'),
             'updated_at'=> date('Y-m-d H:i:s'),
         ]);
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'phone'=>$faker->phoneNumber,
                 'address'=>$faker->address,
                 'status'=>rand(0,1),
-                'group_id'=>rand(34,55),
+                'group_id'=>rand(1,11),
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at'=> date('Y-m-d H:i:s'),
             ]);
