@@ -15,12 +15,9 @@ class CommentSeeder extends Seeder
     public function run(): void
     {
         DB::table('comments')->insert([
-            'fullname'=> 'Người dùng 1',
-            'email'=> 'nguoidung1@gmail.com',
             'user_id'=>4,
-            'product_id'=>9,
-            'phone'=>'012345678',
-            'message'=> 'ưiaodalsjdlksajd',
+            'blog_id'=>3,
+            'messege'=> 'ưiaodalsjdlksajd',
             'created_at'=> date('Y-m-d H:i:s'),
             'updated_at'=> date('Y-m-d H:i:s'),
         ]);
@@ -28,12 +25,9 @@ class CommentSeeder extends Seeder
         $faker = Factory::create();
         for($i = 1; $i<=10;$i++){
             DB::table('comments')->insert([
-                'fullname'=> $faker->name,
-                'email'=> $faker->email,
-                'user_id'=> rand(4,14),
-                'product_id'=>rand(9,23),
-                'phone'=>$faker->phoneNumber,
-                'message'=> $faker->text,
+                'user_id'=> rand(3,13),
+                'blog_id'=>rand(3,10),
+                'messege'=> $faker->text,
                 'created_at'=> date('Y-m-d H:i:s'),
                 'updated_at'=> date('Y-m-d H:i:s'),
             ]);

@@ -29,7 +29,7 @@ class ContactSeeder extends Seeder
             DB::table('contacts')->insert([
                 'fullname'=> $faker->name,
                 'email'=> $faker->email,
-                'user_id'=> rand(4,14),
+                'user_id'=> rand(3,13),
                 'phone'=>$faker->phoneNumber,
                 'message'=> $faker->text,
                 'created_at'=> date('Y-m-d H:i:s'),

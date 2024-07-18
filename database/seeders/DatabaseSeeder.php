@@ -14,6 +14,7 @@ use Database\Seeders\GroupSeeder;
 use Database\Seeders\productCateSeeder;
 use Database\Seeders\productSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ReviewSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -21,8 +22,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(BlogSeeder::class);
+        // $this->call(BlogSeeder::class);
         // $this->call(CommentSeeder::class);
+        $this->call(ReviewSeeder::class);
         // $this->call(ContactSeeder::class);
         // $this->call(BannerSeeder::class);
         // $this->call(productSeeder::class);
