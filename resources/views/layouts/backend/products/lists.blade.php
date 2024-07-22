@@ -23,17 +23,26 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{$title}}</h1>
-                    <a href="#" class="btn btn-primary mb-3">Thêm người dùng</a>
+                    @if (session('msg'))
+                    <div class="alert alert-success">{{session('msg')}}</div>
+                    @endif
+                    <a href="{{route('admin.product.add')}}" class="btn btn-primary mb-3">Thêm sản phẩm</a>
                     <form action="" method="GET">
                         <div class="row">
                             <div class="col-3">
-                                <select name="" id="" class="form-control">
+                                <select name="product_category" id="" class="form-control">
                                     <option value="0">Danh mục điện thoại</option>
+                                    @foreach ($allCate as $key => $item)
+                                        <option value="{{ $item->id }}"{{old('product_category')==$item->id?'selected':false}}>{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-3">
-                                <select name="" id="" class="form-control">
+                                <select name="price_sale" id="" class="form-control">
                                     <option value="0">Danh mục giảm giá</option>
+                                    @foreach ($allPromo as $key => $item)
+                                    <option value="{{ $item->id }}" {{old('price_sale')==$item->id?'selected':false}}>{{ $item->name }}</option>
+                                @endforeach
                                 </select>
                             </div>
                             <div class="col-4">
@@ -74,20 +83,23 @@
                                 <td>{{$item->product_category}}</td>
                                 <td>{{$item->quantity}}</td>
                                 <td>{{$item->short_description}}</td>
-                                <td>{{$item->description}}</td>
+                                <td >{{$item->description}}</td>
                                 <td>{{$item->create_at}}</td>
                                 <td>{{$item->update_at}}</td>
-                                <td><button class="btn btn-warning sm-2">Sửa</button></td>
-                                <td><button class="btn btn-danger sm-2">Xóa</button></td>
+                                <td><a href="{{route('admin.product.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                <td><a href="{{route('admin.product.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="13" class="text-center" style="color: red">Không có người dùng</td>
+                                <td colspan="13" class="text-center" style="color: red">Không có sản phẩm</td>
                               </tr>
                             @endif
                         </tbody>
                     </table>
+                    <div class="float-right">
+                        {{$allProduct->links()}}
+                      </div>
                 </div>
             </main>
             @include('parts.backend.footer')

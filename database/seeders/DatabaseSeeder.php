@@ -4,7 +4,17 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Database\Seeders\BannerSeeder;
+use Database\Seeders\BlogCateSeeder;
+use Database\Seeders\BlogSeeder;
+use Database\Seeders\CommentSeeder;
+use Database\Seeders\ContactSeeder;
+use Database\Seeders\CouponSeeder;
+use Database\Seeders\GroupSeeder;
+use Database\Seeders\productCateSeeder;
+use Database\Seeders\productSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\ReviewSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,11 +22,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // $this->call(BlogSeeder::class);
+        // $this->call(CommentSeeder::class);
+        $this->call(ReviewSeeder::class);
+        // $this->call(ContactSeeder::class);
+        // $this->call(BannerSeeder::class);
+        // $this->call(productSeeder::class);
+        // $this->call(CouponSeeder::class);    
+        // $this->call(UserSeeder::class);
+        // $this->call(GroupSeeder::class);
+        // $this->call(productCateSeeder::class);
+        // $this->call(BlogCateSeeder::class);
     }
 }
