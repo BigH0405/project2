@@ -19,6 +19,7 @@ class ProductCategoryController extends Controller
         }
 
         $allCate = $query->paginate(3)->withQueryString();
+        
         return view('layouts.backend.product_category.lists',compact('title','allCate'));
     }
 
