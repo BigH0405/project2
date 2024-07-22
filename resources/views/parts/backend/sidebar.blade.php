@@ -18,9 +18,10 @@
                     // 'includes' => ['/admin/lessons/*'],
                 ])
 
+
                 @include('parts.backend.menu_item', [
-                    'title' => 'Khuyến mãi',
-                    'name' => 'sale',
+                'title' => 'Blog',
+                'name' => 'blog',
                 ])
 
 
