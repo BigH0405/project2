@@ -4,7 +4,6 @@ use App\Http\Controllers\admin\CouponController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
-use App\Http\Controllers\admin\PromotionController;
 use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\clients\HomeController;
