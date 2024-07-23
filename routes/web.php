@@ -4,7 +4,6 @@ use App\Http\Controllers\admin\CouponController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
-use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\clients\HomeController;
 /*
@@ -65,6 +64,16 @@ Route::prefix('/cate')->name('cate.')->group(function(){
     Route:: get('/edit/{id}', [ProductCategoryController::class,'edit'])->name('edit');
     Route:: post('/edit/{id}', [ProductCategoryController::class,'postEdit'])->name('post-edit');
     Route:: get('/delete/{id}', [ProductCategoryController::class,'delete'])->name('delete');
+});
+
+// Route danh sách sản phẩm
+Route::prefix('/coupons')->name('coupons.')->group(function(){
+    Route:: get('/', [CouponController::class,'index'])->name('index');
+    Route::get('/add',[CouponController::class,'add'])->name('add');
+    Route:: post('/add', [CouponController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [CouponController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [CouponController::class,'postEdit'])->name('post-edit');
+    Route:: get('/delete/{id}', [CouponController::class,'delete'])->name('delete');
 });
 
 // Route blog
