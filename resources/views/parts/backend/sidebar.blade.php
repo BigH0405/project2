@@ -17,9 +17,17 @@
                     'name' => 'cate',
                 ])
                 @include('parts.backend.menu_item', [
+                    'title' => 'Khuyến mãi',
+                    'name' => 'coupons',
+                ])
+
+                @include('parts.backend.menu_item', [
                 'title' => 'Blog',
                 'name' => 'blog',
                 ])
+
+
+
 
 
             </div>
