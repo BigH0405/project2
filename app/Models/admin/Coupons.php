@@ -5,12 +5,11 @@ namespace App\Models\admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Coupons extends Model
 {
     use HasFactory;
 
-    protected $table = "products";
-
+    protected $table="coupons";
     protected $primaryKey = "id";
 
     public $timestamps = true;
@@ -20,23 +19,18 @@ class Products extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     protected $fillable = [
-        'name',
-        'price',
-        'image',
-        'product_category',
-        'quanlity',
-        'short_description',
-        'description',
+        'code',
+        'discount',
+        'user_id',
+        'quantily',
+        'start_day',
+        'end_day',
         'created_at',
         'updated_at'
     ];
     public function postAdd($data)
     {
-        return Products::create($data);
+        return Coupons::create($data);
     }
-    public static function postEdit($id, $data){
-        return Products::where('id', $id)->update($data);
-     }
-     
 
 }

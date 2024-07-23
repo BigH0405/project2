@@ -37,14 +37,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-3">
-                                <select name="price_sale" id="" class="form-control">
-                                    <option value="0">Danh mục giảm giá</option>
-                                    @foreach ($allPromo as $key => $item)
-                                    <option value="{{ $item->id }}" {{old('price_sale')==$item->id?'selected':false}}>{{ $item->name }}</option>
-                                @endforeach
-                                </select>
-                            </div>
                             <div class="col-4">
                                 <input type="search" name="keywords" id="" class="form-control mb-3" placeholder="Nhập từ khóa tìm kiếm..." value="{{request()->keywords}}">
                             </div>
@@ -59,7 +51,6 @@
                                 <th>ID</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Giá</th>
-                                <th>Giảm giá</th>
                                 <th>Ảnh</th>
                                 <th>Danh mục</th>
                                 <th>Số lượng</th>
@@ -78,14 +69,13 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->price}}</td>
-                                <td>{{$item->price_sale}}</td>
-                                <td>{{$item->image}}</td>
+                                <td><img src="{{asset($item->image)}}" alt="" height="200px"></td>
                                 <td>{{$item->product_category}}</td>
-                                <td>{{$item->quantity}}</td>
+                                <td>{{$item->quanlity}}</td>
                                 <td>{{$item->short_description}}</td>
                                 <td >{{$item->description}}</td>
-                                <td>{{$item->create_at}}</td>
-                                <td>{{$item->update_at}}</td>
+                                <td>{{$item->created_at}}</td>
+                                <td>{{$item->updated_at}}</td>
                                 <td><a href="{{route('admin.product.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
                                 <td><a href="{{route('admin.product.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
                             </tr>
