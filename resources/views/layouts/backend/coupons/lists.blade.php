@@ -1,4 +1,3 @@
-
     @include('parts.backend.header')
     <div id="layoutSidenav">
         @include('parts.backend.sidebar')
@@ -12,7 +11,7 @@
                     @if (session('msg_warning'))
                     <div class="alert alert-danger">{{session('msg_warning')}}</div>
                     @endif
-                    <a href="{{route('admin.cate.add')}}" class="btn btn-primary mb-3">Thêm danh mục sản phẩm</a>
+                    <a href="{{route('admin.coupons.add')}}" class="btn btn-primary mb-3">Thêm mã giảm giá</a>
                     <form action="" method="GET">
                         <div class="row">
                             <div class="col-4">
@@ -27,7 +26,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên danh mục</th>
+                                <th>Tên mã</th>
+                                <th>Giảm giá</th>
+                                <th>Số lượng</th>
+                                <th>Người dùng</th>
+                                <th>Ngày bắt đâu</th>
+                                <th>Ngày kết thúc</th>
                                 <th>Thời gian tạo</th>
                                 <th>Thời gian cập nhập</th>
                                 <th>Sửa</th>
@@ -35,29 +39,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (!empty($allCate))
-                            @foreach ($allCate as $key => $item)
-                            <tr>
+                            @if(!empty($allCoupon))
+                            @foreach ($allCoupon as $key =>$item)
+                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$item->name}}</td>
+                                <td>{{$item->code}}</td>
+                                <td>{{$item->discount}}</td>
+                                <td>{{$item->quantily}}</td>
+                                <td>{{$item->user_id}}</td>
+                                <td>{{$item->start_day}}</td>
+                                <td>{{$item->end_day}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
-                                <td><a href="{{route('admin.cate.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
-                                <td><a href="{{route('admin.cate.delete',['id' => $item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>
-                            </tr>
+                                <td><a href="{{route('admin.coupons.edit',['id'=>$item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                <td><a href="{{route('admin.coupons.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                            </tr>   
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="6" class="text-center" style="color: red">Không có danh sách sản phẩm nào</td>
-                              </tr>
+                                <td colspan="11" class="text-center">Không có mã giảm giá nào</td>
+                            </tr>
                             @endif
                         </tbody>
                     </table>
                     <div class="float-right">
-                        {{$allCate->links()}}
+                        {{$allCoupon->links()}}
                       </div>
                 </div>
             </main>
             @include('parts.backend.footer')
         </div>
-    
