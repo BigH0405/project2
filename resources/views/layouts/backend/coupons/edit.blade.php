@@ -56,7 +56,7 @@
                                 <label for="">User_id</label>
                                 <select name="user_id" id="" class="form-control">
                                     @foreach ($allUser as $key => $item)
-                                        <option value="{{ $item->id }}" {{old('user_id')??$coupons->user_id==$item->id?'selected':false}}>{{ $item->id }}</option>
+                                        <option value="{{ $item->id }}" {{old('user_id')??$CouponDetail->user_id==$item->id?'selected':false}}>{{ $item->id }}</option>
                                     @endforeach
                                 </select>
                                 @error('price_sale')

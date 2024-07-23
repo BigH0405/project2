@@ -46,6 +46,9 @@ class CouponController extends Controller
     public function edit($id){
         $title ="Cập nhật mã giảm giá";
         $CouponDetail = Coupons::find($id);
+        if(!$CouponDetail) {
+            return redirect()->route('admin.coupons.index')->with('msg_warning', 'Mã giảm giá không tồn tại');
+        }
         $allUser=Users::all();
         return view('layouts.backend.coupons.edit',compact('title','allUser','CouponDetail'));
     }
