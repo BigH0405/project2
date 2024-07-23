@@ -23,7 +23,7 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{$title}}</h1>
-                    <a href="#" class="btn btn-primary mb-3">Thêm bài viết </a>
+                    <a href="{{route('admin.blog.add')}}" class="btn btn-primary mb-3">Thêm bài viết </a>
                     <form action="" method="GET">
                         <div class="row">
                             <div class="col-3">
@@ -95,4 +95,4 @@
     <script src="{{asset('backend/js/datatables-simple-demo.js')}}"></script>
 </body>
 
-</html>
+{{-- </html> --}}

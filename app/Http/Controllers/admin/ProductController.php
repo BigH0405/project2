@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index(Request $request){
         $title = "Sản phẩm";
         $allCate = ProductCategory::all();
-        $allPromo = Promotions::all();
+        // $allPromo = Promotions::all();
         $search = null;
         $search = $request->input('keywords');
         $query = Products::query();
@@ -35,7 +35,7 @@ class ProductController extends Controller
     }
     public function add(){
         $allCate = ProductCategory::all();
-        $allPromo = Promotions::all();
+        // $allPromo = Promotions::all();
         $title = "Thêm mới sản phẩm";
         return view('layouts.backend.products.add',compact('title','allCate','allPromo'));
         
@@ -58,7 +58,7 @@ class ProductController extends Controller
     public function edit($id){
         $title = "Cập nhập sản phẩm";
         $allCate = ProductCategory::all();
-        $allPromo = Promotions::all();
+        // $allPromo = Promotions::all();
         $product =  Products::find($id);
         if(!$product) {
             return redirect()->route('admin.products.index')->with('msg_warning', 'Sản phẩm không tồn tại');
