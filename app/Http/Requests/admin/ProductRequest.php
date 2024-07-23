@@ -22,11 +22,11 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return  [
-            'name' => 'required|unique:product_category,name',
+            'name' => 'required|unique:products,name',
             'price'=> 'required|numeric|min:0',
-            'price_sale'=>'required',
             'product_category'=>'required',
-            'quantity'=>'required|numeric|min:0',
+            'image'=>'required|mimes:png,jpg,jpge,webp',
+            'quanlity'=>'required|numeric|min:0',
             'short_description'=>'required',
             'description'=>'required',
             'create_at',
@@ -36,14 +36,16 @@ class ProductRequest extends FormRequest
 
     public function messages(){
         return [
-           'name.required' => 'Tên danh mục không được để trống',
-           'name.unique' => 'Tên danh mục đã tồn tại',
+           'name.required' => 'Tên sản phẩm không được để trống',
+           'name.unique' => 'Tên sản phẩm đã tồn tại',
            'price.required'=>'Giá tiền không được để trống',
            'price.numeric'=>'Giá tiền phải là số',
            'price.min'=>'Giá tiền phải lớn hơn 0',
-           'quantity.required'=>'Số lượng không được để trống',
-           'quantity.numeric'=>'Số lượng phải là số',
-           'quantity.min'=>'Số lượng phải lớn hơn 0',
+           'image.required'=>'Ảnh không được để trống',
+           'image.mimes'=>'Sai định dạng ảnh',
+           'quanlity.required'=>'Số lượng không được để trống',
+           'quanlity.numeric'=>'Số lượng phải là số',
+           'quanlity.min'=>'Số lượng phải lớn hơn 0',
            'price_sale.required' => 'Giá không được để trống',
            'product_category.required' => 'Danh mục sản phẩm không được để trống',
            'short_description.required' => 'Mô tả không được để trống',

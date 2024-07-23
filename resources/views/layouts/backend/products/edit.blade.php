@@ -12,7 +12,7 @@
                 <div class="alert alert-danger">{{session('msg_warning')}}</div>
                 @endif
                 <a href="{{route('admin.product.index')}}" class="btn btn-warning mb-3">Quay về</a>
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -27,17 +27,6 @@
                             <input type="text" name="price" class="form-control" placeholder="Nhập số tiền giảm..." value="{{old('price')?? $product->price}}">
                             @error('price')
                             <span style="color: red">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="">Giá sale</label>
-                            <select name="price_sale" id="" class="form-control">
-                                @foreach ($allPromo as $key => $item)
-                                    <option value="{{ $item->id }}" {{old('price_sale')?? $product->price_sale==$item->id?'selected':false}}>{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('price_sale')
-                                <span style="color: red">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-6">
@@ -61,8 +50,8 @@
                         </div>
                         <div class="col-6">
                             <label for="">Số lượng</label>
-                            <input type="text" name="quantity" class="form-control" placeholder="Nhập số lượng..." value="{{old('quantity')?? $product->quantity}}">
-                            @error('quantity')
+                            <input type="text" name="quanlity" class="form-control" placeholder="Nhập số lượng..." value="{{old('quanlity')?? $product->quanlity}}">
+                            @error('quanlity')
                             <span style="color: red">{{$message}}</span>
                             @enderror
                         </div>

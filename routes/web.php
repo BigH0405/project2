@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\CouponController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
