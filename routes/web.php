@@ -66,7 +66,7 @@ Route::prefix('/cate')->name('cate.')->group(function(){
     Route:: get('/delete/{id}', [ProductCategoryController::class,'delete'])->name('delete');
 });
 
-// Route danh sách sản phẩm
+// Route danh sách khuyễn mãi
 Route::prefix('/coupons')->name('coupons.')->group(function(){
     Route:: get('/', [CouponController::class,'index'])->name('index');
     Route::get('/add',[CouponController::class,'add'])->name('add');
