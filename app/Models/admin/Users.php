@@ -4,7 +4,8 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\admin\Groups;
+use App\Models\admin\Blog;
 class Users extends Model
 {
     use HasFactory;
@@ -15,6 +16,35 @@ class Users extends Model
 
     protected $attributes = [];
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    protected $fillable = [
+        'fullname',
+        'email',
+        'email_verified_at',
+        'phone',
+        'address',
+        'status',
+        'group_id ',
+        'password',
+        'remember_token',
+        'lastLogin',
+        'created_at',
+        'updated_at',
+    ];
+
+    public function postAdd($data)
+    {
+        return Users::create($data);
+    }
+    public static function postEdit($id, $data){
+        return Users::where('id', $id)->update($data);
+     }
+     
+    public function Group(){
+        return $this->belongsTo(Groups::class, 'group_id');
+    }
+
+    public function blogs() {
+        return $this->hasMany(Blog::class, 'user_id');
+    }
+    
 }
