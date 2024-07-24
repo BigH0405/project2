@@ -15,9 +15,6 @@ class Coupons extends Model
     public $timestamps = true;
 
     protected $attributes = [];
-
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
     protected $fillable = [
         'code',
         'discount',

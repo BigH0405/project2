@@ -8,6 +8,9 @@
                     @if (session('msg'))
                     <div class="alert alert-success">{{session('msg')}}</div>
                     @endif
+                    @if (session('msg_warning'))
+                    <div class="alert alert-danger">{{session('msg_warning')}}</div>
+                    @endif
                     <a href="{{route('admin.product.add')}}" class="btn btn-primary mb-3">Thêm sản phẩm</a>
                     <form action="" method="GET">
                         <div class="row">

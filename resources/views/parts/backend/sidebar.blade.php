@@ -8,23 +8,33 @@
                     Tổng quan
                 </a>
                 @include('parts.backend.menu_item', [
+                    'title' => 'Danh sách sản phẩm',
+                    'name' => 'cate',
+                ])
+                @include('parts.backend.menu_item', [
                     'title' => 'Sản phẩm',
                     'name' => 'product',
                 ])
 
                 @include('parts.backend.menu_item', [
-                    'title' => 'Danh sách sản phẩm',
-                    'name' => 'cate',
-                ])
-                @include('parts.backend.menu_item', [
-                    'title' => 'Khuyến mãi',
+                    'title' => 'Danh sách Khuyến mãi',
                     'name' => 'coupons',
                 ])
 
                 @include('parts.backend.menu_item', [
-                'title' => 'Blog',
+                'title' => 'Danh sách Blog',
                 'name' => 'blog',
                 ])
+
+                @include('parts.backend.menu_item', [
+                    'title' => 'Danh sách người dùng',
+                    'name' => 'user',
+                    ])
+
+                @include('parts.backend.menu_item', [
+                    'title' => 'Danh sách nhóm',
+                    'name' => 'group',
+                    ])
 
 
 
