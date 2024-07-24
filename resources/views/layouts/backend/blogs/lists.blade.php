@@ -49,7 +49,7 @@
                                 <td>{{$item->title}}</td>
                                 <td>{{$item->image}}</td>
                                 <td>{{$item->views}}</td>
-                                <td>{{$item->user_id}}</td>
+                                <td>{{$item->User ? $item->User->fullname : 'Không có tác giả'}}</td>
                                 <td>{{$item->blog_id}}</td>
                                 <td>{{$item->short_description}}</td>
                                 <td>{{$item->description}}</td>

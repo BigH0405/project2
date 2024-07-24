@@ -26,7 +26,11 @@ class BlogRequest extends FormRequest
             'title' => 'required',
             'image' => 'required',
             'views' => 'required|numeric|min:0',
-            'user_id' => 'required',
+            'user_id' => ['required', 'integer' ,function($atribute, $value, $fail){
+                if($value==0){
+                    $fail('Vui lòng chọn nhóm');
+                }
+            }],
             'blog_id' => 'required',
             'short_description' => 'required',
             'description' => 'required',
@@ -41,6 +45,7 @@ class BlogRequest extends FormRequest
             'views.required' => 'Lượt xem không được để trống',
             'views.numeric' => 'Lượt xem phải là 0',
             'views.min' => 'Lượt xem phải lớn hơn 1',
+            'user_id.required'=>'Nhóm không được bỏ trống',
             'blog_id.required' => 'Danh mục bài viết không được bỏ trống ',
             'short_description.required' => 'Mô tả ngắn không được bỏ trống',
             'description.required' => 'Miêu tả dài không được bỏ trống',

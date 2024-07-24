@@ -9,10 +9,10 @@
                     <form action="" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Mô tả</label>
-                                    <input type="text" class="form-control" name="title" value="{{old('title')}}">
+                                    <input type="text" class="form-control" name="title" value="{{old('title')}}" placeholder="Nhập mô tả...">
                                     @if ($errors->has('title'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('title') }}
@@ -20,10 +20,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for=""> Hình ảnh </label>
-                                    <input type="text" class="form-control" name="image" value="{{old('image')}}">
+                                    <input type="text" class="form-control" name="image" value="{{old('image')}}" placeholder="Chọn hình ảnh...">
                                     @if ($errors->has('image'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('image') }}
@@ -31,10 +31,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for=""> Lượt xem </label>
-                                    <input type="text" class="form-control" name="views" value="{{old('views')}}">
+                                    <input type="text" class="form-control" name="views" value="{{old('views')}}" placeholder="Nhập lượt xem...">
                                     @if ($errors->has('views'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('views') }}
@@ -42,10 +42,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for=""> Mô tả ngắn </label>
-                                    <input type="text" class="form-control" name="short_description" value="{{old('short_description')}}">
+                                    <input type="text" class="form-control" name="short_description" value="{{old('short_description')}}" placeholder="Nhập mô tả ngắn...">
                                     @if ($errors->has('short_description'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('short_description') }}
@@ -53,10 +53,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for=""> Miêu tả </label>
-                                    <input type="text" class="form-control" name="description" value="{{old('description')}}">
+                                    <input type="text" class="form-control" name="description" value="{{old('description')}}" placeholder="Nhập miêu tả...">
                                     @if ($errors->has('description'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('description') }}
@@ -64,7 +64,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Danh mục bài viết</label>
                                     <input type="text" class="form-control" name="blog_id" value="{{old('blog_id')}}">
@@ -75,10 +75,17 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for=""> Tác giả </label>
-                                    <input type="text" class="form-control" name="user_id" value="{{old('user_id')}}">
+                                   <select name="user_id" id="" class="form-control">
+                                    <option value="0">Chọn tác giả</option>
+                                    @if (!empty($allUser))
+                                    @foreach ($allUser as $item)
+                                    <option value="{{$item->id}}">{{$item->fullname}}</option>
+                                    @endforeach
+                                @endif
+                                   </select>
                                     @if ($errors->has('user_id'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('user_id') }}

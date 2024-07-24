@@ -53,7 +53,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Danh mục bài viết</label>
-                                <input type="text" class="form-control" name="blog_id" value="{{old('blog_id')}}">
+                                <input type="text" class="form-control" name="blog_id" value="{{old('blog_id') ?? $Blog->blog_id}}">
                                 @if ($errors->has('blog_id'))
                                     <div class="alert alert-danger">
                                         {{ $errors->first('blog_id') }}
@@ -64,29 +64,20 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for=""> Tác giả </label>
-                                <input type="text" class="form-control" name="user_id" value="{{old('user_id')}}">
+                                <select name="user_id" id="" class="form-control">
+                                    <option value="0">Chọn tác giả</option>
+                                    @if(!empty($allUser))
+                                    @foreach ($allUser as $item)
+                                    <option value="{{$item->id}}" {{old('user_id')==$item->id || $Blog->user_id==$item->id?'selected':false}}>{{$item->fullname}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
                                 @if ($errors->has('user_id'))
                                     <div class="alert alert-danger">
                                         {{ $errors->first('user_id') }}
                                     </div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="col-6">
-                           <!-- Blade Template -->
-                            <label for="">Ngày bắt đầu</label>
-                            <input type="date" name="start_day" class="form-control" placeholder="Nhập ngày bắt đầu..."
-                            value="{{ old('start_day')?? $Blog->start_day }}">
-                            @error('start_day')
-                            <span style="color: red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="">Ngày kết thúc</label>
-                            <input type="date" name="end_day" class="form-control" value="{{old('end_day') ?? $Blog->end_day}}">
-                            @error('end_day')
-                            <span style="color: red">{{$message}}</span>
-                            @enderror
                         </div>
                         <div class="mt-3">
                             <button class="btn btn-success" type="submit">Cập nhập</button>

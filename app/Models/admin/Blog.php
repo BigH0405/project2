@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use App\Models\admin\Users;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,4 +36,9 @@ class Blog extends Model
     public static function postEdit($id,$data){
         return Blog::where('id',$id)->update($data);
     }
+
+    public function User() {
+        return $this->belongsTo(Users::class, 'user_id');
+    }
+
 }

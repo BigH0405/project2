@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\BlogRequest;
 use App\Models\admin\Blog;
+use App\Models\admin\Users;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,14 +13,21 @@ class BlogController extends Controller
     //
     public function index(Request $request){
         $title = "Bài viết";
-        $allBlog = Blog::query()->paginate(5)->withQueryString();
+        $search = null;
+        $search = $request->input('keywords');
+        $query = Blog::query()->with('User');
+        if ($search) {
+            $query->where('title', 'like', '%'.$search.'%');
+        }
+        $allBlog = $query->paginate(5)->withQueryString();
         return view('layouts.backend.blogs.lists',compact('title','allBlog'));
     }
 
     public function add(){
         $title = 'Thêm mới bài viết';
+        $allUser = Users::all();
         // $allCate = BlogCategory::all();
-        return view('layouts.backend.blogs.add',compact('title'));
+        return view('layouts.backend.blogs.add',compact('title','allUser'));
     }
 
     public function postAdd(BlogRequest $request){
@@ -39,10 +47,11 @@ class BlogController extends Controller
     public function edit($id){
         $title = "Cập nhật sản phẩm";
         $Blog = Blog::find($id);
+        $allUser = Users::all();
         if(!$Blog){
             return redirect()->route('admin.blog.index')->with('msg_warning','Bài viết không tồn tại');
         }
-        return view('layouts.backend.blogs.edit',compact('title','Blog'));
+        return view('layouts.backend.blogs.edit',compact('title','Blog','allUser'));
     }
     public function postEdit(BlogRequest $request, $id){
         $Blog = Blog::find($id);
