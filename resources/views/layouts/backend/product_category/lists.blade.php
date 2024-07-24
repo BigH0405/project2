@@ -56,8 +56,10 @@
                     <div class="float-right">
                         {{$allCate->links()}}
                       </div>
+                    </div>
+                </div>
                 </div>
             </div>
-            </main>
-            @include('parts.backend.footer')
+                    </main>
+                    @include('parts.backend.footer')
     

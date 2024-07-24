@@ -26,5 +26,7 @@
                     </form>
                 </div>
             </div>
+            </div>
+        </div>
             </main>
             @include('parts.backend.footer')
