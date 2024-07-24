@@ -7,6 +7,6 @@
                         @include('parts.backend.page_title')
                        <h1 class="text-center">Trang chủ Admin</h1>
                     </div>
+                </div>
                 </main>
                     @include('parts.backend.footer')
-            </div>
