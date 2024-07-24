@@ -70,7 +70,7 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->price}}</td>
                                 <td><img src="{{asset($item->image)}}" alt="" height="200px"></td>
-                                <td>{{$item->product_category}}</td>
+                                <td>{{$item->productCate->name}}</td>
                                 <td>{{$item->quanlity}}</td>
                                 <td>{{$item->short_description}}</td>
                                 <td >{{$item->description}}</td>

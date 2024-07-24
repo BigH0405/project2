@@ -38,5 +38,8 @@ class Products extends Model
         return Products::where('id', $id)->update($data);
      }
      
+     public function productCate() {
+        return $this->belongsTo(ProductCategory::class, 'id');
+    }
 
 }

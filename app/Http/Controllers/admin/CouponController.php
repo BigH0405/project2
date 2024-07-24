@@ -66,7 +66,7 @@ class CouponController extends Controller
             'quantily'=>$request->quantily,
             'start_day'=>$request->start_day,
             'end_day'=>$request->end_day,
-            'update_at' => date('Y-m-d H:i:s') 
+            'updated_at' => date('Y-m-d H:i:s') 
         ];
 
         Coupons::postEdit($id, $dataUpdate);

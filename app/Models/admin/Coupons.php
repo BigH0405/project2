@@ -32,5 +32,7 @@ class Coupons extends Model
     {
         return Coupons::create($data);
     }
-
+    public static function postEdit($id, $data){
+        return Coupons::where('id', $id)->update($data);
+     }
 }

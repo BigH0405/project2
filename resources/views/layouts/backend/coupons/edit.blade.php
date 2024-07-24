@@ -39,7 +39,7 @@
                             <div class="col-6">
                                <!-- Blade Template -->
                                 <label for="">Ngày bắt đầu</label>
-                                <input type="date-time" name="start_day" class="form-control" placeholder="Nhập ngày bắt đầu..."
+                                <input type="date" name="start_day" class="form-control" placeholder="Nhập ngày bắt đầu..."
                                 value="{{ old('start_day')?? $CouponDetail->start_day }}">
                                 @error('start_day')
                                 <span style="color: red">{{ $message }}</span>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="">Ngày kết thúc</label>
-                                <input type="date-time" name="end_day" class="form-control" value="{{old('end_day') ?? $CouponDetail->end_day}}">
+                                <input type="date" name="end_day" class="form-control" value="{{old('end_day') ?? $CouponDetail->end_day}}">
                                 @error('end_day')
                                 <span style="color: red">{{$message}}</span>
                                 @enderror

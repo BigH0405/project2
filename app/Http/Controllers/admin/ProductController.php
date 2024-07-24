@@ -16,7 +16,7 @@ class ProductController extends Controller
         $allCate = ProductCategory::all();
         $search = null;
         $search = $request->input('keywords');
-        $query = Products::query();
+        $query = Products::query()->with('productCate');
         if (!empty($request->product_category)) {
             $product_category = $request->product_category;
             $query->where('product_category', '=', $product_category);
