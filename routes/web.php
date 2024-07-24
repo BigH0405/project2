@@ -80,6 +80,10 @@ Route::prefix('/coupons')->name('coupons.')->group(function(){
 Route::prefix('/blog')->name('blog.')->group(function(){
     Route:: get('/', [BlogController::class,'index'])->name('index');
     Route:: get('/add', [BlogController::class,'add'])->name('add');
+    Route:: post('/add', [BlogController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [BlogController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [BlogController::class,'postEdit'])->name('post-edit');
+    Route::get('/delete/{id}',[BlogController::class,'delete'])->name('delete');
 });
 
 

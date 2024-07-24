@@ -23,6 +23,9 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{$title}}</h1>
+                    @if (session('msg'))
+                    <div class="alert alert-success">{{session('msg')}}</div>
+                    @endif
                     <a href="{{route('admin.blog.add')}}" class="btn btn-primary mb-3">Thêm bài viết </a>
                     <form action="" method="GET">
                         <div class="row">
@@ -70,8 +73,8 @@
                                 <td>{{$item->description}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
-                                <td><button class="btn btn-warning sm-2">Sửa</button></td>
-                                <td><button class="btn btn-danger sm-2">Xóa</button></td>
+                                <td><a href="{{route('admin.blog.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a</td>
+                                <td><a href="{{route('admin.blog.delete',['id' => $item->id])}}" class="btn btn-danger sm-2">Xóa</a></td>
                             </tr>
                             @endforeach
                             @else
@@ -81,6 +84,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="float-right">
+                        {{$allBlog->links()}}
+                    </div>
                 </div>
             </main>
             @include('parts.backend.footer')
