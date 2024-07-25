@@ -26,7 +26,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%'.$search.'%');
         }
 
-        $allProduct = $query->paginate(5)->withQueryString();
+        $allProduct = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         return view('layouts.backend.products.lists',compact('title','allProduct','allCate'));
     }
     public function add(){

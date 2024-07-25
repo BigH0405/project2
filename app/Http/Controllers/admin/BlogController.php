@@ -19,7 +19,7 @@ class BlogController extends Controller
         if ($search) {
             $query->where('title', 'like', '%'.$search.'%');
         }
-        $allBlog = $query->paginate(5)->withQueryString();
+        $allBlog = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         return view('layouts.backend.blogs.lists',compact('title','allBlog'));
     }
 

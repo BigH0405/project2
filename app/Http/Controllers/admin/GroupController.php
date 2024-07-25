@@ -18,7 +18,7 @@ class GroupController extends Controller
             $query->where('name', 'like', '%'.$search.'%');
         }
 
-        $allGroups = $query->paginate(5)->withQueryString();
+        $allGroups = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         return view('layouts.backend.groups.lists',compact('title','allGroups'));
     }
 

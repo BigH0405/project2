@@ -39,7 +39,7 @@ class UserController extends Controller
     }
 
     // Phân trang kết quả
-    $allUser = $query->paginate(5)->withQueryString();
+    $allUser = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
     
     return view('layouts.backend.users.lists', compact('title', 'allUser', 'allGroup'));
 }

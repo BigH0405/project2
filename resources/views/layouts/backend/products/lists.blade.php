@@ -54,7 +54,7 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->price}}</td>
-                                <td><img src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" height="200px"></td>
+                                <td><img src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" height="100px"></td>
                                 <td>{{ $item->productCate ? $item->productCate->name : 'Không có danh mục' }}</td>
                                 <td>{{$item->quanlity}}</td>
                                 <td>{{$item->short_description}}</td>
