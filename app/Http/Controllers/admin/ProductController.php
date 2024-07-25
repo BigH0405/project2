@@ -44,7 +44,7 @@ class ProductController extends Controller
 
             $filename= time().'.'.$extension;
 
-            $path='uploads/products/';
+            $path='backend/uploads/products/';
             $file->move($path,$filename);
         }
         $dataInsert = [
@@ -89,7 +89,7 @@ class ProductController extends Controller
             // Tạo tên tệp mới duy nhất
             $filename = time().'.'.$extension;
     
-            $path = 'uploads/products/';
+            $path = 'backend/uploads/products/';
             $file->move(public_path($path), $filename);
     
             // Xóa ảnh cũ nếu tồn tại

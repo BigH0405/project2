@@ -44,7 +44,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Danh mục bài viết</label>
-                                <input type="text" class="form-control" name="blog_id" value="{{old('blog_id') ?? $Blog->blog_id}}">
+                                <select name="blog_id" id="" class="form-control">
+                                    <option value="0">Chọn danh mục</option>
+                                    @if(!empty($allCate))
+                                    @foreach ($allCate as $item)
+                                    <option value="{{$item->id}}" {{old('blog_id')==$item->id || $Blog->blog_id==$item->id?'selected':false}}>{{$item->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
                                 @if ($errors->has('blog_id'))
                                 <div class="alert alert-danger">
                                     {{ $errors->first('blog_id') }}

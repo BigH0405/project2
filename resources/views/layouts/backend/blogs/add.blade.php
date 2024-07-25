@@ -40,6 +40,42 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
+                                    <label for="">Danh mục bài viết</label>
+                                    <select name="blog_id" id="" class="form-control">
+                                        <option value="0">Chọn danh mục</option>
+                                        @if (!empty($allCate))
+                                        @foreach ($allCate as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('blog_id'))
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first('blog_id') }}
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for=""> Tác giả </label>
+                                    <select name="user_id" id="" class="form-control">
+                                        <option value="0">Chọn tác giả</option>
+                                        @if (!empty($allUser))
+                                        @foreach ($allUser as $item)
+                                        <option value="{{$item->id}}">{{$item->fullname}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('user_id'))
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first('user_id') }}
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
                                     <label for=""> Mô tả ngắn </label>
                                     <input type="text" class="form-control" name="short_description" value="{{old('short_description')}}" placeholder="Nhập mô tả ngắn...">
                                     @if ($errors->has('short_description'))
@@ -49,10 +85,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label for=""> Miêu tả </label>
-                                    <input type="text" class="form-control" name="description" value="{{old('description')}}" placeholder="Nhập miêu tả...">
+                                    <label for=""> Mô tả </label>
+                                    <textarea name="description" cols="12" rows="8" class="form-control" value="{{ old('description') }}" placeholder="Nhập mô tả..."></textarea>
                                     @if ($errors->has('description'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('description') }}
@@ -60,36 +96,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="">Danh mục bài viết</label>
-                                    <input type="text" class="form-control" name="blog_id" value="{{old('blog_id')}}">
-                                    @if ($errors->has('blog_id'))
-                                        <div class="alert alert-danger">
-                                            {{ $errors->first('blog_id') }}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for=""> Tác giả </label>
-                                   <select name="user_id" id="" class="form-control">
-                                    <option value="0">Chọn tác giả</option>
-                                    @if (!empty($allUser))
-                                    @foreach ($allUser as $item)
-                                    <option value="{{$item->id}}">{{$item->fullname}}</option>
-                                    @endforeach
-                                @endif
-                                   </select>
-                                    @if ($errors->has('user_id'))
-                                        <div class="alert alert-danger">
-                                            {{ $errors->first('user_id') }}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        <div class="mt-3">
+                            <div class="mt-3">
                             <button class="btn btn-success" type="submit">Thêm mới</button>
                         </div>
                     </form>

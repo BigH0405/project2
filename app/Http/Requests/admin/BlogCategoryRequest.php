@@ -23,7 +23,7 @@ class BlogCategoryRequest extends FormRequest
     {
         return [
             //
-            'name' => 'require|unique:blog_category,name',
+            'name' => 'required|unique:blog_category,name',
             'short_description' => 'required'
         ];
     }

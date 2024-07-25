@@ -65,7 +65,7 @@
                             </div>
                             <div class="col">
                                 <label for="">Mô tả</label>
-                                <textarea name="description" cols="5" rows="1" class="form-control" value="{{ old('description') }}"></textarea>
+                                <textarea name="description" cols="12" rows="8" class="form-control" value="{{ old('description') }}"></textarea>
                                 @error('description')
                                     <span style="color: red">{{ $message }}</span>
                                 @enderror
