@@ -18,9 +18,17 @@ class BlogCategory extends Model
 
     protected $fillable = [
         'name',
-        'short_description'
+        'short_description',
+        'updated_at',
     ];
     public function postAdd($data){
         return BlogCategory::create($data);
     }
-}
+    public function postEdit($id,$data){
+        return BlogCategory::where('id',$id)->update($data);    
+    }
+    public function Blog(){
+        return $this->hasMany(Blog::class,'blog_id');
+    }
+
+}   
