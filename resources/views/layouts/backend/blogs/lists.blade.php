@@ -47,7 +47,7 @@
                             <tr>
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->title}}</td>
-                                <td>{{$item->image}}</td>
+                                <td><img src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" height="100px"></td>
                                 <td>{{$item->views}}</td>
                                 <td>{{$item->User ? $item->User->fullname : 'Không có tác giả'}}</td>
                                 <td>{{$item->blog_id}}</td>

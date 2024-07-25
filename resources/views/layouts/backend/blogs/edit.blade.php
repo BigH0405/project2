@@ -23,11 +23,16 @@
                             @enderror
                         </div>
                         <div class="col-6">
-                            <label for="">Hình Ảnh</label>
-                            <input type="text" name="image" class="form-control" placeholder="Nhập hình ảnh..." value="{{old('image')?? $Blog->image}}">
+                            <label for="image">Ảnh</label>
+                            <input type="file" name="image" class="form-control">
+                            @if (!empty($Blog->image))
+                                <div class="mt-2">
+                                    <img src="{{ asset($Blog->image) }}" alt="Ảnh sản phẩm" style="width: 100px;">
+                                </div>
+                            @endif
                             @error('image')
-                            <span style="color: red">{{$message}}</span>
-                            @enderror 
+                                <span style="color: red">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col-6">
                             <label for="">Lượt xem </label>
@@ -37,27 +42,13 @@
                             @enderror
                         </div>
                         <div class="col-6">
-                            <label for="">Mô tả ngắn </label>
-                            <input type="text" name="short_description" class="form-control" placeholder="Nhập mô tả ngắn ..." value="{{old('short_description')?? $Blog->short_description}}">
-                            @error('short_description')
-                            <span style="color: red">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="">Miêu tả </label>
-                            <input type="text" name="description" class="form-control" placeholder="Nhập miêu tả..." value="{{old('description')?? $Blog->description}}">
-                            @error('description')
-                            <span style="color: red">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
                             <div class="form-group">
                                 <label for="">Danh mục bài viết</label>
                                 <input type="text" class="form-control" name="blog_id" value="{{old('blog_id') ?? $Blog->blog_id}}">
                                 @if ($errors->has('blog_id'))
-                                    <div class="alert alert-danger">
-                                        {{ $errors->first('blog_id') }}
-                                    </div>
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('blog_id') }}
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -73,11 +64,25 @@
                                     @endif
                                 </select>
                                 @if ($errors->has('user_id'))
-                                    <div class="alert alert-danger">
-                                        {{ $errors->first('user_id') }}
-                                    </div>
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('user_id') }}
+                                </div>
                                 @endif
                             </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="short_description">Mô tả ngắn</label>
+                            <textarea name="short_description" cols="5" rows="1" class="form-control">{{ old('short_description') ?? $Blog->short_description }}</textarea>
+                            @error('short_description')
+                                <span style="color: red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <label for="description">Mô tả</label>
+                            <textarea name="description" cols="12" rows="8" class="form-control">{{ old('description') ?? $Blog->description }}</textarea>
+                            @error('description')
+                                <span style="color: red">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mt-3">
                             <button class="btn btn-success" type="submit">Cập nhập</button>

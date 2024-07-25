@@ -7,6 +7,7 @@ use App\Http\Requests\admin\BlogRequest;
 use App\Models\admin\Blog;
 use App\Models\admin\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BlogController extends Controller
 {
@@ -31,9 +32,19 @@ class BlogController extends Controller
     }
 
     public function postAdd(BlogRequest $request){
+        if($request->has('image')){
+
+            $file =$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+
+            $filename= time().'.'.$extension;
+
+            $path='backend/uploads/blogs/';
+            $file->move($path,$filename);
+        }
        $dataInsert = [
             'title' => $request->title,
-            'image' => $request->image,
+            'image' => $path.$filename,
             'views' => $request->views,
             'user_id' => $request->user_id,
             'blog_id' => $request->blog_id,
@@ -58,9 +69,32 @@ class BlogController extends Controller
         if(!$Blog){
             return redirect()->route('admin.blog.index')->with('msg_warning','Bài viết không tồn tại');
         }
+
+        // Đường dẫn mặc định đến ảnh sản phẩm hiện tại
+        $filename = $Blog->image;
+    
+        if ($request->hasFile('image')) {
+            // Xử lý ảnh mới
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+    
+            // Tạo tên tệp mới duy nhất
+            $filename = time().'.'.$extension;
+    
+            $path = 'backend/uploads/blogs/';
+            $file->move(public_path($path), $filename);
+    
+            // Xóa ảnh cũ nếu tồn tại
+            if (File::exists(public_path($Blog->image))) {
+                File::delete(public_path($Blog->image));
+            }
+    
+            // Cập nhật đường dẫn ảnh
+            $filename = $path . $filename;
+        }
         $dataUpdate = [
             'title' => $request->title,
-            'image' => $request->image,
+            'image' => $filename,
             'views' => $request->views,
             'user_id' => $request->user_id,
             'blog_id' => $request->blog_id,

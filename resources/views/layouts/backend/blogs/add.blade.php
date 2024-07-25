@@ -6,7 +6,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{$title}}</h1>
                     <a href="{{route('admin.blog.index')}}" class="btn btn-warning mb-3">Quay về</a>
-                    <form action="" method="POST">
+                    <form action="" method="POST"  enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-6">
@@ -21,15 +21,11 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="form-group">
-                                    <label for=""> Hình ảnh </label>
-                                    <input type="text" class="form-control" name="image" value="{{old('image')}}" placeholder="Chọn hình ảnh...">
-                                    @if ($errors->has('image'))
-                                        <div class="alert alert-danger">
-                                            {{ $errors->first('image') }}
-                                        </div>
-                                    @endif
-                                </div>
+                                <label for="">Ảnh</label>
+                                <input type="file" name="image" class="form-control">
+                                @error('image')
+                                    <span style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
