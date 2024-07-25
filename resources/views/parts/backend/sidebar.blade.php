@@ -25,6 +25,10 @@
                 'title' => 'Danh sách Blog',
                 'name' => 'blog',
                 ])
+                @include('parts.backend.menu_item', [
+                    'title' => 'Danh sách bài viết',
+                    'name' => 'cates',
+                ])
 
                 @include('parts.backend.menu_item', [
                     'title' => 'Danh sách người dùng',

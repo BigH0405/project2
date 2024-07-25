@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\CouponController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
@@ -108,6 +109,15 @@ Route::prefix('/group')->name('group.')->group(function(){
     Route:: get('/delete/{id}', [GroupController::class,'delete'])->name('delete');
 });
 
+// Route Danh mục Blog
+Route::prefix('/cates')->name('cates.')->group(function(){
+    Route:: get('/', [BlogCategoryController::class,'index'])->name('index');
+    Route:: get('/add', [BlogCategoryController::class,'add'])->name('add');
+    Route:: post('/add', [BlogCategoryController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [BlogCategoryController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [BlogCategoryController::class,'postEdit'])->name('post-edit');
+    Route::get('/delete/{id}',[BlogCategoryController::class,'delete'])->name('delete');
+});
 
 });
 // Kết thúc route admin
