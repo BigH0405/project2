@@ -4,6 +4,7 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\admin\Users;
 
 class Coupons extends Model
 {
@@ -35,4 +36,7 @@ class Coupons extends Model
     public static function postEdit($id, $data){
         return Coupons::where('id', $id)->update($data);
      }
+     public function Users() {
+        return $this->belongsTo(Users::class,'id');
+    }
 }
