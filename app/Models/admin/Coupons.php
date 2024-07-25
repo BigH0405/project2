@@ -15,9 +15,6 @@ class Coupons extends Model
     public $timestamps = true;
 
     protected $attributes = [];
-
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
     protected $fillable = [
         'code',
         'discount',
@@ -32,5 +29,7 @@ class Coupons extends Model
     {
         return Coupons::create($data);
     }
-
+    public static function postEdit($id, $data){
+        return Coupons::where('id', $id)->update($data);
+     }
 }

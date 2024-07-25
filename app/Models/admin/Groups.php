@@ -2,15 +2,15 @@
 
 namespace App\Models\admin;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Groups extends Model
 {
     use HasFactory;
 
-    protected $table = "products";
-
+    protected $table="groups";
     protected $primaryKey = "id";
 
     public $timestamps = true;
@@ -19,15 +19,11 @@ class Products extends Model
 
     protected $fillable = [
         'name',
-        'price',
-        'image',
-        'product_category',
-        'quanlity',
-        'short_description',
-        'description',
+        'permissions',
         'created_at',
         'updated_at'
     ];
+
     public function postAdd($data)
     {
         return Products::create($data);
@@ -36,8 +32,7 @@ class Products extends Model
         return Products::where('id', $id)->update($data);
      }
      
-     public function productCate() {
-        return $this->belongsTo(ProductCategory::class, 'product_category');
+    public function User(){
+        return $this->hasMany(User::class, 'group_id');
     }
-
 }

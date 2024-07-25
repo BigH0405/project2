@@ -20,7 +20,7 @@ class CouponController extends Controller
             $query->where('code', 'like', '%'.$search.'%');
         }
 
-        $allCoupon= $query->paginate(5)->withQueryString();
+        $allCoupon= $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         return view('layouts.backend.coupons.lists',compact('title','allCoupon'));
     }
     public function add(){
@@ -46,6 +46,9 @@ class CouponController extends Controller
     public function edit($id){
         $title ="Cập nhật mã giảm giá";
         $CouponDetail = Coupons::find($id);
+        if(!$CouponDetail) {
+            return redirect()->route('admin.coupons.index')->with('msg_warning', 'Mã giảm giá không tồn tại');
+        }
         $allUser=Users::all();
         return view('layouts.backend.coupons.edit',compact('title','allUser','CouponDetail'));
     }
@@ -63,7 +66,7 @@ class CouponController extends Controller
             'quantily'=>$request->quantily,
             'start_day'=>$request->start_day,
             'end_day'=>$request->end_day,
-            'update_at' => date('Y-m-d H:i:s') 
+            'updated_at' => date('Y-m-d H:i:s') 
         ];
 
         Coupons::postEdit($id, $dataUpdate);

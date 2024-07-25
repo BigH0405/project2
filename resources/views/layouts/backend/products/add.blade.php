@@ -6,8 +6,8 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{ $title }}</h1>
-                    @if (session('msg_warning'))
-                        <div class="alert alert-danger">{{ session('msg_warning') }}</div>
+                    @if (session($errors->all()))
+                    <div class="alert alert-danger">Dữ liệu nhập vào sai</div>
                     @endif
                     <a href="{{ route('admin.product.index') }}" class="btn btn-warning mb-3">Quay về</a>
                     <form action="" method="POST" enctype="multipart/form-data">
@@ -76,7 +76,8 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            </div>
+            </div>
             </main>
             @include('parts.backend.footer')
-        </div>
-    </div>
