@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\BlogCategory;
 
-// use App\Http\Requests\admin\BlogCategoryRequest;
+use App\Http\Requests\admin\BlogCategoryRequest;
 
 
 class BlogCategoryController extends Controller
@@ -28,7 +28,7 @@ class BlogCategoryController extends Controller
         return view('layouts.backend.blog_category.add', compact('title'));
 
     }
-    public function postAdd(Request $request)
+    public function postAdd(BlogCategoryRequest $request)
     {
         $dataIntert = [
             'name' => $request->name,
@@ -48,7 +48,7 @@ class BlogCategoryController extends Controller
         }
         return view('layouts.backend.blog_category.edit', compact('title', 'cates'));
     }
-    public function postEdit(Request $request, $id)
+    public function postEdit(BlogCategoryRequest $request, $id)
     {
         $cates = BlogCategory::find($id);
 
