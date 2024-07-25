@@ -20,7 +20,7 @@ class CouponController extends Controller
             $query->where('code', 'like', '%'.$search.'%');
         }
 
-        $allCoupon= $query->paginate(5)->withQueryString();
+        $allCoupon= $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         return view('layouts.backend.coupons.lists',compact('title','allCoupon'));
     }
     public function add(){

@@ -5,7 +5,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         @include('parts.backend.page_title')
-                       <h1 class="text-center">Trang chủ Admin</h1>
+                        <h1 class="text-center">Trang chủ Admin</h1>
                     </div>
                 </div>
                 </div>

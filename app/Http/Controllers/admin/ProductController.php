@@ -26,7 +26,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%'.$search.'%');
         }
 
-        $allProduct = $query->paginate(5)->withQueryString();
+        $allProduct = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         return view('layouts.backend.products.lists',compact('title','allProduct','allCate'));
     }
     public function add(){
@@ -67,44 +67,56 @@ class ProductController extends Controller
         if(!$product) {
             return redirect()->route('admin.products.index')->with('msg_warning', 'Sản phẩm không tồn tại');
         }
+        // dd($product);
+
         return view('layouts.backend.products.edit',compact('title','product','allCate'));
     }
     public function postEdit(ProductRequest $request, $id){
         $product = Products::find($id);
-
-        if(!$product) {
+    
+        if (!$product) {
             return redirect()->route('admin.product.index')->with('msg_warning', 'Sản phẩm không tồn tại');
         }
-
-        if($request->has('image')){
-
-            $file =$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-
-            $filename= time().'.'.$extension;
-
-            $path='uploads/products/';
-            $file->move($path,$filename);
-
-            if(File::exists($product->image)){
-                File::delete($product->image);
+    
+        // Đường dẫn mặc định đến ảnh sản phẩm hiện tại
+        $filename = $product->image;
+    
+        if ($request->hasFile('image')) {
+            // Xử lý ảnh mới
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+    
+            // Tạo tên tệp mới duy nhất
+            $filename = time().'.'.$extension;
+    
+            $path = 'uploads/products/';
+            $file->move(public_path($path), $filename);
+    
+            // Xóa ảnh cũ nếu tồn tại
+            if (File::exists(public_path($product->image))) {
+                File::delete(public_path($product->image));
             }
+    
+            // Cập nhật đường dẫn ảnh
+            $filename = $path . $filename;
         }
+    
         $dataUpdate = [
             'name' => $request->name,
             'price' => $request->price,
-            'image' =>  $path.$filename,
+            'image' => $filename,
             'product_category' => $request->product_category,
             'quanlity' => $request->quanlity,
             'short_description' => $request->short_description,
             'description' => $request->description,
-            'updated_at' => date('Y-m-d H:i:s') 
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
-
-        Products::postEdit($id, $dataUpdate);
-
+    
+        Products::where('id', $id)->update($dataUpdate);
+    
         return back()->with('msg', "Sửa sản phẩm thành công");
     }
+    
     public function delete($id){
         $product= Products::find($id);
         if($product){

@@ -8,6 +8,9 @@
                     @if (session('msg'))
                     <div class="alert alert-success">{{session('msg')}}</div>
                     @endif
+                    @if (session('msg_warning'))
+                    <div class="alert alert-danger">{{session('msg_warning')}}</div>
+                    @endif
                     <a href="{{route('admin.product.add')}}" class="btn btn-primary mb-3">Thêm sản phẩm</a>
                     <form action="" method="GET">
                         <div class="row">
@@ -51,7 +54,7 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->price}}</td>
-                                <td><img src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" height="200px"></td>
+                                <td><img src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" height="100px"></td>
                                 <td>{{ $item->productCate ? $item->productCate->name : 'Không có danh mục' }}</td>
                                 <td>{{$item->quanlity}}</td>
                                 <td>{{$item->short_description}}</td>

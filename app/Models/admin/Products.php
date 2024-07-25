@@ -19,8 +19,6 @@ class Products extends Model
 
     protected $attributes = [];
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
     protected $fillable = [
         'name',
         'price',
@@ -41,7 +39,7 @@ class Products extends Model
      }
      
      public function productCate() {
-        return $this->belongsTo(ProductCategory::class, 'id');
+        return $this->belongsTo(ProductCategory::class, 'product_category');
     }
 
 }
