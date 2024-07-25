@@ -46,7 +46,7 @@
                                 <td>{{$item->code}}</td>
                                 <td>{{$item->discount}}</td>
                                 <td>{{$item->quantily}}</td>
-                                <td>{{$item->user_id}}</td>
+                                <td>{{$item->Users ?$item->Users->fullname:"Không có khách hàng"}}</td>
                                 <td>{{$item->start_day}}</td>
                                 <td>{{$item->end_day}}</td>
                                 <td>{{$item->created_at}}</td>

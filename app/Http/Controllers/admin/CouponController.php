@@ -12,7 +12,7 @@ class CouponController extends Controller
 {
     public function index(Request $request){
         $title ="Mã giảm giá";
-        $query = Coupons::query();
+        $query = Coupons::query()->with('Users');
 
         $search = null;
         $search = $request->input('keywords');
