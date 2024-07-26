@@ -14,7 +14,7 @@ class BlogCategoryController extends Controller
     //
     public function index(Request $request)
     {
-        $title = "Danh sách bài viết";
+        $title = "Danh mục bài viết";
 
         $allCate = BlogCategory::query()->paginate(5)->withQueryString();
 
@@ -23,7 +23,7 @@ class BlogCategoryController extends Controller
     }
     public function add()
     {
-        $title = "Thêm mới danh sách bài viết";
+        $title = "Thêm mới danh mục bài viết";
 
         return view('layouts.backend.blog_category.add', compact('title'));
 

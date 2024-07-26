@@ -14,7 +14,7 @@ class BlogController extends Controller
 {
     //
     public function index(Request $request){
-        $title = "Bài viết";
+        $title = "Danh sách bài viết";
         $search = null;
         $search = $request->input('keywords');
         $query = Blog::query()->with('User');
@@ -58,7 +58,7 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index')->with('msg', 'Thêm bài viết thành công');
     }
     public function edit($id){
-        $title = "Cập nhật sản phẩm";
+        $title = "Cập nhập bài viết";
         $Blog = Blog::find($id);
         $allUser = Users::all();
         $allCate = BlogCategory::all();

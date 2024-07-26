@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class CouponController extends Controller
 {
     public function index(Request $request){
-        $title ="Mã giảm giá";
+        $title ="Danh sách mã giảm giá";
         $query = Coupons::query()->with('Users');
 
         $search = null;
