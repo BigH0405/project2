@@ -77,7 +77,7 @@ class ProductController extends Controller
         $allCate = ProductCategory::all();
         $product =  Products::find($id);
         if(!$product) {
-            return redirect()->route('admin.products.index')->with('msg_warning', 'Sản phẩm không tồn tại');
+            return redirect()->route('admin.product.index')->with('msg_warning', 'Sản phẩm không tồn tại');
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'

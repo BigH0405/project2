@@ -11,6 +11,9 @@
                     @if (session('msg_warning'))
                     <div class="alert alert-danger">{{session('msg_warning')}}</div>
                     @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">Vui lòng kiểm tra lại dữ liệu</div>
+                    @endif
                     <a href="{{route('admin.cate.index')}}" class="btn btn-warning mb-3">Quay về</a>
                     <form action="" method="POST">
                         @csrf

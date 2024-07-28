@@ -6,8 +6,8 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="text-center mb-3 mt-3">{{ $title }}</h1>
-                    @if (session($errors->all()))
-                    <div class="alert alert-danger">Dữ liệu nhập vào sai</div>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">Vui lòng kiểm tra lại dữ liệu</div>
                     @endif
                     <a href="{{ route('admin.product.index') }}" class="btn btn-warning mb-3">Quay về</a>
                     <form action="" method="POST" enctype="multipart/form-data">
