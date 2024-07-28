@@ -11,6 +11,9 @@
                     @if (session('msg_warning'))
                     <div class="alert alert-danger">{{session('msg_warning')}}</div>
                     @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">Vui lòng kiểm tra lại dữ liệu</div>
+                    @endif
                     <a href="{{route('admin.coupons.add')}}" class="btn btn-primary mb-3">Thêm mã giảm giá</a>
                     <form action="" method="GET">
                         <div class="row">

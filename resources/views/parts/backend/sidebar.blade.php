@@ -22,13 +22,14 @@
                 ])
 
                 @include('parts.backend.menu_item', [
-                'title' => 'Danh mục Blog',
-                'name' => 'blog',
-                ])
+                    'title' => 'Danh mục Blog',
+                    'name' => 'cates',
+                    ])
+
                 @include('parts.backend.menu_item', [
                     'title' => 'Danh sách Blog',
-                    'name' => 'cates',
-                ])
+                    'name' => 'blog',
+                    ])
 
                 @include('parts.backend.menu_item', [
                     'title' => 'Danh sách người dùng',
