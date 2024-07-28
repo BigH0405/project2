@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\admin\Groups;
 use App\Models\admin\Blog;
+use App\Models\admin\Comments;
+use App\Models\admin\Reviews;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -48,6 +50,14 @@ class Users extends Authenticatable
 
     public function blogs() {
         return $this->hasMany(Blog::class, 'user_id');
+    }
+
+    public function comment(){
+        return $this->belongsTo(Comments::class, 'user_id');
+    }
+
+    public function review(){
+        return $this->belongsTo(Reviews::class, 'user_id');
     }
     
 }

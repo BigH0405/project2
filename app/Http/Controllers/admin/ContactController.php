@@ -7,6 +7,7 @@ use App\Http\Requests\admin\ContactRequest;
 use App\Models\admin\Contacts;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -20,7 +21,12 @@ class ContactController extends Controller
             $query->where('fullname', 'like', '%'.$search.'%');
         }
         $allContacts = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
-        return view('layouts.backend.contacts.lists',compact('title','allContacts'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.contacts.lists',compact('title','allContacts','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function edit($id){
         $title = "Cập nhập liên hệ";
@@ -30,9 +36,13 @@ class ContactController extends Controller
         if(!$contacts) {
             return redirect()->route('admin.contacts.index')->with('msg_warning', 'Liên hệ không tồn tại');
         }
-        // dd($contacts);
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.contacts.edit',compact('title','contacts','allUser','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
 
-        return view('layouts.backend.contacts.edit',compact('title','contacts','allUser'));
     }
     public function postEdit(ContactRequest $request, $id){
         $contact = Contacts::find($id);

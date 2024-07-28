@@ -7,6 +7,7 @@ use App\Http\Requests\admin\CommentRequest;
 use App\Models\admin\Comments;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class CommentController extends Controller
@@ -24,7 +25,13 @@ class CommentController extends Controller
         });
     }
     $allComments= $query->orderBy('id','DESC')->paginate(10)->withQueryString();
-    return view('layouts.backend.comments.lists',compact('title','allComments'));
+    if (Auth::guard('admin')->check()) {
+        // Lấy thông tin người dùng từ guard 'admin'
+        $user = Auth::guard('admin')->user()->fullname;
+        return view('layouts.backend.comments.lists',compact('title','allComments','user'));
+
+    }
+    return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function edit($id){
         $title = "Cập nhập bình luận";
@@ -33,9 +40,14 @@ class CommentController extends Controller
         if(!$comments) {
             return redirect()->route('admin.comments.index')->with('msg_warning', 'Liên hệ không tồn tại');
         }
-        // dd($comments);
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.comments.edit',compact('title','comments','user'));
+    
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
 
-        return view('layouts.backend.comments.edit',compact('title','comments'));
     }
     public function delete($id){
         $Comments = Comments::find($id);
