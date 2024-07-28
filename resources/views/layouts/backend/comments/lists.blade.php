@@ -11,17 +11,8 @@
                     @if (session('msg_warning'))
                     <div class="alert alert-danger">{{session('msg_warning')}}</div>
                     @endif
-                    <a href="{{route('admin.blog.add')}}" class="btn btn-primary mb-3">Thêm bài viết </a>
                     <form action="" method="GET">
                         <div class="row">
-                            <div class="col-3">
-                                <select name="product_category" id="" class="form-control">
-                                    <option value="0">Danh mục bài viết</option>
-                                    @foreach ($allCate as $key => $item)
-                                        <option value="{{ $item->id }}"{{old('blog_id')==$item->id?'selected':false}}>{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="col-4">
                                 <input type="search" name="keywords" id="" class="form-control mb-3" placeholder="Nhập từ khóa tìm kiếm..." value="{{request()->keywords}}">
                             </div>
@@ -34,13 +25,9 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Mô tả</th>
-                                <th>Hình ảnh</th>
-                                <th>Lượt xem</th>
                                 <th>Người dùng</th>
-                                <th>Danh mục</th>
-                                <th>Mô tả ngắn</th>
-                                <th>Miêu tả </th>
+                                <th>Bài viết</th>
+                                <th>Bình luận </th>
                                 <th>Thời gian tạo</th>
                                 <th>Thời gian cập nhập</th>
                                 <th>Sửa</th>
@@ -48,37 +35,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (!empty($allBlog))
-                            @foreach ($allBlog as $key => $item)
+                            @if (!empty($allComments))
+                            @foreach ($allComments as $key => $item)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$item->title}}</td>
-                                <td><img src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" height="100px"></td>
-                                <td>{{$item->views}}</td>
-                                <td>{{$item->User ? $item->User->fullname : 'Không có tác giả'}}</td>
-                                <td>{{$item->BlogCate ? $item->BlogCate->name :'Không có danh mục'}}</td>
-                                <td>{{$item->short_description}}</td>
-                                <td>{{$item->description}}</td>
+                                <td>{{$item->User ? $item->User->fullname : 'Không có người dùng'}}</td>
+                                <td>{{$item->Blog ? $item->Blog->title : 'Không có bài viết'}}</td>
+                                <td >{{ Str::limit($item->messege, 25) }}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
-                                <td><a href="{{route('admin.blog.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a</td>
-                                <td><a href="{{route('admin.blog.delete',['id' => $item->id])}}" class="btn btn-danger sm-2">Xóa</a></td>
+                                <td><a href="{{route('admin.comments.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                <td><a href="{{route('admin.comments.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="13" class="text-center" style="color: red">Không có người dùng</td>
+                                <td colspan="13" class="text-center" style="color: red">Không có sản phẩm</td>
                               </tr>
                             @endif
                         </tbody>
                     </table>
                     <div class="float-right">
-                        {{$allBlog->links()}}
-                    </div>
+                        {{$allComments->links()}}
+                      </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
             </main>
             @include('parts.backend.footer')
-   

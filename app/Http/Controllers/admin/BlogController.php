@@ -14,15 +14,20 @@ class BlogController extends Controller
 {
     //
     public function index(Request $request){
-        $title = "Danh sách bài viết";
+        $title = "Bài viết";
+        $allCate = BlogCategory::all();
         $search = null;
         $search = $request->input('keywords');
-        $query = Blog::query()->with('User');
+        $query = Blog::query()->with('User','BlogCate');
+        if (!empty($request->BlogCategory)) {
+            $BlogCategory = $request->BlogCategory;
+            $query->where('BlogCategory', '=', $BlogCategory);
+        }
         if ($search) {
             $query->where('title', 'like', '%'.$search.'%');
         }
         $allBlog = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
-        return view('layouts.backend.blogs.lists',compact('title','allBlog'));
+        return view('layouts.backend.blogs.lists',compact('title','allBlog','allCate'));
     }
 
     public function add(){

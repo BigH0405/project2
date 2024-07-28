@@ -40,7 +40,18 @@
                     'title' => 'Danh sách nhóm',
                     'name' => 'group',
                     ])
-
+                @include('parts.backend.menu_item', [
+                    'title' => 'Liên hệ',
+                    'name' => 'contacts',
+                    ])    
+                @include('parts.backend.menu_item', [
+                    'title' => 'Bình luận',
+                    'name' => 'comments',
+                    ])
+                @include('parts.backend.menu_item', [
+                'title' => 'Đánh giá ',
+                'name' => 'reviews',
+                ])   
 
 
 
