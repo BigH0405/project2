@@ -15,10 +15,15 @@ class BlogController extends Controller
 {
     //
     public function index(Request $request){
-        $title = "Danh sách bài viết";
+        $title = "Bài viết";
+        $allCate = BlogCategory::all();
         $search = null;
         $search = $request->input('keywords');
-        $query = Blog::query()->with('User');
+        $query = Blog::query()->with('User','BlogCate');
+        if (!empty($request->BlogCategory)) {
+            $BlogCategory = $request->BlogCategory;
+            $query->where('BlogCategory', '=', $BlogCategory);
+        }
         if ($search) {
             $query->where('title', 'like', '%'.$search.'%');
         }
@@ -31,6 +36,7 @@ class BlogController extends Controller
 
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
+
     }
 
     public function add(){

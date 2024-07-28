@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\BlogController;
+use App\Http\Controllers\admin\CommentController;
+use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\clients\HomeController;
 use App\Http\Controllers\admin\GroupController;
 use App\Http\Controllers\admin\UserController;
@@ -135,8 +138,38 @@ Route::prefix('/cates')->middleware('auth:admin')->name('cates.')->group(functio
     Route:: post('/edit/{id}', [BlogCategoryController::class,'postEdit'])->name('post-edit');
     Route::get('/delete/{id}',[BlogCategoryController::class,'delete'])->name('delete');
 });
+// route contacts
+Route::prefix('/contacts')->name('contacts.')->group(function(){
+    Route::get('/',[ContactController::class,'index'])->name('index');
+    Route:: get('/add', [ContactController::class,'add'])->name('add');
+    Route:: post('/add', [ContactController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [ContactController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [ContactController::class,'postEdit'])->name('post-edit');
+    Route::get('/delete/{id}',[ContactController::class,'delete'])->name('delete');
 
 });
+// route comments
+Route::prefix('/comments')->name('comments.')->group(function(){
+    Route::get('/',[CommentController::class,'index'])->name('index');
+    Route:: get('/add', [CommentController::class,'add'])->name('add');
+    Route:: post('/add', [CommentController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [CommentController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [CommentController::class,'postEdit'])->name('post-edit');
+    Route::get('/delete/{id}',[CommentController::class,'delete'])->name('delete');
+
+});
+//route reviews
+Route::prefix('/reviews')->name('reviews.')->group(function(){
+    Route::get('/',[ReviewController::class,'index'])->name('index');
+    Route:: get('/add', [ReviewController::class,'add'])->name('add');
+    Route:: post('/add', [ReviewController::class,'postAdd'])->name('post-add');
+    Route:: get('/edit/{id}', [ReviewController::class,'edit'])->name('edit');
+    Route:: post('/edit/{id}', [ReviewController::class,'postEdit'])->name('post-edit');
+    Route::get('/delete/{id}',[ReviewController::class,'delete'])->name('delete');
+
+});
+});
+
 // Kết thúc route admin
 
 
