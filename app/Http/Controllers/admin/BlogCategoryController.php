@@ -14,16 +14,22 @@ class BlogCategoryController extends Controller
     //
     public function index(Request $request)
     {
-        $title = "Danh sách bài viết";
+        $title = "Danh mục bài viết";
 
-        $allCate = BlogCategory::query()->paginate(5)->withQueryString();
+        $search = null;
+        $search = $request->input('keywords');
+        $query = BlogCategory::query();
+        if ($search) {
+            $query->where('name', 'like', '%'.$search.'%');
+        }
+        $allCate = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
 
         return view('layouts.backend.blog_category.lists', compact('title', 'allCate'));
 
     }
     public function add()
     {
-        $title = "Thêm mới danh sách bài viết";
+        $title = "Thêm mới danh mục bài viết";
 
         return view('layouts.backend.blog_category.add', compact('title'));
 
