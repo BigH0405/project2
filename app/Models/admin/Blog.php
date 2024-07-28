@@ -40,5 +40,7 @@ class Blog extends Model
     public function User() {
         return $this->belongsTo(Users::class, 'user_id');
     }
-
+    public function BlogCate() {
+        return $this->belongsTo(BlogCategory::class, 'blog_id');
+    }
 }
