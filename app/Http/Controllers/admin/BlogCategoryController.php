@@ -16,7 +16,13 @@ class BlogCategoryController extends Controller
     {
         $title = "Danh mục bài viết";
 
-        $allCate = BlogCategory::query()->paginate(5)->withQueryString();
+        $search = null;
+        $search = $request->input('keywords');
+        $query = BlogCategory::query();
+        if ($search) {
+            $query->where('name', 'like', '%'.$search.'%');
+        }
+        $allCate = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
 
         return view('layouts.backend.blog_category.lists', compact('title', 'allCate'));
 
