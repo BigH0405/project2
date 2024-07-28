@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\File;
-
-
+use App\Models\admin\Users;
 function isRoute($routeList)
 {
     if (!empty($routeList)) {
@@ -23,4 +22,13 @@ function activeSidebar($name, $routeList)
 function activeMenu($name)
 {
     return request()->is(trim(route($name, [], false), '/'));
+}
+
+
+function isAdmin($email){
+   $count = Users::where('email', $email)->where('role','1')->count();
+   if($count > 0){
+    return true;
+   }
+   return false;
 }

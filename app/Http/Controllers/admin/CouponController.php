@@ -7,6 +7,7 @@ use App\Http\Requests\admin\CouponRequest;
 use App\Models\admin\Coupons;
 use App\Models\admin\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
@@ -21,12 +22,25 @@ class CouponController extends Controller
         }
 
         $allCoupon= $query->orderBy('id','DESC')->paginate(5)->withQueryString();
-        return view('layouts.backend.coupons.lists',compact('title','allCoupon'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.coupons.lists',compact('title','allCoupon','user'));
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function add(){
         $title ="Thêm mã giảm giá";
         $allUser=Users::all();
-        return view('layouts.backend.coupons.add',compact('title','allUser'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.coupons.add',compact('title','allUser','user'));
+
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function postAdd(CouponRequest $request){
         $dataInsert=[
@@ -50,7 +64,12 @@ class CouponController extends Controller
             return redirect()->route('admin.coupons.index')->with('msg_warning', 'Mã giảm giá không tồn tại');
         }
         $allUser=Users::all();
-        return view('layouts.backend.coupons.edit',compact('title','allUser','CouponDetail'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.coupons.edit',compact('title','allUser','CouponDetail','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function postEdit(CouponRequest $request, $id){
         $coupons = Coupons::find($id);

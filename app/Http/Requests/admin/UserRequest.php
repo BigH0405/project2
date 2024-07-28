@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'confirm_password' => 'required|min:8|same:password',
             'phone' => ['required', 'regex:/^[0-9]{10,15}$/'],
             'address'=> 'required',
-            'status' => 'required',
+            'role' => 'required',
             'group_id' => ['required', 'integer' ,function($atribute, $value, $fail){
                 if($value==0){
                     $fail('Vui lòng chọn nhóm');
@@ -52,7 +52,7 @@ class UserRequest extends FormRequest
           'phone.required' => 'Số điện thoại không được để trống',
           'phone.regex' => 'Số điện thoại không đúng định dạng',
           'address.required' => 'Địa chỉ không được để trống',
-          'status.required' => 'Trạng thái không được để trống',
+          'role.required' => 'Trạng thái không được để trống',
           'group_id.required'=> 'Nhóm không được để trống',
           'group_id.integer'=> 'Nhóm phải là số',
     ];

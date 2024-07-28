@@ -5,9 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\BlogCategory;
-
 use App\Http\Requests\admin\BlogCategoryRequest;
-
+use Illuminate\Support\Facades\Auth;
 
 class BlogCategoryController extends Controller
 {
@@ -15,17 +14,24 @@ class BlogCategoryController extends Controller
     public function index(Request $request)
     {
         $title = "Danh mục bài viết";
-
         $allCate = BlogCategory::query()->paginate(5)->withQueryString();
-
-        return view('layouts.backend.blog_category.lists', compact('title', 'allCate'));
-
+        // Kiểm tra nếu người dùng đã đăng nhập bằng guard 'admin' 
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.blog_category.lists', compact('title', 'allCate','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function add()
     {
         $title = "Thêm mới danh mục bài viết";
-
-        return view('layouts.backend.blog_category.add', compact('title'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.blog_category.add', compact('title','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
 
     }
     public function postAdd(BlogCategoryRequest $request)
@@ -46,7 +52,13 @@ class BlogCategoryController extends Controller
         if (!$cates) {
             return redirect()->route('admin.cates.index')->with('msg_warning', 'Danh mục bài viết không tồn tại');
         }
-        return view('layouts.backend.blog_category.edit', compact('title', 'cates'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.blog_category.edit', compact('title', 'cates','user'));
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function postEdit(BlogCategoryRequest $request, $id)
     {

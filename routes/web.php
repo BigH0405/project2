@@ -9,6 +9,9 @@ use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\clients\HomeController;
 use App\Http\Controllers\admin\GroupController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\auth\DashboardController;
+use App\Http\Controllers\admin\auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,14 +46,28 @@ Route::get('/contact', function () {
     return view('layouts/contact');
 });
 
+Route::get('/products', function () {
+    return view('layouts/products');
+});
 // Route admin
 Route::prefix('/admin')->name('admin.')->group(function(){
-    Route::get('/', function(){
-        return view('layouts.backend.backend');
-    });
+    //Route Dashboard admin
+    Route::get('/',[DashboardController::class,'index'])->middleware('auth:admin')->name('index');
+
+    //Route đăng nhập + đăng ký
+    Route::get('/login',[LoginController::class,'login'])->middleware('guest:admin')->name('login');
+    Route::post('/login',[LoginController::class,'Postlogin'])->middleware('guest:admin')->name('post-login');
+
+    Route::post('logout', function(){
+    Auth::guard('admin')->logout();
+    return redirect()->route('admin.login');
+    })->middleware('auth:admin')->name('logout');
+
+   
+
 
 //Route sản phẩm
-Route::prefix('/product')->name('product.')->group(function(){
+Route::prefix('/product')->middleware('auth:admin')->name('product.')->group(function(){
     Route:: get('/', [ProductController::class,'index'])->name('index');
     Route::get('/add',[ProductController::class,'add'])->name('add');
     Route:: post('/add', [ProductController::class,'postAdd'])->name('post-add');
@@ -60,7 +77,7 @@ Route::prefix('/product')->name('product.')->group(function(){
 });
 
 // Route danh sách sản phẩm
-Route::prefix('/cate')->name('cate.')->group(function(){
+Route::prefix('/cate')->middleware('auth:admin')->name('cate.')->group(function(){
     Route:: get('/', [ProductCategoryController::class,'index'])->name('index');
     Route::get('/add',[ProductCategoryController::class,'add'])->name('add');
     Route:: post('/add', [ProductCategoryController::class,'postAdd'])->name('post-add');
@@ -70,7 +87,7 @@ Route::prefix('/cate')->name('cate.')->group(function(){
 });
 
 // Route danh sách khuyễn mãi
-Route::prefix('/coupons')->name('coupons.')->group(function(){
+Route::prefix('/coupons')->middleware('auth:admin')->name('coupons.')->group(function(){
     Route:: get('/', [CouponController::class,'index'])->name('index');
     Route::get('/add',[CouponController::class,'add'])->name('add');
     Route:: post('/add', [CouponController::class,'postAdd'])->name('post-add');
@@ -80,7 +97,7 @@ Route::prefix('/coupons')->name('coupons.')->group(function(){
 });
 
 // Route blog
-Route::prefix('/blog')->name('blog.')->group(function(){
+Route::prefix('/blog')->middleware('auth:admin')->name('blog.')->group(function(){
     Route:: get('/', [BlogController::class,'index'])->name('index');
     Route:: get('/add', [BlogController::class,'add'])->name('add');
     Route:: post('/add', [BlogController::class,'postAdd'])->name('post-add');
@@ -90,7 +107,7 @@ Route::prefix('/blog')->name('blog.')->group(function(){
 });
 
 // Route user
-Route::prefix('/user')->name('user.')->group(function(){
+Route::prefix('/user')->middleware('auth:admin')->name('user.')->group(function(){
     Route:: get('/', [UserController::class,'index'])->name('index');
     Route::get('/add',[UserController::class,'add'])->name('add');
     Route:: post('/add', [UserController::class,'postAdd'])->name('post-add');
@@ -100,7 +117,7 @@ Route::prefix('/user')->name('user.')->group(function(){
 });
 
 // Route group
-Route::prefix('/group')->name('group.')->group(function(){
+Route::prefix('/group')->middleware('auth:admin')->name('group.')->group(function(){
     Route:: get('/', [GroupController::class,'index'])->name('index');
     Route::get('/add',[GroupController::class,'add'])->name('add');
     Route:: post('/add', [GroupController::class,'postAdd'])->name('post-add');
@@ -110,7 +127,7 @@ Route::prefix('/group')->name('group.')->group(function(){
 });
 
 // Route Danh mục Blog
-Route::prefix('/cates')->name('cates.')->group(function(){
+Route::prefix('/cates')->middleware('auth:admin')->name('cates.')->group(function(){
     Route:: get('/', [BlogCategoryController::class,'index'])->name('index');
     Route:: get('/add', [BlogCategoryController::class,'add'])->name('add');
     Route:: post('/add', [BlogCategoryController::class,'postAdd'])->name('post-add');
@@ -123,11 +140,16 @@ Route::prefix('/cates')->name('cates.')->group(function(){
 // Kết thúc route admin
 
 
+
 // Route clients
 Route::prefix('/')->name('clients.')->group(function(){
     Route:: get('/', [HomeController::class,'index'])->name('lists');
     
 
 });
-// Kết thúc route clientssw
+// Kết thúc route clients
 
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

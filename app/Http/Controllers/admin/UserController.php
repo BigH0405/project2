@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\admin\Users;
 use \App\Models\admin\Groups;
 use App\Http\Requests\admin\UserRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -18,10 +19,10 @@ class UserController extends Controller
     $query = Users::query()->with('Group');
     
     // Bộ lọc theo trạng thái
-    if (!empty($request->status)) {
-        $status = $request->status;
-        $status = ($status == "active") ? 1 : 0;
-        $query->where('status', '=', $status);
+    if (!empty($request->role)) {
+        $role = $request->role;
+        $role = ($role == "active") ? 1 : 0;
+        $query->where('role', '=', $role);
     }
     
     // Bộ lọc theo nhóm
@@ -40,14 +41,23 @@ class UserController extends Controller
 
     // Phân trang kết quả
     $allUser = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
-    
-    return view('layouts.backend.users.lists', compact('title', 'allUser', 'allGroup'));
+    if (Auth::guard('admin')->check()) {
+        // Lấy thông tin người dùng từ guard 'admin'
+        $user = Auth::guard('admin')->user()->fullname;
+        return view('layouts.backend.users.lists', compact('title', 'allUser', 'allGroup', 'user'));
+    }
+    return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
 }
 
     public function add(){
         $title = "Thêm mới người dùng";
         $allGroup = Groups::all();
-        return view('layouts.backend.users.add',compact('title','allGroup'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.users.add',compact('title','allGroup'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function postAdd(UserRequest $request){
@@ -58,7 +68,7 @@ class UserController extends Controller
             'confirm_password' => $request->confirm_password,
             'phone' => $request->phone,
             'address'=> $request->address,
-            'status' => $request->status,
+            'role' => $request->role,
             'group_id' => $request->group_id,
             'email_verified_at'=> date('Y-m-d'),
             'created_at' => date('Y-m-d H:i:s'),
@@ -75,7 +85,12 @@ class UserController extends Controller
         if(!$user) {
             return redirect()->route('admin.user.index')->with('msg_warning', 'Người dùng không tồn tại');
         }
-        return view('layouts.backend.users.edit', compact('title', 'allGroup', 'user'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.users.edit', compact('title', 'allGroup', 'user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function postEdit(UserRequest $request,$id){
@@ -91,7 +106,7 @@ class UserController extends Controller
                 // 'confirm_password' => $request->confirm_password,
                 'phone' => $request->phone,
                 'address'=> $request->address,
-                'status' => $request->status,
+                'role' => $request->role,
                 'group_id' => $request->group_id,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
@@ -103,7 +118,7 @@ class UserController extends Controller
                 // 'confirm_password' => $request->confirm_password,
                 'phone' => $request->phone,
                 'address'=> $request->address,
-                'status' => $request->status,
+                'role' => 0,
                 'group_id' => $request->group_id,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
