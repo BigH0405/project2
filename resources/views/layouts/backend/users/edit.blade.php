@@ -67,9 +67,9 @@
                         </div>
                         <div class="col-6">
                             <label for="">Trạng thái</label>
-                            <select name="status" id="" class="form-control">
-                                <option value="0" {{old('status')==0 || $user->status==0 ?'selected':false}}>Chưa kích hoạt</option>
-                                <option value="1" {{old('status')==1 || $user->status==1?'selected':false}}>Kích hoạt</option>
+                            <select name="role" id="" class="form-control">
+                                <option value="0" {{old('role')==0 || $user->role==0 ?'selected':false}}>Người dùng</option>
+                                <option value="1" {{old('role')==1 || $user->role==1?'selected':false}}>Quản trị viên</option>
                             </select>
                             @error('description')
                                 <span style="color: red">{{ $message }}</span>

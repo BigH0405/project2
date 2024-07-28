@@ -26,10 +26,10 @@
                             
                         </div>
                         <div class="col-3">
-                            <select name="status" id="" class="form-control">
+                            <select name="role" id="" class="form-control">
                               <option value="0">Tất cả trạng thái</option>
-                              <option value="active" {{request()->status=='active'?'selected':false}}>Kích hoạt</option>
-                              <option value="inactive" {{request()->status=='inactive'?'selected':false}}>Chưa kích hoạt</option>
+                              <option value="active" {{request()->role=='active'?'selected':false}}>Quản trị viên</option>
+                              <option value="inactive" {{request()->role=='inactive'?'selected':false}}>Người dùng</option>
                             </select>
                           </div>
                         <div class="col-4">
@@ -67,7 +67,7 @@
                             <td>{{$item->password}}</td>
                             <td>{{$item->phone}}</td>
                             <td>{{$item->address}}</td>
-                            <td>{!!$item->status==0?'<button class="btn btn-warning btn-sm">Chưa kích hoạt</button>':'<button class="btn btn-success btn-sm">Kích hoạt</button>'!!}</td>
+                            <td>{!!$item->role==0?'<button class="btn btn-warning btn-sm">Người dùng</button>':'<button class="btn btn-success btn-sm">Quản trị viên</button>'!!}</td>
                             <td>{{$item->Group ? $item->Group->name : 'Không có nhóm'}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>

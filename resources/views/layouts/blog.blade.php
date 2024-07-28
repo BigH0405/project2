@@ -306,7 +306,7 @@
                             </div><!-- /input-group -->
                             <div class="br"></div>
                         </aside>
-                        <aside class="single_sidebar_widget author_widget">
+                        {{-- <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="{{asset('clients/img/blog/author.png')}}" alt="">
                             <h4>Charlie Barber</h4>
                             <p>Senior blog writer</p>
@@ -320,7 +320,7 @@
                                 should have to spend money on boot camp when you can get. Boot camps have itssuppor
                                 ters andits detractors.</p>
                             <div class="br"></div>
-                        </aside>
+                        </aside> --}}
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Popular Posts</h3>
                             <div class="media post_item">
@@ -413,7 +413,7 @@
                             </ul>
                             <div class="br"></div>
                         </aside>
-                        <aside class="single-sidebar-widget newsletter_widget">
+                        {{-- <aside class="single-sidebar-widget newsletter_widget">
                             <h4 class="widget_title">Newsletter</h4>
                             <p>
                                 Here, I focus on a range of items and features that we use in life without
@@ -431,7 +431,7 @@
                             </div>
                             <p class="text-bottom">You can unsubscribe at any time</p>
                             <div class="br"></div>
-                        </aside>
+                        </aside> --}}
                         <aside class="single-sidebar-widget tag_cloud_widget">
                             <h4 class="widget_title">Tag Clouds</h4>
                             <ul class="list">

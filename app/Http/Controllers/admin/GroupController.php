@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\Groups;
 use App\Http\Requests\admin\GroupRequest;
+use Illuminate\Support\Facades\Auth;
+
 class GroupController extends Controller
 {
     public function index(Request $request){
@@ -19,12 +21,25 @@ class GroupController extends Controller
         }
 
         $allGroups = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
-        return view('layouts.backend.groups.lists',compact('title','allGroups'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.groups.lists',compact('title','allGroups','user'));
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function add(){
         $title = "Thêm mới nhóm";
-        return view('layouts.backend.groups.add',compact('title'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.groups.add',compact('title','user'));
+
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function postAdd(GroupRequest $request){
@@ -44,7 +59,12 @@ class GroupController extends Controller
         if(!$groupid){
             return redirect()->route('admin.group.index')->with('msg_warning','Nhóm không tồn tại');
         }
-        return view('layouts.backend.groups.edit',compact('title','groupid'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.groups.edit',compact('title','groupid','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function postEdit(Request $request,$id){

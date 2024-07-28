@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\admin\ProductCategory;
 use App\Http\Requests\admin\ProductCategoryRequest;
+use Illuminate\Support\Facades\Auth;
+
 class ProductCategoryController extends Controller
 {
     public function index(Request $request){
@@ -19,14 +21,23 @@ class ProductCategoryController extends Controller
         }
 
         $allCate = $query->orderBy('id','DESC')->paginate(3)->withQueryString();
-        
-        return view('layouts.backend.product_category.lists',compact('title','allCate'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.product_category.lists',compact('title','allCate','user'));
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function add(){
         $title = "Thêm mới danh sách sản phẩm";
-
-        return view('layouts.backend.product_category.add',compact('title'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.product_category.add',compact('title','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
         
     }
 
@@ -45,7 +56,12 @@ class ProductCategoryController extends Controller
         if(!$cate) {
             return redirect()->route('admin.cate.index')->with('msg_warning', 'Danh mục không tồn tại');
         }
-        return view('layouts.backend.product_category.edit',compact('title','cate'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.product_category.edit',compact('title','cate','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
 
     public function postEdit(ProductCategoryRequest $request, $id){

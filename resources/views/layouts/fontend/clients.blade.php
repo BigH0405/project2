@@ -771,7 +771,7 @@
 	<!-- end product Area -->
 
 	<!-- Start exclusive deal Area -->
-	<section class="exclusive-deal-area">
+	{{-- <section class="exclusive-deal-area">
 		<div class="container-fluid">
 			<div class="row justify-content-center align-items-center">
 				<div class="col-lg-6 no-padding exclusive-left">
@@ -841,7 +841,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- End exclusive deal Area -->
 
 	<!-- Start brand Area -->
@@ -881,7 +881,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-lg-12">
 					<div class="row">
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
@@ -993,13 +993,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3">
+				{{-- <div class="col-lg-3">
 					<div class="ctg-right">
 						<a href="#" target="_blank">
 							<img class="img-fluid d-block mx-auto" src="{{asset('clients/img/category/c5.jpg')}}" alt="">
 						</a>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 	</section>

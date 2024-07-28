@@ -7,6 +7,7 @@ use App\Http\Requests\admin\ProductRequest;
 use App\Models\admin\ProductCategory;
 use Illuminate\Http\Request;
 use App\Models\admin\Products;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -27,12 +28,23 @@ class ProductController extends Controller
         }
 
         $allProduct = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
-        return view('layouts.backend.products.lists',compact('title','allProduct','allCate'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.products.lists',compact('title','allProduct','allCate','user'));
+
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
     public function add(){
         $allCate = ProductCategory::all();
         $title = "Thêm mới sản phẩm";
-        return view('layouts.backend.products.add',compact('title','allCate'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.products.add',compact('title','allCate','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
         
     }
     public function postAdd(ProductRequest $request ){
@@ -67,9 +79,14 @@ class ProductController extends Controller
         if(!$product) {
             return redirect()->route('admin.product.index')->with('msg_warning', 'Sản phẩm không tồn tại');
         }
-        // dd($product);
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.products.edit',compact('title','product','allCate','user'));
 
-        return view('layouts.backend.products.edit',compact('title','product','allCate'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
+
     }
     public function postEdit(ProductRequest $request, $id){
         $product = Products::find($id);
