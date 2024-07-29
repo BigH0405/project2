@@ -8,10 +8,11 @@ use App\Models\admin\Groups;
 use App\Models\admin\Blog;
 use App\Models\admin\Comments;
 use App\Models\admin\Reviews;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-class Users extends Authenticatable
+class Users extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     protected $table="users";

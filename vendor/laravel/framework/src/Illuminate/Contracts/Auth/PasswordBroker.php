@@ -12,13 +12,15 @@ interface PasswordBroker
      * @var string
      */
     const RESET_LINK_SENT = 'passwords.sent';
+    const RESET_LINK_SENT_ADMIN = 'admin.passwords-sent';
 
     /**
      * Constant representing a successfully reset password.
      *
      * @var string
      */
-    const PASSWORD_RESET = 'passwords.reset';
+    const PASSWORD_RESET = 'password.reset';
+    const PASSWORD_RESET_ADMIN = 'admin.password-reset';
 
     /**
      * Constant representing the user not found response.

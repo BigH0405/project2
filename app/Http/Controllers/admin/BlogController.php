@@ -32,7 +32,7 @@ class BlogController extends Controller
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
             $user = Auth::guard('admin')->user()->fullname;
-            return view('layouts.backend.blogs.lists',compact('title','allBlog','user'));
+            return view('layouts.backend.blogs.lists',compact('title','allBlog','user','allCate'));
 
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');

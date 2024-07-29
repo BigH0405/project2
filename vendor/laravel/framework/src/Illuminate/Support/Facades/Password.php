@@ -27,6 +27,7 @@ class Password extends Facade
      * @var string
      */
     const RESET_LINK_SENT = PasswordBroker::RESET_LINK_SENT;
+    const RESET_LINK_SENT_ADMIN = PasswordBroker::RESET_LINK_SENT_ADMIN;
 
     /**
      * Constant representing a successfully reset password.
@@ -34,6 +35,7 @@ class Password extends Facade
      * @var string
      */
     const PASSWORD_RESET = PasswordBroker::PASSWORD_RESET;
+    const PASSWORD_RESET_ADMIN = PasswordBroker::PASSWORD_RESET_ADMIN;
 
     /**
      * Constant representing the user not found response.
