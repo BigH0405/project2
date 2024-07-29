@@ -29,7 +29,7 @@ class Users extends Authenticatable implements MustVerifyEmail
         'phone',
         'address',
         'role',
-        'group_id ',
+        'group_id',
         'password',
         'remember_token',
         'lastLogin',
