@@ -55,7 +55,7 @@ class UserController extends Controller
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
             $user = Auth::guard('admin')->user()->fullname;
-            return view('layouts.backend.users.add',compact('title','allGroup'));
+            return view('layouts.backend.users.add',compact('title','allGroup','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
