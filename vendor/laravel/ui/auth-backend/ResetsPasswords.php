@@ -137,14 +137,15 @@ trait ResetsPasswords
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetResponse(Request $request, $response)
-    {
-        if ($request->wantsJson()) {
-            return new JsonResponse(['message' => trans($response)], 200);
-        }
-
-        return redirect($this->redirectPath())
-                            ->with('status', trans($response));
+{
+    if ($request->wantsJson()) {
+        return new JsonResponse(['message' => trans($response)], 200);
     }
+
+    return redirect()->route('admin.login') // Chuyển hướng đến trang đăng nhập dành cho quản trị viên
+                     ->with('status', trans($response));
+}
+
 
     /**
      * Get the response for a failed password reset.
