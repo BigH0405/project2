@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -56,7 +57,19 @@ class LoginController extends Controller
             'password.string'=> 'Kiểu dữ liệu mật khẩu không hợp lệ',
             'password.min'=> 'Mật khẩu phải từ :min ký tự',
         ]
-    );
+        );
+
+        $credentials = $request->only('email', 'password');
+
+        if (isAdmin($credentials['email'])) {
+            if (Auth::guard('admin')->attempt($credentials)) {
+                return redirect()->intended(RouteServiceProvider::ADMIN);
+            } else {
+                return back()->with('msg_warning', 'Email hoặc mật khẩu không hợp lệ');
+            }
+        } else {
+            return back()->with('msg_warning', 'Tài khoản không phải là quản trị viên');
+        }
     }
     
     protected function sendFailedLoginResponse(Request $request)

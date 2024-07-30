@@ -21,6 +21,7 @@ use App\Http\Controllers\admin\auth\RestPasswordController;
 use App\Http\Controllers\clients\ProductsController;
 use App\Http\Controllers\clients\BlogClientController;
 use App\Http\Controllers\clients\ContactClientController;
+use App\Http\Controllers\clients\auth\LoginClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,7 +66,6 @@ use App\Http\Controllers\clients\ContactClientController;
 Route::prefix('/admin')->name('admin.')->group(function(){
     //Route Dashboard admin
     Route::get('/',[DashboardController::class,'index'])->middleware('auth:admin')->name('index');
-// Auth::routes(['verify' => true]);
 /**********************************************Login-Register*********************************************************/
     //Route đăng nhập
     Route::get('/login',[LoginController::class,'login'])->middleware('guest:admin')->name('login');
@@ -198,6 +198,18 @@ Route::prefix('/reviews')->name('reviews.')->group(function(){
 
 // Route clients
 Route::prefix('/')->name('clients.')->group(function(){
+/**********************************************Login-Register*********************************************************/
+
+//Route đăng nhập
+
+Route::get('/login',[LoginClientController::class,'login'])->name('login');
+Route::post('/login',[LoginClientController::class,'postLogin'])->name('post-login');
+/**********************************************END Login-Register*********************************************************/
+
+
+
+
+
     // Route clients trang chủ
     Route:: get('/', [HomeController::class,'index'])->name('lists');
     //Route clients sản phẩm
@@ -210,6 +222,5 @@ Route::prefix('/')->name('clients.')->group(function(){
 // Kết thúc route clients
 
 
-// Auth::routes(['verify' => true]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

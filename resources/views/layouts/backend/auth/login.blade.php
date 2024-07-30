@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a class="btn btn-link" href="#">
+                            <a class="btn btn-link" href="{{route('clients.login')}}">
                                 Đăng nhập với tư cách người dùng
                              </a>
                         </div>
