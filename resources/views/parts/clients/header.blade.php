@@ -62,7 +62,7 @@
                         <li class="nav-item {{ active_link('clients.contacts') }}">
                             <a class="nav-link" href="{{ route('clients.contacts') }}">Liên hệ</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Đăng nhập</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('clients.login')}}">Đăng nhập</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
