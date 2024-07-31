@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ReviewRequest;
 use App\Models\admin\Reviews;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -21,7 +22,12 @@ class ReviewController extends Controller
             });
         }
         $allReviews= $query->orderBy('id','DESC')->paginate(10)->withQueryString();
-        return view('layouts.backend.reviews.lists',compact('title','allReviews'));
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view('layouts.backend.reviews.lists',compact('title','allReviews','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
         }
         public function edit($id){
             $title = "Cập nhập Đánh giá";
@@ -30,9 +36,13 @@ class ReviewController extends Controller
             if(!$reviews) {
                 return redirect()->route('admin.reviews.index')->with('msg_warning', 'Đánh giá không tồn tại');
             }
-            // dd($reviews);
+            if (Auth::guard('admin')->check()) {
+                // Lấy thông tin người dùng từ guard 'admin'
+                $user = Auth::guard('admin')->user()->fullname;
+                return view('layouts.backend.reviews.edit',compact('title','reviews','user'));
+            }
+            return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     
-            return view('layouts.backend.reviews.edit',compact('title','reviews'));
         }
         public function postEdit(ReviewRequest $request, $id){
             $contact = Reviews::find($id);

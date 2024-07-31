@@ -15,6 +15,13 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\auth\DashboardController;
 use App\Http\Controllers\admin\auth\LoginController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\admin\auth\ForgotPasswordController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\admin\auth\RestPasswordController;
+use App\Http\Controllers\clients\ProductsController;
+use App\Http\Controllers\clients\BlogClientController;
+use App\Http\Controllers\clients\ContactClientController;
+use App\Http\Controllers\clients\auth\LoginClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,45 +36,60 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::get('/detail', function () {
-    return view('layouts/product_detail');
-});
+// Route::get('/detail', function () {
+//     return view('layouts/product_detail');
+// });
 
-Route::get('/blog', function () {
-    return view('layouts/blog');
-});
+// Route::get('/blog', function () {
+//     return view('layouts/blog');
+// });
 
-Route::get('/blog-detail', function () {
-    return view('layouts/blog_detail');
-});
+// Route::get('/blog-detail', function () {
+//     return view('layouts/blog_detail');
+// });
 
-Route::get('/login', function () {
-    return view('layouts/auth_login');
-});
+// Route::get('/login', function () {
+//     return view('layouts/auth_login');
+// });
 
-Route::get('/contact', function () {
-    return view('layouts/contact');
-});
+// Route::get('/contact', function () {
+//     return view('layouts/contact');
+// });
 
-Route::get('/products', function () {
-    return view('layouts/products');
-});
+// Route::get('/products', function () {
+//     return view('layouts/products');
+// });
+
+
+
 // Route admin
 Route::prefix('/admin')->name('admin.')->group(function(){
     //Route Dashboard admin
     Route::get('/',[DashboardController::class,'index'])->middleware('auth:admin')->name('index');
-
-    //Route đăng nhập + đăng ký
+/**********************************************Login-Register*********************************************************/
+    //Route đăng nhập
     Route::get('/login',[LoginController::class,'login'])->middleware('guest:admin')->name('login');
     Route::post('/login',[LoginController::class,'Postlogin'])->middleware('guest:admin')->name('post-login');
-
-    Route::post('logout', function(){
+    //Đăng xuất
+    Route::post('/logout', function(){
     Auth::guard('admin')->logout();
-    return redirect()->route('admin.login');
+    return redirect()->route('clients.lists');
     })->middleware('auth:admin')->name('logout');
 
-   
+// Route hiển thị form quên mật khẩu
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'getForgotPassword'])
+    ->middleware('guest:admin')
+    ->name('forgot-password');
 
+// Route xử lý yêu cầu POST để gửi email đặt lại mật khẩu
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+    ->middleware('guest:admin')
+    ->name('sendResetLinkEmail');
+//  Route xử lý form xác nhận mật khẩu
+    Route::get('reset-password/{token}', [RestPasswordController::class,'showResetForm'])->name('rest-password');
+    Route::post('reset-password', [RestPasswordController::class,'reset'])->name('update-password');
+
+/**********************************************END Login-Register*********************************************************/
 
 //Route sản phẩm
 Route::prefix('/product')->middleware('auth:admin')->name('product.')->group(function(){
@@ -176,13 +198,29 @@ Route::prefix('/reviews')->name('reviews.')->group(function(){
 
 // Route clients
 Route::prefix('/')->name('clients.')->group(function(){
-    Route:: get('/', [HomeController::class,'index'])->name('lists');
-    
+/**********************************************Login-Register*********************************************************/
 
+//Route đăng nhập
+
+Route::get('/login',[LoginClientController::class,'login'])->name('login');
+Route::post('/login',[LoginClientController::class,'postLogin'])->name('post-login');
+/**********************************************END Login-Register*********************************************************/
+
+
+
+
+
+    // Route clients trang chủ
+    Route:: get('/', [HomeController::class,'index'])->name('lists');
+    //Route clients sản phẩm
+    Route::get('/products',[ProductsController::class,'index'])->name('products');
+    //Route clients blogs
+    Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
+    //Route clients liên hệ
+    Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
 });
 // Kết thúc route clients
 
 
-// Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -9,16 +9,13 @@
 
                 <div class="card-body">
                     @if ($errors->any())
-                    <div class="alert alert-danger text-center">Vui lòng kiểm tra lại dữ liệu</div>
-                        
+                    <div class="alert alert-danger text-center">Vui lòng kiểm tra lại dữ liệu</div> 
                     @endif
                     @if (session('msg'))
                     <div class="alert alert-success text-center">{{session('msg')}}</div>
-                        
                     @endif
                     @if (session('msg_warning'))
                     <div class="alert alert-danger text-center">{{session('msg_warning')}}</div>
-                        
                     @endif
                     <form method="POST" action="{{ route('admin.post-login') }}">
                         @csrf
@@ -69,12 +66,17 @@
                                     Đăng nhập
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                @if (Route::has('admin.forgot-password'))
+                                    <a class="btn btn-link text-center" href="{{ route('admin.forgot-password') }}">
                                        Quên mật khẩu
                                     </a>
                                 @endif
                             </div>
+                        </div>
+                        <div class="text-center">
+                            <a class="btn btn-link" href="{{route('clients.login')}}">
+                                Đăng nhập với tư cách người dùng
+                             </a>
                         </div>
                     </form>
                 </div>

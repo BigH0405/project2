@@ -32,3 +32,18 @@ function isAdmin($email){
    }
    return false;
 }
+
+function isClients($email){
+    $count = App\Models\clients\Users::where('email', $email)->where('role','0')->count();
+    if($count > 0){
+     return true;
+    }
+    return false;
+ }
+
+if (!function_exists('active_link')) {
+    function active_link($routeName, $class = 'active') {
+        return request()->routeIs($routeName) ? $class : '';
+    }
+}
+

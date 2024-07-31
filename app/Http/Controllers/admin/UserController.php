@@ -55,7 +55,7 @@ class UserController extends Controller
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
             $user = Auth::guard('admin')->user()->fullname;
-            return view('layouts.backend.users.add',compact('title','allGroup'));
+            return view('layouts.backend.users.add',compact('title','allGroup','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     }
@@ -134,11 +134,23 @@ class UserController extends Controller
     
         if ($user) {
             $blogCount = $user->blogs()->count();
-    
+            $commentCount = $user->comment()->count();
+            $reviewCount = $user->review()->count();
             if ($blogCount > 0) {
                 return redirect()->route('admin.user.index')
                                  ->with('msg_warning', "Không thể xóa người dùng này vì còn $blogCount bài viết đang sử dụng!");
             }
+
+            if ($commentCount > 0) {
+                return redirect()->route('admin.user.index')
+                                 ->with('msg_warning', "Không thể xóa người dùng này vì còn $commentCount bình luận đang sử dụng!");
+            }
+
+            if ($reviewCount > 0) {
+                return redirect()->route('admin.user.index')
+                                 ->with('msg_warning', "Không thể xóa người dùng này vì còn $reviewCount đánh giá đang sử dụng!");
+            }
+            
     
             Users::destroy($id);
             return redirect()->route('admin.user.index')->with('msg', "Xóa người dùng thành công");
