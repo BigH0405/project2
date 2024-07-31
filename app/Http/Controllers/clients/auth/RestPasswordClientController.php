@@ -1,30 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\admin\auth;
+namespace App\Http\Controllers\clients\auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rules;
 
-class RestPasswordController extends Controller
+class RestPasswordClientController extends Controller
 {
     protected $redirectTo;
 
     use ResetsPasswords;
 
+    public function __construct(){
+        $this->redirectTo = route('clients.login');
+    }
+
     public function showResetForm(Request $request)
     {
+        $title = 'Đổi mật khẩu';
         $token = $request->route()->parameter('token');
 
-        return view('layouts.backend.auth.reset')->with(
+        return view('layouts.clients.auth.reset',compact('title'))->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
-    
+
     protected function validationErrorMessages()
     {
         return [
@@ -57,14 +64,24 @@ class RestPasswordController extends Controller
                     : $this->sendResetFailedResponse($request, $response);
     }
 
+    protected function sendResetResponse(Request $request, $response)
+{
+    if ($request->wantsJson()) {
+        return new JsonResponse(['message' => trans($response)], 200);
+    }
+
+    return redirect()->route('clients.login') // Chuyển hướng đến trang đăng nhập dành cho quản trị viên
+                         ->with('msg', 'Đổi mật khẩu thành công! Bạn có thể đăng nhập bằng mật khẩu mới');
+}
+
 
     public function broker()
     {
-        return Password::broker('admin');
+        return Password::broker('web');
     }
 
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard('web');
     }
 }

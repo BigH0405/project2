@@ -22,6 +22,12 @@ use App\Http\Controllers\clients\ProductsController;
 use App\Http\Controllers\clients\BlogClientController;
 use App\Http\Controllers\clients\ContactClientController;
 use App\Http\Controllers\clients\auth\LoginClientController;
+use App\Http\Controllers\clients\auth\RegisterController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\clients\auth\VerifyClientsController;
+use App\Http\Controllers\clients\auth\ForgotPasswordClientController;
+use App\Http\Controllers\clients\auth\RestPasswordClientController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,8 +92,8 @@ Route::prefix('/admin')->name('admin.')->group(function(){
     ->middleware('guest:admin')
     ->name('sendResetLinkEmail');
 //  Route xử lý form xác nhận mật khẩu
-    Route::get('reset-password/{token}', [RestPasswordController::class,'showResetForm'])->name('rest-password');
-    Route::post('reset-password', [RestPasswordController::class,'reset'])->name('update-password');
+    Route::get('reset-password/{token}', [RestPasswordController::class,'showResetForm'])->middleware('guest:admin')->name('rest-password');
+    Route::post('reset-password', [RestPasswordController::class,'reset'])->middleware('guest:admin')->name('update-password');
 
 /**********************************************END Login-Register*********************************************************/
 
@@ -194,33 +200,72 @@ Route::prefix('/reviews')->name('reviews.')->group(function(){
 
 // Kết thúc route admin
 
-
+Route::get('/email/verify', function () {
+    return redirect()->route('clients.verify');
+})->middleware('auth:web')->name('verification.notice');
+//
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('register');
+})->middleware(['auth:web', 'signed'])->name('verification.verify');
+//
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Một đường link đã được gửi tới bạn!');
+})->middleware(['auth:web', 'throttle:6,1'])->name('verification.resend');
 
 // Route clients
 Route::prefix('/')->name('clients.')->group(function(){
-/**********************************************Login-Register*********************************************************/
+    /**********************************************END Login-Register*********************************************************/
+    // Route đăng nhập
+    Route::get('/login', [LoginClientController::class, 'login'])->middleware('guest:web')->name('login');
+    Route::post('/login', [LoginClientController::class, 'postLogin'])->middleware('guest:web')->name('post-login');
 
-//Route đăng nhập
+    // Route đăng ký
+    Route::get('/register', [RegisterController::class,'showRegistrationForm'])->middleware('guest:web')->name('register');
+    Route::post('/register', [RegisterController::class,'register'])->middleware('guest:web')->name('post-register');
 
-Route::get('/login',[LoginClientController::class,'login'])->name('login');
-Route::post('/login',[LoginClientController::class,'postLogin'])->name('post-login');
-/**********************************************END Login-Register*********************************************************/
+    // Route form xác minh email
+    Route::get('/verify', [VerifyClientsController::class,'show'])->name('verify');
+
+    // Route form quên mật khẩu
+    Route::get('/forgot-password', [ForgotPasswordClientController::class,'getForgotPassword'])->middleware('guest:web')->name('forgot-password');
+    Route::post('/forgot-password', [ForgotPasswordClientController::class, 'sendResetLinkEmail'])->middleware('guest:web')
+    ->name('sendResetLinkEmail');
+
+    // Hiện form đổi mật khẩu
+    Route::get('reset-password/{token}', [RestPasswordClientController::class,'showResetForm'])->middleware('guest:web')->name('rest-password');
+    Route::post('reset-password', [RestPasswordController::class,'reset'])->middleware('guest:web')->name('update-password');
+
+    // Đăng xuất
+    Route::post('/logout', function(){
+        Auth::guard('web')->logout();
+        return redirect()->route('clients.lists');
+    })->middleware('auth:web')->name('logout');
 
 
+    // Các route yêu cầu email đã xác minh
+    Route::middleware(['auth:web', 'verified'])->group(function() {
+        // Các route yêu cầu xác minh email ở đây, nếu có
+       
+    });
 
+    /**********************************************END Login-Register*********************************************************/
 
-
+    // Các route công khai
     // Route clients trang chủ
-    Route:: get('/', [HomeController::class,'index'])->name('lists');
-    //Route clients sản phẩm
+    Route::get('/', [HomeController::class,'index'])->name('lists');
+    // Route clients sản phẩm
     Route::get('/products',[ProductsController::class,'index'])->name('products');
-    //Route clients blogs
+    // Route clients blogs
     Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
-    //Route clients liên hệ
+    // Route clients liên hệ
     Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
+
+    
 });
+
 // Kết thúc route clients
 
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
