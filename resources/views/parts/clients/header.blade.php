@@ -62,7 +62,27 @@
                         <li class="nav-item {{ active_link('clients.contacts') }}">
                             <a class="nav-link" href="{{ route('clients.contacts') }}">Liên hệ</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('clients.login')}}">Đăng nhập</a></li>
+                        @if (!empty($user))
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">Xin chào: {{$user}}</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('clients.logout') }}"
+                                    onclick="event.preventDefault(); if (confirm('Bạn có chắc chắn muốn đăng xuất?')) { document.getElementById('logout-form').submit(); }">
+                                    Đăng xuất
+                                 </a> 
+                                 <form id="logout-form" action="{{ route('clients.logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                 </form>
+                            </ul>
+                        </li>
+                        @else
+                        <li class="nav-item submenu dropdown">
+                            <a href="{{ route('clients.login') }}" class="nav-link dropdown-toggle">Đăng nhập</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link" href="{{route('clients.register')}}">Đăng ký</a></li>
+                            </ul>
+                        </li>
+                        @endif
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -85,5 +105,4 @@
         </div>
     </div>
 </header>
-	<!-- End Banner Area -->
 

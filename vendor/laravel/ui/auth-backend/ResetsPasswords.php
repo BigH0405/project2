@@ -114,7 +114,7 @@ trait ResetsPasswords
 
         event(new PasswordReset($user));
 
-        $this->guard()->login($user);
+        // $this->guard()->login($user);
     }
 
     /**
@@ -141,9 +141,9 @@ trait ResetsPasswords
     if ($request->wantsJson()) {
         return new JsonResponse(['message' => trans($response)], 200);
     }
-
-    return redirect()->route('admin.login') // Chuyển hướng đến trang đăng nhập dành cho quản trị viên
-                     ->with('status', trans($response));
+        return redirect()->route('clients.login') // Chuyển hướng đến trang đăng nhập
+                         ->with('msg', 'Đổi mật khẩu thành công! Bạn có thể đăng nhập bằng mật khẩu mới');
+    
 }
 
 
