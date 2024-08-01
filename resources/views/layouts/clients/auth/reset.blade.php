@@ -41,10 +41,12 @@
                     @if (session('msg_warning'))
                     <div class="alert alert-danger text-center">{{session('msg_warning')}}</div>
                     @endif
-                    <form class="row login_form" action="{{ route('clients.post-login') }}" method="POST">
+                    <form class="row login_form" action="{{ route('clients.update-password') }}" method="POST">
+                        <input type="hidden" name="token" value="{{ $token }}">
+
                         @csrf
                         <div class="col-md-12 form-group">
-                            <input id="name" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Nhập email của bạn...">
+                            <input id="name" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" autocomplete="email" autofocus placeholder="Nhập email của bạn...">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -53,7 +55,7 @@
                             @enderror
                         </div>
                         <div class="col-md-12 form-group">
-                            <input id="name" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autocomplete="password" autofocus placeholder="Nhâp password của bạn...">
+                            <input id="name" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" autocomplete="password" autofocus placeholder="Nhâp mật khẩu mới của bạn...">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -61,17 +63,15 @@
                         @enderror
                         </div>
                         <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Ghi nhớ mật khẩu</label>
-                            </div>
+                            <input id="name" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" autocomplete="password_confirmation" autofocus placeholder="Nhập lại mật khẩu mới của bạn...">
+                            @error('password_confirmation')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="submit" value="submit" class="primary-btn">Đăng nhập</button>
-                            @if (Route::has('clients.forgot-password'))
-                            <a href="{{route('clients.forgot-password')}}">Quên mật khẩu?</a>
-                            @endif
-                            <a href="{{route('admin.login')}}" style="color: #01A4DB">Đăng nhập với tư cách quản trị viên</a>
+                            <button type="submit" value="submit" class="primary-btn">Đổi mật khẩu</button>
                         </div>
                     </form>
                 </div>

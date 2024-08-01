@@ -7,6 +7,7 @@ use App\Models\admin\BlogCategory;
 use App\Models\admin\Comments;
 use App\Models\clients\Blogs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogClientController extends Controller
 {
@@ -20,6 +21,11 @@ class BlogClientController extends Controller
             }
         $allBlogs = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         $allTop = $query->orderBy('views','DESC')->paginate(4)->withQueryString();
-        return view('layouts.clients.blog',compact('allBlogs','messege','allTop'));
-    }
+        if (Auth::guard('web')->check()) {
+            // Lấy thông tin người dùng từ guard 'web'
+            $user = Auth::guard('web')->user()->fullname;
+            return view('layouts.clients.blog',compact('allBlogs','messege','allTop','user'));
+        }
+        // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo
+        return view('layouts.clients.blog');
 }
