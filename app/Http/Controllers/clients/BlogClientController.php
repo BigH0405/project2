@@ -29,3 +29,4 @@ class BlogClientController extends Controller
         // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo
         return view('layouts.clients.blog');
 }
+}
