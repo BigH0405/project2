@@ -218,6 +218,7 @@ Route::post('/login',[LoginClientController::class,'postLogin'])->name('post-log
     Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
     //Route clients liên hệ
     Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
+    Route::post('/contacts',[ContactClientController::class,'postContacts'])->name('post-contacts');
 });
 // Kết thúc route clients
 

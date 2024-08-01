@@ -41,10 +41,10 @@
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Contact Us</h1>
+					<h1>Liên hệ với chúng tôi</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Contact</a>
+						<a href="{{route('clients.lists')}}">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{{route('clients.contacts')}}">Liên hệ</a>
 					</nav>
 				</div>
 			</div>
@@ -79,25 +79,44 @@
 					</div>
 				</div>
 				<div class="col-lg-9">
-					<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+					@if (session('msg'))
+					<div class="alert alert-success">{{session('msg')}}</div>
+					@endif
+					@if ($errors->any())
+					<div class="alert alert-danger">Vui lòng kiểm tra lại dữ liệu</div>
+					@endif
+					<form class="row contact_form" action="" method="POST">
+						@csrf
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
+								<input type="text" class="form-control" name="fullname" placeholder="Họ và Tên"  value="{{ old('fullname') }}">
 							</div>
+							@error('fullname')
+							<span style="color: red">{{ $message }}</span>
+						    @enderror
 							<div class="form-group">
-								<input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+								<input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
 							</div>
+							@error('email')
+							<span style="color: red">{{ $message }}</span>
+						    @enderror
 							<div class="form-group">
-								<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
+								<input type="text" class="form-control" name="phone" placeholder="Số điện thoại" value="{{ old('phone') }}">
 							</div>
+							@error('phone')
+							<span style="color: red">{{ $message }}</span>
+						    @enderror
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
+								<textarea class="form-control" name="message" id="message" rows="1" placeholder="Gửi thông điệp của bạn" value="{{ old('message') }}"></textarea>
 							</div>
+							@error('message')
+							<span style="color: red">{{ $message }}</span>
+						    @enderror
 						</div>
 						<div class="col-md-12 text-right">
-							<button type="submit" value="submit" class="primary-btn">Send Message</button>
+							<button type="submit" class="primary-btn">Gửi liên hệ</button>
 						</div>
 					</form>
 				</div>
@@ -110,7 +129,7 @@
 	<!-- End footer Area -->
 
 	<!--================Contact Success and Error message Area =================-->
-	<div id="success" class="modal modal-message fade" role="dialog">
+	{{-- <div id="success" class="modal modal-message fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -122,10 +141,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 	<!-- Modals error -->
-
+{{-- 
 	<div id="error" class="modal modal-message fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -138,6 +157,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<!--================End Contact Success and Error message Area =================-->
 	@include('parts.clients.footer')
