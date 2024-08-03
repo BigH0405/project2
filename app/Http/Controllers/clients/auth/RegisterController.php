@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\clients\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\clients\ProductsCate;
 use App\Models\clients\Users;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -30,8 +31,9 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+        $nav = ProductsCate::get();
         $title = 'Đăng ký tài khoản';
-        return view('layouts.clients.auth.register',compact('title'));
+        return view('layouts.clients.auth.register',compact('title','nav'));
 
     }
 

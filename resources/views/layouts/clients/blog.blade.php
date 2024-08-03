@@ -22,46 +22,52 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
+                    @foreach($allCate as $item)
                     <div class="categories_post">
                         <img src="{{asset('clients/img/blog/cat-post/cat-post-3.jpg')}}" alt="post">
                         <div class="categories_details">
                             <div class="categories_text">
                                 <a href="blog-details.html">
-                                    <h5>Social Life</h5>
+                                    <h5>{{$item->name}}</h5>
                                 </a>
                                 <div class="border_line"></div>
-                                <p>Enjoy your social life together</p>
+                                <p>{{$item->short_description}}</p>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <div class="col-lg-4">
+                    @foreach($allCate as $item)
                     <div class="categories_post">
                         <img src="{{asset('clients/img/blog/cat-post/cat-post-2.jpg')}}" alt="post">
                         <div class="categories_details">
                             <div class="categories_text">
                                 <a href="blog-details.html">
-                                    <h5>Politics</h5>
+                                    <h5>{{$item->name}}</h5>
                                 </a>
                                 <div class="border_line"></div>
-                                <p>Be a part of politics</p>
+                                <p>{{$item->short_description}}</p>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <div class="col-lg-4">
+                    @foreach($allCate as $item)
                     <div class="categories_post">
                         <img src="{{asset('clients/img/blog/cat-post/cat-post-1.jpg')}}" alt="post">
                         <div class="categories_details">
                             <div class="categories_text">
                                 <a href="blog-details.html">
-                                    <h5>Food</h5>
+                                    <h5>{{$item->name}}</h5>
                                 </a>
                                 <div class="border_line"></div>
-                                <p>Let the food be finished</p>
+                                <p>{{$item->short_description}}</p>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -74,7 +80,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="blog_left_sidebar">
-                        @foreach($allBlogs as $key => $item)
+                        @foreach($allBlogs as $item)
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
@@ -145,7 +151,7 @@
                         </aside> --}}
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Popular Posts</h3>
-                        @foreach($allTop as $key => $item)
+                        @foreach($allTop as $item)
                             <div class="media post_item">
                                 <img src="{{asset('clients/img/blog/popular-post/post1.jpg')}}" alt="post">
                                 <div class="media-body">
@@ -165,7 +171,7 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Post Catgories</h4>
                             <ul class="list cat-list">
-                        @foreach($allBlogs as $key => $item)
+                        @foreach($allBlogs as $item)
                                 <li>
                                     <a href="#" class="d-flex justify-content-between">
                                         <p>{{$item->BlogCate ? $item->BlogCate->name :'Không có danh mục'}}</p>
@@ -179,7 +185,7 @@
                         <aside class="single-sidebar-widget tag_cloud_widget">
                             <h4 class="widget_title">Tag Clouds</h4>
                             <ul class="list">
-                        @foreach($allBlogs as $key => $item)
+                        @foreach($allBlogs as $item)
                                 <li><a href="#">{{$item->BlogCate ? $item->BlogCate->name :'Không có danh mục'}}</a></li>
                         @endforeach
                             </ul>

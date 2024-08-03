@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\clients\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\clients\ProductsCate;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
@@ -17,8 +18,9 @@ class LoginClientController extends Controller
 
     public function login()
     {
+        $nav = ProductsCate::get();
         $title = "Đăng nhập";
-        return view('layouts.clients.auth.login',compact('title'));
+        return view('layouts.clients.auth.login',compact('title','nav'));
     }
 
     public function postLogin(Request $request)

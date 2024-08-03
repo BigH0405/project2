@@ -5,8 +5,12 @@
                 <div class="single-footer-widget">
                     <h6>About Us</h6>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-                        magna aliqua.
+                        Chào mừng quý khách đến với Kamar Shop – điểm đến tin cậy cho tất cả nhu cầu về điện thoại di động của bạn!
+
+                        Tại Kamar Shop, chúng tôi tự hào là nhà cung cấp hàng đầu các sản phẩm điện thoại di động
+                         chính hãng từ những thương hiệu nổi tiếng như Apple, Samsung, Xiaomi, Oppo, và nhiều thương hiệu khác.
+                          Với kinh nghiệm nhiều năm trong ngành công nghệ, chúng tôi cam kết mang đến cho khách hàng những sản phẩm chất lượng 
+                          cao cùng dịch vụ chăm sóc khách hàng tận tâm.
                     </p>
                 </div>
             </div>
@@ -69,7 +73,7 @@
         </div>
         <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
             <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">Kamar Shop</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 </p>
         </div>
