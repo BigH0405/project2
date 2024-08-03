@@ -47,3 +47,13 @@ if (!function_exists('active_link')) {
     }
 }
 
+ function isRole($dataArr, $moduleName, $role = 'view')
+    {
+        if (isset($dataArr[$moduleName]) && !empty($dataArr[$moduleName])) {
+            $roleArr = $dataArr[$moduleName];
+            return in_array($role, $roleArr);
+        }
+        return false;
+    }
+
+

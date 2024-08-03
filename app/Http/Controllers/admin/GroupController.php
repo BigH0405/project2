@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\admin\Groups;
 use App\Http\Requests\admin\GroupRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\admin\Modules;
 
 class GroupController extends Controller
 {
@@ -100,4 +101,40 @@ class GroupController extends Controller
     
         return redirect()->route('admin.group.index')->with('msg_warning', "Quyền hành không tồn tại.");
     }
+
+    public function permission(Groups $groups, $id) {
+        $group = Groups::findOrFail($id); // Tìm nhóm theo ID
+        $module = Modules::all(); // Lấy tất cả các module
+        $roleListArr = [
+            'view' => 'Xem',
+            'add' => 'Thêm',
+            'edit' => 'Sửa',
+            'delete' => 'Xóa',
+        ];
+    
+        // Lấy dữ liệu quyền từ nhóm và giải mã JSON
+        $roleJson = $group->permissions;
+        $roleArr = !empty($roleJson) ? json_decode($roleJson, true) : [];
+    
+        return view("layouts.backend.groups.permission", compact('group', 'module', 'roleListArr', 'roleArr'));
+    }
+    
+
+    public function PostPermission(Request $request, $id) {
+        // Tìm nhóm theo ID
+        $group = Groups::findOrFail($id); // Sử dụng findOrFail để đảm bảo nhóm tồn tại
+    
+        // Lấy quyền từ request
+        $roleArr = $request->input('role', []);
+    
+        // Chuyển đổi quyền thành JSON
+        $roleJson = json_encode($roleArr, JSON_UNESCAPED_UNICODE);
+    
+        // Cập nhật quyền vào nhóm
+        $group->permissions = $roleJson;
+        $group->save(); // Lưu các thay đổi
+    
+        return back()->with('msg', 'Phân quyền thành công');
+    }
+    
 }

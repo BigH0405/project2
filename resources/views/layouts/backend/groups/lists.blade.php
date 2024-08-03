@@ -27,7 +27,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Tên nhóm</th>
-                            <th>Quyền hành</th>
+                            <th>Phân quyền</th>
                             <th>Thời gian tạo</th>
                             <th>Thời gian cập nhập</th>
                             <th>Sửa</th>
@@ -40,7 +40,7 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->permissions}}</td>
+                            <td><a href="{{ route('admin.group.permission',['id' => $item->id])}}" class="btn btn-primary">Phân quyền</a></td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>
                             <td><a href="{{route('admin.group.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
