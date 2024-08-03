@@ -115,8 +115,13 @@ class GroupController extends Controller
         // Lấy dữ liệu quyền từ nhóm và giải mã JSON
         $roleJson = $group->permissions;
         $roleArr = !empty($roleJson) ? json_decode($roleJson, true) : [];
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user()->fullname;
+            return view("layouts.backend.groups.permission", compact('group', 'module', 'roleListArr', 'roleArr','user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
     
-        return view("layouts.backend.groups.permission", compact('group', 'module', 'roleListArr', 'roleArr'));
     }
     
 

@@ -40,7 +40,7 @@ class LoginController extends Controller
 
         if (isAdmin($credentials['email'])) {
             if (Auth::guard('admin')->attempt($credentials)) {
-                return redirect()->intended(RouteServiceProvider::ADMIN);
+                return redirect()->route('admin.index');
             } else {
                 return back()->with('msg_warning', 'Email hoặc mật khẩu không hợp lệ');
             }
@@ -64,6 +64,11 @@ class LoginController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect('clients/');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('admin');
     }
 
 }
