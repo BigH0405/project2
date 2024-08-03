@@ -53,8 +53,12 @@
                         <li class="nav-item submenu dropdown {{ request()->routeIs('clients.products') ? 'active' : '' }}">
                             <a href="{{ route('clients.products') }}" class="nav-link dropdown-toggle">Danh mục</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="#">Cate</a></li>
-                            </ul>
+                                @foreach($nav as $item)
+                                <li class="nav-item"><a class="nav-link" href="#">{{$item->name}}</a></li>
+                            @endforeach
+                           
+                            {{-- <li class="nav-item"><a class="nav-link" href="#">test</a></li> --}}
+                         </ul>
                         </li>
                         <li class="nav-item submenu dropdown {{ active_link('clients.blogs') }}">
                             <a href="{{ route('clients.blogs') }}" class="nav-link dropdown-toggle">Blog</a>

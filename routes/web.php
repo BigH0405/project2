@@ -27,6 +27,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\clients\auth\VerifyClientsController;
 use App\Http\Controllers\clients\auth\ForgotPasswordClientController;
 use App\Http\Controllers\clients\auth\RestPasswordClientController;
+use App\Http\Controllers\clients\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -259,11 +260,16 @@ Route::prefix('/')->name('clients.')->group(function(){
     Route::get('/', [HomeController::class,'index'])->name('lists');
     // Route clients sản phẩm
     Route::get('/products',[ProductsController::class,'index'])->name('products');
+    Route::get('/products/{id}',[ProductsController::class,'show'])->name('product_detail');
     // Route clients blogs
     Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
     // Route clients liên hệ
+    
     Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
     Route::post('/contacts',[ContactClientController::class,'postContacts'])->name('post-contacts');
+
+    Route::get('/cart',[CartController::class,'index'])->name('cart');
+
 });
 // Kết thúc route clients
 

@@ -5,19 +5,22 @@ namespace App\Http\Controllers\clients;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\client\ContactRequest;
 use App\Models\clients\Contacts;
+use App\Models\clients\ProductsCate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ContactClientController extends Controller
 {
     public function index(){
+        $nav = ProductsCate::get();
+
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
             $user = Auth::guard('web')->user()->fullname;
-            return view('layouts.clients.contact',compact('user'));
+            return view('layouts.clients.contact',compact('user','nav'));
         }
         // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo
-        return view('layouts.clients.contact');
+        return view('layouts.clients.contact',compact('nav'));
     }
     public function postContacts(ContactRequest $request){
         $dataInsert = [

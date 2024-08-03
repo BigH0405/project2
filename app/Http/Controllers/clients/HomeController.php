@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
     // Lấy sản phẩm bán chạy nhất
     $bestSellingProducts = Products::orderBy('quanlity', 'asc')->limit(9)->get();
-
+    $nav = ProductsCate::get();
     $products = Products::orderBy("id","desc")->limit(8)->get();
     $productBanner = Products::orderBy("id","desc")->limit(5)->get();
     //Limit 1 danh mục
@@ -25,10 +25,10 @@ class HomeController extends Controller
     if (Auth::guard('web')->check()) {
         // Lấy thông tin người dùng từ guard 'web'
         $user = Auth::guard('web')->user()->fullname;
-        return view('layouts.clients.clients', compact('user','products','allCate','bestSellingProducts','productBanner'));
+        return view('layouts.clients.clients', compact('user','products','allCate','bestSellingProducts','productBanner','nav'));
     }
 
-    return view('layouts.clients.clients', compact('products','allCate','bestSellingProducts','productBanner'));
+    return view('layouts.clients.clients', compact('products','allCate','bestSellingProducts','productBanner','nav'));
 }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\clients\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\clients\ProductsCate;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,8 +14,9 @@ class ForgotPasswordClientController extends Controller
 {
     use SendsPasswordResetEmails;
     public function getForgotPassword(){
+        $nav = ProductsCate::get();
         $title = 'Quên mật khẩu';
-        return view('layouts.clients.auth.forgot',compact('title'));
+        return view('layouts.clients.auth.forgot',compact('title','nav'));
     }
 
     protected function validateEmail(Request $request)
