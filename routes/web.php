@@ -99,7 +99,7 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 /**********************************************END Login-Register*********************************************************/
 
 //Route sản phẩm
-Route::prefix('/product')->middleware('auth:admin')->name('product.')->group(function(){
+Route::prefix('/product')->middleware(['auth:admin','can:products'])->name('product.')->group(function(){
     Route:: get('/', [ProductController::class,'index'])->name('index');
     Route::get('/add',[ProductController::class,'add'])->name('add');
     Route:: post('/add', [ProductController::class,'postAdd'])->name('post-add');
@@ -109,7 +109,7 @@ Route::prefix('/product')->middleware('auth:admin')->name('product.')->group(fun
 });
 
 // Route danh sách sản phẩm
-Route::prefix('/cate')->middleware('auth:admin')->name('cate.')->group(function(){
+Route::prefix('/cate')->middleware(['auth:admin','can:product_category'])->name('cate.')->group(function(){
     Route:: get('/', [ProductCategoryController::class,'index'])->name('index');
     Route::get('/add',[ProductCategoryController::class,'add'])->name('add');
     Route:: post('/add', [ProductCategoryController::class,'postAdd'])->name('post-add');
@@ -119,7 +119,7 @@ Route::prefix('/cate')->middleware('auth:admin')->name('cate.')->group(function(
 });
 
 // Route danh sách khuyễn mãi
-Route::prefix('/coupons')->middleware('auth:admin')->name('coupons.')->group(function(){
+Route::prefix('/coupons')->middleware(['auth:admin','can:coupons'])->name('coupons.')->group(function(){
     Route:: get('/', [CouponController::class,'index'])->name('index');
     Route::get('/add',[CouponController::class,'add'])->name('add');
     Route:: post('/add', [CouponController::class,'postAdd'])->name('post-add');
@@ -129,7 +129,7 @@ Route::prefix('/coupons')->middleware('auth:admin')->name('coupons.')->group(fun
 });
 
 // Route blog
-Route::prefix('/blog')->middleware('auth:admin')->name('blog.')->group(function(){
+Route::prefix('/blog')->middleware(['auth:admin','can:blogs'])->name('blog.')->group(function(){
     Route:: get('/', [BlogController::class,'index'])->name('index');
     Route:: get('/add', [BlogController::class,'add'])->name('add');
     Route:: post('/add', [BlogController::class,'postAdd'])->name('post-add');
@@ -139,7 +139,7 @@ Route::prefix('/blog')->middleware('auth:admin')->name('blog.')->group(function(
 });
 
 // Route user
-Route::prefix('/user')->middleware('auth:admin')->name('user.')->group(function(){
+Route::prefix('/user')->middleware(['auth:admin','can:users'])->name('user.')->group(function(){
     Route:: get('/', [UserController::class,'index'])->name('index');
     Route::get('/add',[UserController::class,'add'])->name('add');
     Route:: post('/add', [UserController::class,'postAdd'])->name('post-add');
@@ -149,17 +149,19 @@ Route::prefix('/user')->middleware('auth:admin')->name('user.')->group(function(
 });
 
 // Route group
-Route::prefix('/group')->middleware('auth:admin')->name('group.')->group(function(){
+Route::prefix('/group')->middleware(['auth:admin','can:groups'])->name('group.')->group(function(){
     Route:: get('/', [GroupController::class,'index'])->name('index');
     Route::get('/add',[GroupController::class,'add'])->name('add');
     Route:: post('/add', [GroupController::class,'postAdd'])->name('post-add');
     Route:: get('/edit/{id}', [GroupController::class,'edit'])->name('edit');
     Route:: post('/edit/{id}', [GroupController::class,'postEdit'])->name('post-edit');
     Route:: get('/delete/{id}', [GroupController::class,'delete'])->name('delete');
+    Route:: get('/permission/{id}', [GroupController::class,'permission'])->name('permission');
+    Route:: post('/permission/{id}', [GroupController::class,'PostPermission'])->name('post-permission');
 });
 
 // Route Danh mục Blog
-Route::prefix('/cates')->middleware('auth:admin')->name('cates.')->group(function(){
+Route::prefix('/cates')->middleware(['auth:admin','can:blog_category'])->name('cates.')->group(function(){
     Route:: get('/', [BlogCategoryController::class,'index'])->name('index');
     Route:: get('/add', [BlogCategoryController::class,'add'])->name('add');
     Route:: post('/add', [BlogCategoryController::class,'postAdd'])->name('post-add');
@@ -168,7 +170,7 @@ Route::prefix('/cates')->middleware('auth:admin')->name('cates.')->group(functio
     Route::get('/delete/{id}',[BlogCategoryController::class,'delete'])->name('delete');
 });
 // route contacts
-Route::prefix('/contacts')->name('contacts.')->group(function(){
+Route::prefix('/contacts')->middleware(['auth:admin','can:contacts'])->name('contacts.')->group(function(){
     Route::get('/',[ContactController::class,'index'])->name('index');
     Route:: get('/add', [ContactController::class,'add'])->name('add');
     Route:: post('/add', [ContactController::class,'postAdd'])->name('post-add');
@@ -178,7 +180,7 @@ Route::prefix('/contacts')->name('contacts.')->group(function(){
 
 });
 // route comments
-Route::prefix('/comments')->name('comments.')->group(function(){
+Route::prefix('/comments')->middleware(['auth:admin','can:comments'])->name('comments.')->group(function(){
     Route::get('/',[CommentController::class,'index'])->name('index');
     Route:: get('/add', [CommentController::class,'add'])->name('add');
     Route:: post('/add', [CommentController::class,'postAdd'])->name('post-add');
@@ -188,7 +190,7 @@ Route::prefix('/comments')->name('comments.')->group(function(){
 
 });
 //route reviews
-Route::prefix('/reviews')->name('reviews.')->group(function(){
+Route::prefix('/reviews')->middleware(['auth:admin','can:reviews'])->name('reviews.')->group(function(){
     Route::get('/',[ReviewController::class,'index'])->name('index');
     Route:: get('/add', [ReviewController::class,'add'])->name('add');
     Route:: post('/add', [ReviewController::class,'postAdd'])->name('post-add');
