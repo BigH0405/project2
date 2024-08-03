@@ -27,6 +27,6 @@ class BlogClientController extends Controller
             return view('layouts.clients.blog',compact('allBlogs','messege','allTop','user'));
         }
         // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo
-        return view('layouts.clients.blog');
+        return view('layouts.clients.blog',compact('allBlogs','messege','allTop'));
 }
 }
