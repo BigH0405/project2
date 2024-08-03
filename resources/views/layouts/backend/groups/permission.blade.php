@@ -54,6 +54,7 @@
                                           
                     </table>
                     <button class="btn btn-primary">Phân quyền</button>
+                    <a href="{{route('admin.group.index')}}" class="btn btn-warning">Trở về</a>
                     @csrf
                 </form>
             </div>
