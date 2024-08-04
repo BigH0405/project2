@@ -50,15 +50,8 @@
                         <li class="nav-item {{ active_link('clients.lists') }}">
                             <a class="nav-link" href="{{ route('clients.lists') }}">Home</a>
                         </li>
-                        <li class="nav-item submenu dropdown {{ request()->routeIs('clients.products') ? 'active' : '' }}">
-                            <a href="{{ route('clients.products') }}" class="nav-link dropdown-toggle">Danh mục</a>
-                            <ul class="dropdown-menu">
-                                @foreach($nav as $item)
-                                <li class="nav-item"><a class="nav-link" href="#">{{$item->name}}</a></li>
-                            @endforeach
-                           
-                            {{-- <li class="nav-item"><a class="nav-link" href="#">test</a></li> --}}
-                         </ul>
+                        <li class="nav-item submenu dropdown {{ active_link('clients.products') }}">
+                            <a href="{{ route('clients.products') }}" class="nav-link dropdown-toggle">Sản phẩm</a>
                         </li>
                         <li class="nav-item submenu dropdown {{ active_link('clients.blogs') }}">
                             <a href="{{ route('clients.blogs') }}" class="nav-link dropdown-toggle">Blog</a>
@@ -68,7 +61,7 @@
                         </li>
                         @if (!empty($user))
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link dropdown-toggle">Xin chào: {{$user}}</a>
+                            <a href="#" class="nav-link dropdown-toggle">Xin chào: {{$user->fullname}}</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('clients.logout') }}"
                                     onclick="event.preventDefault(); if (confirm('Bạn có chắc chắn muốn đăng xuất?')) { document.getElementById('logout-form').submit(); }">

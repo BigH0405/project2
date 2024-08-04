@@ -61,8 +61,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Đảm bảo hàm isRole đã được tải
-        // require_once base_path('path/to/functions.php');
 
         ResetPassword::createUrlUsing(function ($user, string $token) {
             if ($user instanceof Users) {

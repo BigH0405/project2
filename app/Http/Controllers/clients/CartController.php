@@ -14,7 +14,7 @@ class CartController extends Controller
         $nav = ProductsCate::get();
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.blog',compact('user','nav'));
         }
         return view('layouts.clients.cart',compact('nav'));
