@@ -58,7 +58,7 @@
                 
                 @can('contacts')
                 @include('parts.backend.menu_item', [
-                    'title' => 'Liên hệ',
+                    'title' => 'Quản lý liên hệ',
                     'name' => 'contacts',
                     ])   
                 @endcan
