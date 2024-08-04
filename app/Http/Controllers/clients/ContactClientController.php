@@ -16,7 +16,7 @@ class ContactClientController extends Controller
 
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.contact',compact('user','nav'));
         }
         // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo

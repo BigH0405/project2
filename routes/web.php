@@ -274,6 +274,8 @@ Route::prefix('/')->name('clients.')->group(function(){
     // Route clients sản phẩm
     Route::get('/products',[ProductsController::class,'index'])->name('products');
     Route::get('/products/{id}',[ProductsController::class,'show'])->name('product_detail');
+    // Route để hiển thị sản phẩm theo danh mục
+    Route::get('/products/category/{id}', [ProductsController::class, 'productsByCategory'])->name('productsbyCategory');
     // Route clients blogs
     Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
     // Route clients liên hệ
