@@ -45,6 +45,22 @@
         <div class="col-xl-9 col-lg-8 col-md-7">
             <!-- Start Filter Bar -->
             <div class="filter-bar d-flex flex-wrap align-items-center">
+                <div class="sorting">
+                </div>
+                <div class="sorting mr-auto">
+                </div>
+                {{-- <h1>{{$title}}</h1> --}}
+                <form action="" method="GET">
+                    <div class="row mt-3">
+                        <div class="col-8">
+                                <input type="search" name="keywords" id="" class="form-control mb-3" placeholder="Nhập từ khóa tìm kiếm..." value="{{request()->keywords}}">
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                </div>  
+                </div>
+                </form>
+        </div>
                 @if(!empty($title1))
                     <h3>{{ $title1 }}</h3>
                 @else

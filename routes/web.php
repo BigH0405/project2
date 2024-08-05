@@ -273,6 +273,7 @@ Route::prefix('/')->name('clients.')->group(function(){
     Route::get('/', [HomeController::class,'index'])->name('lists');
     // Route clients sản phẩm
     Route::get('/products',[ProductsController::class,'index'])->name('products');
+    //Route chi tiết sản phẩm
     Route::get('/products/{id}',[ProductsController::class,'show'])->name('product_detail');
     // Route để hiển thị sản phẩm theo danh mục
     Route::get('/products/category/{id}', [ProductsController::class, 'productsByCategory'])->name('productsbyCategory');

@@ -12,12 +12,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $title="Sản phẩm";
         $bestSellingProducts = Products::orderBy('quanlity', 'asc')->limit(9)->get();
         $query = Products::query();
         $allCate = ProductsCate::get();
         $nav = ProductsCate::get();
+        $search = null;
+        $search = $request->input('keywords');
+        if ($search) {
+            $query->where('name', 'like', '%'.$search.'%');
+        }
         $allProducts=$query->orderBy('id','DESC')->paginate(6)->withQueryString();
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
