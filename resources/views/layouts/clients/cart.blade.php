@@ -23,7 +23,6 @@
             <div class="alert alert-warning">{{ session('error') }}</div>
         @endif
         <div class="cart_inner">
-            <a class="primary-btn" href="{{route('clients.bills')}}">Đơn hàng</a>
             <form action="{{ route('clients.cart.update') }}" method="post">
                 @csrf
                 <div class="table-responsive">

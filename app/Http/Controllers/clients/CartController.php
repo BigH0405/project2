@@ -26,7 +26,7 @@ class CartController extends Controller
         $nav = ProductsCate::get();
 
         if (Auth::guard('web')->check()) {
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.cart', compact('user', 'nav', 'cart', 'subTotal', 'shipping', 'total'));
         }
 

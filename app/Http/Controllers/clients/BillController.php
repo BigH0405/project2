@@ -19,7 +19,7 @@ class BillController extends Controller
         $donHangs=Auth::user()->donHang;
         $nav = ProductsCate::get();
         if (Auth::guard('web')->check()) {
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.bill_detail', compact('user', 'nav','donHangs'));
         }
         return view('layouts.clients.bill_detail', compact('nav','donHangs'));
@@ -40,7 +40,7 @@ class BillController extends Controller
 
         $nav = ProductsCate::get();
         if (Auth::guard('web')->check()) {
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.checkout', compact('user', 'nav', 'subTotal', 'shipping', 'total', 'cart'));
         }
         return redirect()->route('clients.lists')->with('msg','Đăng nhập để tiếp tục');
@@ -106,7 +106,7 @@ class BillController extends Controller
         $nav = ProductsCate::get();
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.showBill',compact('user','nav','donHang'));
         }
 

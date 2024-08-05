@@ -45,7 +45,7 @@ class Users extends Authenticatable implements MustVerifyEmail
     public function donHang(){
         return $this->hasMany(Bills::class,'user_id');
 
-
+    }
     public function Reviews(){
         return $this->hasMany(ReviewClients::class,'user_id');
 

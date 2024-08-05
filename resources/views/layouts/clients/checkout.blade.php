@@ -70,16 +70,10 @@
                         <div class="payment_item">
                             <div class="radion_btn">
                                 <input type="radio" id="f-option5" name="payment_method" >
-                                <label for="f-option5">Thanh toán khi giao hàng</label>
-                                <div class="check"></div>
                             </div>
                             <p>Thanh toán bằng tiền mặt khi giao hàng.</p>
                         </div>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="terms_conditions">
-                            <label for="f-option4">I’ve read and accept the </label>
-                            <a href="#">terms & conditions*</a>
-                        </div>
+                        
                       <button type="submit" class="primary-btn" >Proceed to Paypal</button>
                     </div>
                 </div>
