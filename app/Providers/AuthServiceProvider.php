@@ -4,8 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
-use App\Models\admin\Groups;
-use App\Models\admin\Users;
+
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -14,6 +13,27 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use App\Models\admin\Modules;
+use App\Policies\ProductPolicy;
+use App\Policies\GroupsPolicy;
+use App\Policies\UsersPolicy;
+use App\Policies\ProductCatePolicy;
+use App\Policies\BlogCatePolicy;
+use App\Policies\BlogPolicy;
+use App\Policies\CommentsPolicy;
+use App\Policies\ContacsPolicy;
+use App\Policies\CouponsPolicy;
+use App\Policies\ReviewsCatePolicy;
+use App\Models\admin\Groups;
+use App\Models\admin\Users;
+use App\Models\admin\Products;
+use App\Models\admin\Blog;
+use App\Models\admin\BlogCategory;
+use App\Models\admin\Comments;
+use App\Models\admin\Contacts;
+use App\Models\admin\Coupons;
+use App\Models\admin\ProductCategory;
+use App\Models\admin\Reviews;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -22,7 +42,16 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Products::class => ProductPolicy::class,
+        Blog::class => BlogPolicy::class,
+        BlogCategory::class => BlogCatePolicy::class,
+        Comments::class => CommentsPolicy::class,
+        Contacts::class => ContacsPolicy::class,
+        Coupons::class => CouponsPolicy::class,
+        Reviews::class => ReviewsCatePolicy::class,
+        Users::class => UsersPolicy::class,
+        Groups::class => GroupsPolicy::class,
+        ProductCategory::class => ProductCatePolicy::class,
     ];
 
     /**
@@ -32,8 +61,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Đảm bảo hàm isRole đã được tải
-        // require_once base_path('path/to/functions.php');
 
         ResetPassword::createUrlUsing(function ($user, string $token) {
             if ($user instanceof Users) {
@@ -52,11 +79,22 @@ class AuthServiceProvider extends ServiceProvider
                     $roleJson = $user->Group->permissions;
                     if (!empty($roleJson)) {
                         $roleArr = json_decode($roleJson, true);
-                        return isRole($roleArr, $module->name); // Sử dụng hàm isRole từ file functions
+                        return isRole($roleArr, $module->name);
+                    }
+                    return false;
+                });
+
+                // Định nghĩa quyền edit cho module
+                Gate::define($module->name . '.edit', function (Users $user) use ($module) {
+                    $roleJson = $user->Group->permissions;
+                    if (!empty($roleJson)) {
+                        $roleArr = json_decode($roleJson, true);
+                        return isRole($roleArr, $module->name, 'edit');
                     }
                     return false;
                 });
             }
+            }
         }
     }
-}
+

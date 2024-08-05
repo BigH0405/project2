@@ -26,13 +26,13 @@ class ProductsController extends Controller
         $allProducts=$query->orderBy('id','DESC')->paginate(6)->withQueryString();
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.products',compact('user','allProducts','allCate','bestSellingProducts','nav','title'));
         }
         // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo
         return view('layouts.clients.products',compact('allProducts','allCate','bestSellingProducts','nav','title'));
     }
-    public function show( $id){
+    public function show($id){
         $title="Chi tiết sản phẩm";
         $product =  Products::find($id);
         $nav = ProductsCate::get();
@@ -43,20 +43,39 @@ class ProductsController extends Controller
         }
         if (Auth::guard('web')->check()) {
             // Lấy thông tin người dùng từ guard 'web'
-            $user = Auth::guard('web')->user()->fullname;
+            $user = Auth::guard('web')->user();
             return view('layouts.clients.product_detail',['id'=>$id],compact('user','product','bestSellingProducts','nav','title'));
         }
         return view('layouts.clients.product_detail',['id'=>$id],compact('product','bestSellingProducts','nav','title'));
     }
-    public function showcate( $id){
-        $nav = ProductsCate::get();
-        $product =  Products::find($id);
-        if (Auth::guard('web')->check()) {
-            // Lấy thông tin người dùng từ guard 'web'
-            $user = Auth::guard('web')->user()->fullname;
-            return view('layouts.clients.product_detail',['id'=>$id],compact('user'));
-        }
-        return view('layouts.clients.product_detail',['id'=>$id],compact('nav'));
+    public function productsByCategory($id)
+{
+    // Lấy danh mục theo ID
+    $category = ProductsCate::find($id);
+
+    if (!$category) {
+        return redirect()->route('products.index')->with('error', 'Category not found');
     }
+
+    $title = 'Sản phẩm theo danh mục';
+    // Thiết lập title với tên danh mục
+    $title1 = "Sản phẩm theo danh mục: " . $category->name;
+
+    // Lấy các sản phẩm bán chạy nhất và tất cả các danh mục
+    $bestSellingProducts = Products::orderBy('quanlity', 'desc')->limit(9)->get();
+    $allCate = ProductsCate::all();
+    $nav = ProductsCate::all();
+
+    // Lấy tất cả các sản phẩm thuộc danh mục
+    $allProducts = $category->products()->orderBy('id', 'DESC')->paginate(6)->withQueryString();
+
+    // Kiểm tra người dùng đăng nhập
+    if (Auth::guard('web')->check()) {
+        $user = Auth::guard('web')->user();
+        return view('layouts.clients.products', compact('user', 'allProducts', 'allCate', 'bestSellingProducts', 'nav', 'title','title1'));
+    }
+
+    return view('layouts.clients.products', compact('allProducts', 'allCate', 'bestSellingProducts', 'nav', 'title','title1'));
+}
 
 }
