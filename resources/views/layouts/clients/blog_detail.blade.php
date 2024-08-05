@@ -1,6 +1,7 @@
 @include('parts.clients.header')
 
 
+
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -65,6 +66,8 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
+
+                                     
                                         <img src="{{asset('clients/img/product/review-1.png')}}" alt="">
                                     </div>
                                     <div class="desc">
@@ -146,3 +149,4 @@
 </section>
 
 @include('parts.clients.footer')
+

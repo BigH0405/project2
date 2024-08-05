@@ -23,7 +23,7 @@
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="{{asset('clients/img/banner/banner-img.png')}}" alt="">
+									<img class="img-fluid" src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="">
 								</div>
 							</div>
 						</div>
@@ -201,15 +201,20 @@
 									<h6>{{$item->price}}</h6>
 								</div>
 								<div class="prd-bottom">
+									<form action="{{route('clients.cart.add')}}" method="POST">
+										@csrf
+									<a href="" class="social-info">
+										<input type="hidden" name="quanlity" value="1">
+										<input type="hidden" name="product_id" value="{{$item->id}}">
+									   <button type="submit" style="border:none"> <span class="ti-bag"></span>
+										<p class="hover-text">Giỏ hàng</p></button>
+									</a>
 
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
+									<a href="{{route('clients.product_detail',$item->id)}}" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">xem chi tiết</p>
 									</a>
+								</form>
 								</div>
 							</div>
 						</div>

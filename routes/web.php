@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\clients\UserClientsController;
+use App\Http\Controllers\clients\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
@@ -282,6 +283,7 @@ Route::prefix('/')->name('clients.')->group(function(){
     // Các route công khai
     // Route clients trang chủ
     Route::get('/', [HomeController::class,'index'])->name('lists');
+    Route::get('/bill', [HomeController::class,'index'])->name('lists');
     // Route clients sản phẩm
     Route::get('/products',[ProductsController::class,'index'])->name('products');
     //Route chi tiết sản phẩm
@@ -299,8 +301,18 @@ Route::prefix('/')->name('clients.')->group(function(){
     // Route clients liên hệ
     Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
     Route::post('/contacts',[ContactClientController::class,'postContacts'])->name('post-contacts');
-
+   
+    //route giỏ hàng
     Route::get('/cart',[CartController::class,'index'])->name('cart');
+    Route::post('/cart-add',[CartController::class,'addCraft'])->name('cart.add');
+    Route::post('/update-add',[CartController::class,'updateCraft'])->name('cart.update');
+   
+    //route hóa đơn
+    Route::get('/bill-detail',[BillController::class,'index'])->middleware('auth:web')->name('bills');
+    Route::get('/bill-detail/{id}',[BillController::class,'show'])->middleware('auth:web')->name('bills.show');
+    Route::get('/bill',[BillController::class,'create'])->middleware('auth:web')->name('bill.create');
+    Route::post('/bill',[BillController::class,'store'])->middleware('auth:web')->name('bill.store');
+
 
 });
 // Kết thúc route clients
