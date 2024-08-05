@@ -91,16 +91,8 @@ class ProductsController extends Controller
 public function storeReview(Request $request, $id)
 {
     $request->validate([
-        'fullname' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
         'messege' => 'required|string|max:255',
     ], [
-        'fullname.required' => 'Tên không được để trống',
-        'fullname.string' => 'Tên phải là một chuỗi ký tự.',
-        'fullname.max' => 'Tên không được vượt quá 255 ký tự.',
-        'email.required' => 'Email không được để trống',
-        'email.email' => 'Email không đúng định dạng',
-        'email.max' => 'Email không được vượt quá 255 ký tự.',
         'messege.required' => 'Đánh giá không được để trống',
         'messege.string' => 'Đánh giá phải là một chuỗi ký tự.',
         'messege.max' => 'Đánh giá không được vượt quá 255 ký tự.',
@@ -121,7 +113,7 @@ public function storeReview(Request $request, $id)
     $review->updated_at = now();
     $review->save();
 
-    return back()->with('msg_success', 'Đánh giá của bạn đã được gửi.');
+    return back()->with('msg', 'Đánh giá của bạn đã được gửi.');
 }
 
 
