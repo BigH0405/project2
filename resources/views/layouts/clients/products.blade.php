@@ -64,6 +64,9 @@
             <!-- End Filter Bar -->
             <!-- Start Product List -->
             <section class="lattest-product-area pb-40 category-list">
+                @if (session('msg'))
+                <div class="alert alert-success">{{ session('msg') }}</div>
+            @endif
                 <div class="row">
                     @if(!empty($allProducts))
                     @foreach($allProducts as $item)

@@ -4,6 +4,11 @@
 	<!-- start banner Area -->
 	<section class="banner-area">
 		<div class="container">
+			@if (session('msg'))
+			<div class="alert alert-danger">
+				{{session('msg')}}
+			</div>
+		@endif
 			<div class="row fullscreen align-items-center justify-content-start">
 				<div class="col-lg-12">
 					<div class="active-banner-slider owl-carousel">
@@ -23,7 +28,7 @@
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="{{asset('clients/img/banner/banner-img.png')}}" alt="">
+									<img class="img-fluid" src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="">
 								</div>
 							</div>
 						</div>

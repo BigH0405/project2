@@ -38,6 +38,7 @@ class BlogClientController extends Controller
         return view('layouts.clients.blog',compact('allBlogs','messege','allTop','allCate','nav'));
 }
 
+
 public function showDetail(Request $request, $id){
     // Lấy thông tin danh mục sản phẩm
     $nav = ProductsCate::get();
@@ -90,6 +91,7 @@ public function storeComments(Request $request, $id)
 
     return back()->with('msg', 'Bình luận của bạn đã được gửi');
 }
+
 
 
 

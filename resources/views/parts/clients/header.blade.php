@@ -63,10 +63,13 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle">Xin chào: {{$user->fullname}}</a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{route('clients.bills')}}">Đơn hàng</a>
+                                   </li>
                                 <li><a class="dropdown-item" href="{{ route('clients.logout') }}"
                                     onclick="event.preventDefault(); if (confirm('Bạn có chắc chắn muốn đăng xuất?')) { document.getElementById('logout-form').submit(); }">
                                     Đăng xuất
-                                 </a> 
+                                 </a> </li>
                                  <form id="logout-form" action="{{ route('clients.logout') }}" method="POST" class="d-none">
                                     @csrf
                                  </form>
@@ -82,7 +85,7 @@
                         @endif
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+                        <li class="nav-item"><a href="{{ route('clients.cart') }}" class="cart"><span class="ti-bag"></span></a></li>
                         <li class="nav-item">
                             <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                         </li>

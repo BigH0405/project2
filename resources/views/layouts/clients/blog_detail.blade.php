@@ -1,4 +1,7 @@
 @include('parts.clients.header')
+
+
+    
 <header class="header_area sticky-header">
     <!-- Header content here -->
 </header>
@@ -67,6 +70,8 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
+
+                                     
                                         <img src="{{asset('clients/img/product/review-1.png')}}" alt="">
                                     </div>
                                     <div class="desc">
@@ -148,3 +153,4 @@
 </section>
 
 @include('parts.clients.footer')
+
