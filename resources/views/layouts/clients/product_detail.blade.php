@@ -96,9 +96,12 @@
 										<div class="d-flex">
 											<img src="{{asset('clients/img/product/review-1.png')}}" alt="">
 										</div>
+										@if (Auth::check())
 										<div class="media-body">
-											<h4>{{$item->User->fullname}}</h4>
+											<h4>{{Auth::guard('web')->check() ? $user->fullname : 'Khách' }}</h4>
+											<p class="date">{{ $item->created_at->format('F j, Y \a\t g:i a') }}</p>
 										</div>
+										@endif
 									</div>
 									<p>{{$item->messege}}</p>
 									@endforeach
