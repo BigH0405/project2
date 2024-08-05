@@ -14,7 +14,9 @@
                     @if ($errors->any())
                     <div class="alert alert-danger">Vui lòng kiểm tra lại dữ liệu</div>
                     @endif
+                    @can('create', App\Models\admin\Coupons::class)
                     <a href="{{route('admin.coupons.add')}}" class="btn btn-primary mb-3">Thêm mã giảm giá</a>
+                    @endcan
                     <form action="" method="GET">
                         <div class="row">
                             <div class="col-4">
@@ -54,8 +56,12 @@
                                 <td>{{$item->end_day}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
+                                @can('update', App\Models\admin\Coupons::class)
                                 <td><a href="{{route('admin.coupons.edit',['id'=>$item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                @endcan
+                                @can('delete', App\Models\admin\Coupons::class)
                                 <td><a href="{{route('admin.coupons.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                                @endcan
                             </tr>   
                             @endforeach
                             @else

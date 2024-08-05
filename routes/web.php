@@ -277,8 +277,12 @@ Route::prefix('/')->name('clients.')->group(function(){
     Route::get('/products/{id}',[ProductsController::class,'show'])->name('product_detail');
     // Route để hiển thị sản phẩm theo danh mục
     Route::get('/products/category/{id}', [ProductsController::class, 'productsByCategory'])->name('productsbyCategory');
+    //Đánh giá sản phẩm
+    Route::post('/products/{id}/reviews', [ProductsController::class, 'storeReview'])->name('productsreviewsstore');
     // Route clients blogs
     Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
+    //Chỉ tiết bài viết
+    Route::get('/blogs/{id}', [BlogClientController ::class, 'showDetail'])->name('blog_detail');
     // Route clients liên hệ
     
     Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
