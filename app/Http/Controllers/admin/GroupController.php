@@ -24,7 +24,7 @@ class GroupController extends Controller
         $allGroups = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.groups.lists',compact('title','allGroups','user'));
 
         }
@@ -35,7 +35,7 @@ class GroupController extends Controller
         $title = "Thêm mới nhóm";
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.groups.add',compact('title','user'));
 
 
@@ -62,7 +62,7 @@ class GroupController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.groups.edit',compact('title','groupid','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -117,7 +117,7 @@ class GroupController extends Controller
         $roleArr = !empty($roleJson) ? json_decode($roleJson, true) : [];
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view("layouts.backend.groups.permission", compact('group', 'module', 'roleListArr', 'roleArr','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');

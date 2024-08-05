@@ -27,7 +27,7 @@ class CommentController extends Controller
     $allComments= $query->orderBy('id','DESC')->paginate(10)->withQueryString();
     if (Auth::guard('admin')->check()) {
         // Lấy thông tin người dùng từ guard 'admin'
-        $user = Auth::guard('admin')->user()->fullname;
+        $user = Auth::guard('admin')->user();
         return view('layouts.backend.comments.lists',compact('title','allComments','user'));
 
     }
@@ -42,7 +42,7 @@ class CommentController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.comments.edit',compact('title','comments','user'));
     
         }

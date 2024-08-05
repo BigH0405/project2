@@ -12,7 +12,7 @@ class DashboardController extends Controller
         // Kiểm tra nếu người dùng đã đăng nhập bằng guard 'admin'
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.backend', compact('user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');

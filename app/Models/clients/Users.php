@@ -50,4 +50,9 @@ class Users extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ReviewClients::class,'user_id');
 
     }
+
+    public function postAdd($data)
+    {
+        return Users::create($data);
+    }
 }

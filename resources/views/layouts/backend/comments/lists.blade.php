@@ -26,8 +26,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Người dùng</th>
-                                <th>Bài viết</th>
-                                <th>Bình luận </th>
+                                <th width="15%">Bài viết</th>
+                                <th width="20%">Bình luận </th>
                                 <th>Thời gian tạo</th>
                                 <th>Thời gian cập nhập</th>
                                 <th>Sửa</th>
@@ -41,7 +41,7 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->User ? $item->User->fullname : 'Không có người dùng'}}</td>
                                 <td>{{$item->Blog ? $item->Blog->title : 'Không có bài viết'}}</td>
-                                <td >{{ Str::limit($item->messege, 25) }}</td>
+                                <td>{{ Str::limit($item->message, 25) }}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
                                 @can('update', App\Models\admin\Comments::class)

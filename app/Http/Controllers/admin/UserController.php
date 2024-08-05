@@ -43,7 +43,7 @@ class UserController extends Controller
     $allUser = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
     if (Auth::guard('admin')->check()) {
         // Lấy thông tin người dùng từ guard 'admin'
-        $user = Auth::guard('admin')->user()->fullname;
+        $user = Auth::guard('admin')->user();
         return view('layouts.backend.users.lists', compact('title', 'allUser', 'allGroup', 'user'));
     }
     return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -54,7 +54,7 @@ class UserController extends Controller
         $allGroup = Groups::all();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.users.add',compact('title','allGroup','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -87,7 +87,7 @@ class UserController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.users.edit', compact('title', 'allGroup', 'user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -158,5 +158,49 @@ class UserController extends Controller
     
         return redirect()->route('admin.user.index')->with('msg_warning', "Người dùng không tồn tại.");
     }
+
+
+    public function showProfile()
+    {
+        // Lấy thông tin người dùng hiện tại
+        $users = Auth::user();
+        if (Auth::guard('admin')->check()) {
+            // Lấy thông tin người dùng từ guard 'admin'
+            $user = Auth::guard('admin')->user();
+            return view('layouts.backend.users.profile', compact('user'));
+        }
+        return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
+        // Trả về view profile với dữ liệu người dùng
+    }
+
+    public function updateProfile(Request $request)
+{
+    // Lấy thông tin người dùng hiện tại
+    $user = Auth::user();
+
+    // Validate dữ liệu
+    $request->validate([
+        'fullname' => 'required|string|max:255',
+        'phone' => 'required|string|max:15',
+        'address' => 'required|string|max:255',
+        'password' => 'nullable|string|min:8',
+    ]);
+
+    // Cập nhật thông tin người dùng
+    $user->fullname = $request->fullname;
+    $user->phone = $request->phone;
+    $user->address = $request->address;
+
+    // Chỉ cập nhật mật khẩu nếu có dữ liệu mới
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
+    }
+
+    // Lưu thay đổi vào cơ sở dữ liệu
+    $user->save();
+
+    // Trả về trang profile với thông báo thành công
+    return redirect()->route('admin.profile')->with('msg', 'Cập nhập thông tin thành công!');
+}
 
 }

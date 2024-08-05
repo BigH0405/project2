@@ -34,10 +34,10 @@
                         </div>
                             <div class="col-6">
                                 <label for="image">Ảnh</label>
-                                <input type="file" name="image" class="form-control" placeholder="Chọn ảnh mới...">
+                                <input type="file" name="image" class="form-control" placeholder="Chọn ảnh mới..." value="{{old('image') ?? $product->image}}">
                                 @if (!empty($product->image))
                                     <div class="mt-2">
-                                        <img src="{{ asset($product->image) }}" alt="Ảnh sản phẩm" style="width: 100px;">
+                                        <img src="{{ asset($product->image) }}" alt="Ảnh sản phẩm" style="width: 100px;" value="{{old('image') ?? $product->image}}">
                                     </div>
                                 @endif
                                 @error('image')

@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\clients\UserClientsController;
 use App\Http\Controllers\clients\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
@@ -89,6 +90,10 @@ Route::prefix('/admin')->name('admin.')->group(function(){
     //Route đăng nhập
     Route::get('/login',[LoginController::class,'login'])->middleware('guest:admin')->name('login');
     Route::post('/login',[LoginController::class,'Postlogin'])->middleware('guest:admin')->name('post-login');
+    //Form thông tin người dùng
+    Route::get('/profile', [UserController::class, 'showProfile'])->name('profile')->middleware('auth:admin');
+    //Cập nhập người dùng
+    Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profileupdate')->middleware('auth:admin');
     //Đăng xuất
     Route::post('/logout', function(){
     Auth::guard('admin')->logout();
@@ -253,6 +258,12 @@ Route::prefix('/')->name('clients.')->group(function(){
     // Hiện form đổi mật khẩu
     Route::get('reset-password/{token}', [RestPasswordClientController::class,'showResetForm'])->middleware('guest:web')->name('rest-password');
     Route::post('reset-password', [RestPasswordController::class,'reset'])->middleware('guest:web')->name('update-password');
+
+    //Form thông tin người dùng
+    Route::get('/profile', [UserClientsController::class, 'showProfile'])->name('profile');
+    //Cập nhập người dùng
+    Route::post('/profile/update', [UserClientsController::class, 'updateProfile'])->name('profileupdate');
+
 
     // Đăng xuất
     Route::post('/logout', function(){

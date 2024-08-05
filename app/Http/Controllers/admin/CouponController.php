@@ -24,7 +24,7 @@ class CouponController extends Controller
         $allCoupon= $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.coupons.lists',compact('title','allCoupon','user'));
 
         }
@@ -35,7 +35,7 @@ class CouponController extends Controller
         $allUser=Users::all();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.coupons.add',compact('title','allUser','user'));
 
 
@@ -66,7 +66,7 @@ class CouponController extends Controller
         $allUser=Users::all();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.coupons.edit',compact('title','allUser','CouponDetail','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');

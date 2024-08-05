@@ -63,16 +63,22 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle">Xin chào: {{$user->fullname}}</a>
                             <ul class="dropdown-menu">
-                                <li>
+
+                                <li><a class="dropdown-item" href="{{ route('clients.profile') }}">
+                                    Thông tin cá nhân
+                                 </a> 
+                                </li>
+                                 <li>
                                     <a class="dropdown-item" href="{{route('clients.bills')}}">Đơn hàng</a>
                                    </li>
                                 <li><a class="dropdown-item" href="{{ route('clients.logout') }}"
                                     onclick="event.preventDefault(); if (confirm('Bạn có chắc chắn muốn đăng xuất?')) { document.getElementById('logout-form').submit(); }">
                                     Đăng xuất
-                                 </a> </li>
-                                 <form id="logout-form" action="{{ route('clients.logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                 </form>
+                                 </a> 
+                                </li>
+
+                               
+                                
                             </ul>
                         </li>
                         @else

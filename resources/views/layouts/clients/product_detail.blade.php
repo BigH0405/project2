@@ -38,6 +38,28 @@
             </div>
             <div class="col-lg-5 offset-lg-1">
 
+
+	<!--================Single Product Area =================-->
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="s_Product_carousel">
+						<div class="single-prd-item">
+						<img class="img-fluid" src="{{ $product->image ? asset($product->image) : 'Không có ảnh' }}" alt="">
+
+						</div>
+						<div class="single-prd-item">
+						<img class="img-fluid" src="{{ $product->image ? asset($product->image) : 'Không có ảnh' }}" alt="">
+
+						</div>
+						<div class="single-prd-item">
+						<img class="img-fluid" src="{{ $product->image ? asset($product->image) : 'Không có ảnh' }}" alt="">
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
                 <div class="s_product_text">
                     <h3>{{ $product->name }}</h3>
                     <h2>{{ number_format($product->price, 0, '', '.') }}đ</h2>

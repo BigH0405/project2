@@ -80,7 +80,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Đăng nhập:</div>
-            Xin chào: {{!empty($user) ? $user : 'Khách'}}
+            Xin chào: {{!empty($user) ? $user->fullname : 'Khách'}}
         </div>
     </nav>
 </div>
