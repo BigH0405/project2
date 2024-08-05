@@ -14,7 +14,7 @@ class BlogCategoryController extends Controller
     public function index(Request $request)
     {
         $title = "Danh mục bài viết";
-        $allCate = BlogCategory::query()->paginate(5)->withQueryString();
+        $allCate = BlogCategory::paginate(5)->withQueryString();
         // Kiểm tra nếu người dùng đã đăng nhập bằng guard 'admin' 
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
@@ -75,7 +75,7 @@ class BlogCategoryController extends Controller
         // dd($dataUpdate);
         // die;
         // BlogCategory::postEdit($id, $dataUpdate);
-        $blogCategory = new \App\Models\admin\BlogCategory();
+        $blogCategory = new BlogCategory();
         $blogCategory->postEdit($id, $dataUpdate);
         return back()->with('msg', "Sửa danh mục thành công");
     }
