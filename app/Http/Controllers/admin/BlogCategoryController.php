@@ -18,7 +18,7 @@ class BlogCategoryController extends Controller
         // Kiểm tra nếu người dùng đã đăng nhập bằng guard 'admin' 
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.blog_category.lists', compact('title', 'allCate','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -28,7 +28,7 @@ class BlogCategoryController extends Controller
         $title = "Thêm mới danh mục bài viết";
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.blog_category.add', compact('title','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -54,7 +54,7 @@ class BlogCategoryController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.blog_category.edit', compact('title', 'cates','user'));
 
         }

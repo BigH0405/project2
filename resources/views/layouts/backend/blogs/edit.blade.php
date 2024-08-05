@@ -27,10 +27,10 @@
                         </div>
                         <div class="col-6">
                             <label for="image">Ảnh</label>
-                            <input type="file" name="image" class="form-control">
+                            <input type="file" name="image" class="form-control" value="{{old('image')?? $Blog->image}}">
                             @if (!empty($Blog->image))
                                 <div class="mt-2">
-                                    <img src="{{ asset($Blog->image) }}" alt="Ảnh sản phẩm" style="width: 100px;">
+                                    <img src="{{ asset($Blog->image) }}" alt="Ảnh sản phẩm" style="width: 100px;" value="{{old('image')?? $Blog->image}}">
                                 </div>
                             @endif
                             @error('image')

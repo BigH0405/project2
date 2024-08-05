@@ -31,7 +31,7 @@ class BlogController extends Controller
         // Kiểm tra nếu người dùng đã đăng nhập bằng guard 'admin' 
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.blogs.lists',compact('title','allBlog','user','allCate'));
 
         }
@@ -45,7 +45,7 @@ class BlogController extends Controller
         $allCate = BlogCategory::all();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.blogs.add',compact('title','allUser','allCate','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -86,7 +86,7 @@ class BlogController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.blogs.edit',compact('title','Blog','allUser','allCate','user'));
 
         }

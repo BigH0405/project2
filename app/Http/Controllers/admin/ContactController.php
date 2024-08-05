@@ -23,7 +23,7 @@ class ContactController extends Controller
         $allContacts = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.contacts.lists',compact('title','allContacts','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -38,7 +38,7 @@ class ContactController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.contacts.edit',compact('title','contacts','allUser','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -51,7 +51,7 @@ class ContactController extends Controller
             return redirect()->route('admin.contacts.index')->with('msg_warning', 'Liên hệ không tồn tại');
         }    
         $dataUpdate = [
-            'fullname' => $request->fullname,
+            'fullname' => $request,
             'email' => $request->email,
             'phone' => $request->phone,
             'message' => $request->message,

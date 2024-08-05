@@ -30,7 +30,7 @@ class ProductController extends Controller
         $allProduct = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.products.lists',compact('title','allProduct','allCate','user'));
 
         }
@@ -41,7 +41,7 @@ class ProductController extends Controller
         $title = "Thêm mới sản phẩm";
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.products.add',compact('title','allCate','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -81,7 +81,7 @@ class ProductController extends Controller
         }
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.products.edit',compact('title','product','allCate','user'));
 
         }

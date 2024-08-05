@@ -1,7 +1,5 @@
 @include('parts.clients.header')
-<header class="header_area sticky-header">
-    <!-- Header content here -->
-</header>
+
 
 <section class="banner-area organic-breadcrumb">
     <div class="container">

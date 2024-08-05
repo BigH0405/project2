@@ -27,7 +27,7 @@
                                 <th>ID</th>
                                 <th>Sản phẩm</th>
                                 <th>Người dùng</th>                                
-                                <th>Đánh giá </th>
+                                <th width="20%">Đánh giá </th>
                                 <th>Thời gian tạo</th>
                                 <th>Thời gian cập nhập</th>
                                 <th>Sửa</th>
@@ -41,7 +41,7 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$item->Product ? $item->Product->name : 'Không có sản phẩm'}}</td>
                                 <td>{{$item->User ? $item->User->fullname : 'Không có người dùng'}}</td>
-                                <td >{{ Str::limit($item->messege, 25) }}</td>
+                                <td >{{ Str::limit($item->message, 25) }}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
                                 @can('update', App\Models\admin\Reviews::class)

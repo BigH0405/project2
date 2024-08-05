@@ -24,7 +24,7 @@ class ReviewController extends Controller
         $allReviews= $query->orderBy('id','DESC')->paginate(10)->withQueryString();
         if (Auth::guard('admin')->check()) {
             // Lấy thông tin người dùng từ guard 'admin'
-            $user = Auth::guard('admin')->user()->fullname;
+            $user = Auth::guard('admin')->user();
             return view('layouts.backend.reviews.lists',compact('title','allReviews','user'));
         }
         return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');
@@ -38,7 +38,7 @@ class ReviewController extends Controller
             }
             if (Auth::guard('admin')->check()) {
                 // Lấy thông tin người dùng từ guard 'admin'
-                $user = Auth::guard('admin')->user()->fullname;
+                $user = Auth::guard('admin')->user();
                 return view('layouts.backend.reviews.edit',compact('title','reviews','user'));
             }
             return redirect()->route('admin.login')->with('msg_warning', 'Bạn cần đăng nhập để thực hiện các thao tác khác');

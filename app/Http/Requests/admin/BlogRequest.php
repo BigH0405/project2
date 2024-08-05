@@ -24,7 +24,7 @@ class BlogRequest extends FormRequest
         return [
             //
             'title' => 'required',
-            'image' => 'required',
+            'image.*' => 'mimes:png,jpg,jpeg,webp|max:2048', // Cho phép nhiều ảnh, tối đa 2MB mỗi ảnh
             'views' => 'required|numeric|min:0',
             'user_id' => ['required', 'integer' ,function($atribute, $value, $fail){
                 if($value==0){
@@ -41,7 +41,8 @@ class BlogRequest extends FormRequest
         return [
             'title.required' => 'Mô tả không được để trống',
             'image.required' => 'Ảnh không được để trống',
-            // 'image.mimes'=>'Sai định dạng ảnh',
+            'image.*.mimes' => 'Ảnh phải có định dạng: png, jpg, jpeg, webp',
+            'image.*.max' => 'Ảnh không được vượt quá 2MB',
             'views.required' => 'Lượt xem không được để trống',
             'views.numeric' => 'Lượt xem phải là 0',
             'views.min' => 'Lượt xem phải lớn hơn 1',
