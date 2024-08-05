@@ -45,6 +45,14 @@
                             <span style="color: red">{{$message}}</span>
                             @enderror
                         </div>
+
+                        <div class="col-6">
+                            <label for="">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu mới">
+                            @error('password')
+                            <span style="color: red">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary">Cập nhập</button>

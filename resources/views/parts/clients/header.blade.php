@@ -76,9 +76,9 @@
                                     Đăng xuất
                                  </a> 
                                 </li>
-
-                               
-                                
+                                <form id="logout-form" action="{{ route('clients.logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                 </form>
                             </ul>
                         </li>
                         @else
