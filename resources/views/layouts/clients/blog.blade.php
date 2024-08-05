@@ -97,13 +97,15 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="blog_post">
-                                    <img class="img-fluid" src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="">
+                                    <a href="{{route('clients.blog_detail',$item->id)}}">
+                                        <img class="img-fluid" src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="">
+                                    </a>
                                     <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2><a href="{{route('clients.blogs_detail',$item->id)}}">{{$item->title}}</a></h2>
+                                        <a href="{{route('clients.blog_detail', $item->id)}}">
+                                            <h2>{{$item->title}}</h2>
                                         </a>
                                         <p>{{$item->short_description}}</p>
-                                        <a href="single-blog.html" class="white_bg_btn">View More</a>
+                                        <a href="{{route('clients.blog_detail', $item->id)}}" class="white_bg_btn">Xem thêm</a>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +140,7 @@
                             <h3 class="widget_title">Popular Posts</h3>
                         @foreach($allTop as $item)
                             <div class="media post_item">
-                                <img src="{{asset('clients/img/blog/popular-post/post1.jpg')}}" alt="post">
+                                <img class="img-fluid" src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="" width="50px">
                                 <div class="media-body">
                                     <a href="blog-details.html">
                                         <h3>{{$item->title}}</h3>

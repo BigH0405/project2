@@ -11,7 +11,9 @@
                     @if (session('msg_warning'))
                     <div class="alert alert-danger">{{session('msg_warning')}}</div>
                     @endif
+                    @can('create',App\Models\admin\Products::class)
                     <a href="{{route('admin.product.add')}}" class="btn btn-primary mb-3">Thêm sản phẩm</a>
+                    @endcan
                     <form action="" method="GET">
                         <div class="row">
                             <div class="col-3">
@@ -61,13 +63,17 @@
                                 <td >{{$item->description}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
+                                @can('update',App\Models\admin\Products::class)
                                 <td><a href="{{route('admin.product.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                @endcan
+                                @can('delete',App\Models\admin\Products::class)
                                 <td><a href="{{route('admin.product.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                                @endcan
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="13" class="text-center" style="color: red">Không có sản phẩm</td>
+                                <td colspan="12" class="text-center" style="color: red">Không có sản phẩm</td>
                               </tr>
                             @endif
                         </tbody>

@@ -81,136 +81,104 @@
 </div>
 <!--================End Single Product Area =================-->
 
-<!--================Product Description Area =================-->
-<section class="product_description_area">
-    <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                    aria-selected="true">Mô tả</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
-                    aria-controls="review" aria-selected="false">Đánh giá</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <p>{{ $product->description }}</p>
-            </div>
-            <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row total_rate">
-                            <h1 class="text-center">Đánh giá sản phẩm</h1>
-                        </div>
-                        <div class="review_list">
-                            <div class="review_item">
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="{{ asset('clients/img/product/review-1.png') }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Blake Ruiz</h4>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea
-                                    commodo</p>
-                            </div>
-                            <div class="review_item">
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="{{ asset('clients/img/product/review-2.png') }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Blake Ruiz</h4>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea
-                                    commodo</p>
-                            </div>
-                            <div class="review_item">
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="{{ asset('clients/img/product/review-3.png') }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Blake Ruiz</h4>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea
-                                    commodo</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="review_box">
-                            <h4>Đánh giá</h4>
-                            <form class="row contact_form" action="contact_process.php" method="post"
-                                id="contactForm" novalidate="novalidate">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Your Full name" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Your Full name'">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="email" name="email"
-                                            placeholder="Email Address" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Email Address'">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="number" name="number"
-                                            placeholder="Phone Number" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Phone Number'">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="message" id="message" rows="1" placeholder="Review"
-                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" value="submit" class="primary-btn">Submit Now</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Product Description Area =================-->
+
+	<!--================Product Description Area =================-->
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mô tả</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					 aria-selected="false">Đánh giá</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<p>{{$product->description}}</p>
+				</div>
+				<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="row total_rate">
+								<h1 class="text-center">Đánh giá sản phẩm</h1>
+							</div>
+							<div class="review_list">
+								<div class="review_item">
+									@if (!empty($allReviews))	
+									@foreach ($allReviews as $item)
+									<div class="media">
+										<div class="d-flex">
+											<img src="{{asset('clients/img/product/review-1.png')}}" alt="">
+										</div>
+										@if (Auth::check())
+										<div class="media-body">
+											<h4>{{Auth::guard('web')->check() ? $user->fullname : 'Khách' }}</h4>
+											<p class="date">{{ $item->created_at->format('F j, Y \a\t g:i a') }}</p>
+										</div>
+										@endif
+									</div>
+									<p>{{$item->messege}}</p>
+									@endforeach
+									@else
+									<p class="text-center">Sản phẩm không có bình luận nào</p>							
+									@endif
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="review_box">
+								<h4>Đánh giá</h4>
+								@if (session('msg'))
+									<div class="alert alert-success">{{session('msg')}}</div>
+								@endif
+								@if ($errors->any())
+									<div class="alert alert-danger text-center">Dữ liệu lỗi! Vui lòng kiểm trả lại</div>
+								@endif
+							</div>
+							@if (Auth::check())
+							<form class="row contact_form" action="{{ route('clients.productsreviewsstore', $product->id) }}" method="post">
+								@csrf
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="text" class="form-control" id="name" name="fullname" placeholder="Nhập tên của bạn..." disabled value="{{ Auth::guard('web')->check() ? $user->fullname : old('fullname') }}">
+									</div>
+									@error('fullname')
+									<span style="color: red">{{ $message }}</span>
+									@enderror
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="text" class="form-control" id="email" name="email" placeholder="Nhập email của bạn..." disabled value="{{ Auth::guard('web')->check() ? $user->email : old('email') }}">
+									</div>
+									@error('email')
+									<span style="color: red">{{ $message }}</span>
+									@enderror
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" name="messege" id="message" rows="1" placeholder="Nhập đánh giá của bạn..." value="{{old('messege')}}"></textarea>
+									</div>
+									@error('messege')
+									<span style="color: red">{{ $message }}</span>
+									@enderror
+								</div>
+								<div class="col-md-12 text-right">
+									<button type="submit" value="submit" class="primary-btn">Đăng đánh giá</button>
+								</div>
+							</form>
+							@else
+							<p style="color: red">Bạn phải đăng nhập mới có thể dùng chức năng!</p>
+							@endif
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Product Description Area =================-->
 
 <!-- Start related-product Area -->
 <section class="related-product-area section_gap_bottom">

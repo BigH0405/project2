@@ -29,6 +29,17 @@ use App\Http\Controllers\clients\auth\VerifyClientsController;
 use App\Http\Controllers\clients\auth\ForgotPasswordClientController;
 use App\Http\Controllers\clients\auth\RestPasswordClientController;
 use App\Http\Controllers\clients\CartController;
+use App\Models\admin\Products;
+use App\Models\admin\ProductCategory;
+use App\Models\admin\Coupons;
+use App\Models\admin\Blog;
+use App\Models\admin\BlogCategory;
+use App\Models\admin\Comments;
+use App\Models\admin\Contacts;
+use App\Models\admin\Groups;
+use App\Models\admin\Reviews;
+use App\Models\admin\Users;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -102,61 +113,61 @@ Route::prefix('/admin')->name('admin.')->group(function(){
 //Route sản phẩm
 Route::prefix('/product')->middleware(['auth:admin','can:products'])->name('product.')->group(function(){
     Route:: get('/', [ProductController::class,'index'])->name('index');
-    Route::get('/add',[ProductController::class,'add'])->name('add');
-    Route:: post('/add', [ProductController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [ProductController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [ProductController::class,'postEdit'])->name('post-edit');
-    Route:: get('/delete/{id}', [ProductController::class,'delete'])->name('delete');
+    Route::get('/add',[ProductController::class,'add'])->name('add')->can('create', Products::class);
+    Route:: post('/add', [ProductController::class,'postAdd'])->name('post-add')->can('create', Products::class);
+    Route:: get('/edit/{id}', [ProductController::class,'edit'])->name('edit')->can('update', Products::class);
+    Route:: post('/edit/{id}', [ProductController::class,'postEdit'])->name('post-edit')->can('update', Products::class);
+    Route:: get('/delete/{id}', [ProductController::class,'delete'])->name('delete')->can('delete', Products::class);
 });
 
 // Route danh sách sản phẩm
 Route::prefix('/cate')->middleware(['auth:admin','can:product_category'])->name('cate.')->group(function(){
     Route:: get('/', [ProductCategoryController::class,'index'])->name('index');
-    Route::get('/add',[ProductCategoryController::class,'add'])->name('add');
-    Route:: post('/add', [ProductCategoryController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [ProductCategoryController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [ProductCategoryController::class,'postEdit'])->name('post-edit');
-    Route:: get('/delete/{id}', [ProductCategoryController::class,'delete'])->name('delete');
+    Route::get('/add',[ProductCategoryController::class,'add'])->name('add')->can('create', ProductCategory::class);
+    Route:: post('/add', [ProductCategoryController::class,'postAdd'])->name('post-add')->can('create', ProductCategory::class);
+    Route:: get('/edit/{id}', [ProductCategoryController::class,'edit'])->name('edit')->can('edit', ProductCategory::class);
+    Route:: post('/edit/{id}', [ProductCategoryController::class,'postEdit'])->name('post-edit')->can('update', ProductCategory::class);
+    Route:: get('/delete/{id}', [ProductCategoryController::class,'delete'])->name('delete')->can('delete', ProductCategory::class);
 });
 
 // Route danh sách khuyễn mãi
 Route::prefix('/coupons')->middleware(['auth:admin','can:coupons'])->name('coupons.')->group(function(){
     Route:: get('/', [CouponController::class,'index'])->name('index');
-    Route::get('/add',[CouponController::class,'add'])->name('add');
-    Route:: post('/add', [CouponController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [CouponController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [CouponController::class,'postEdit'])->name('post-edit');
-    Route:: get('/delete/{id}', [CouponController::class,'delete'])->name('delete');
+    Route::get('/add',[CouponController::class,'add'])->name('add')->can('create', Coupons::class);
+    Route:: post('/add', [CouponController::class,'postAdd'])->name('post-add')->can('create', Coupons::class);
+    Route:: get('/edit/{id}', [CouponController::class,'edit'])->name('edit')->can('update', Coupons::class);
+    Route:: post('/edit/{id}', [CouponController::class,'postEdit'])->name('post-edit')->can('update', Coupons::class);
+    Route:: get('/delete/{id}', [CouponController::class,'delete'])->name('delete')->can('delete', Coupons::class);
 });
 
 // Route blog
 Route::prefix('/blog')->middleware(['auth:admin','can:blogs'])->name('blog.')->group(function(){
     Route:: get('/', [BlogController::class,'index'])->name('index');
-    Route:: get('/add', [BlogController::class,'add'])->name('add');
-    Route:: post('/add', [BlogController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [BlogController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [BlogController::class,'postEdit'])->name('post-edit');
-    Route::get('/delete/{id}',[BlogController::class,'delete'])->name('delete');
+    Route:: get('/add', [BlogController::class,'add'])->name('add')->can('create', Blog::class);
+    Route:: post('/add', [BlogController::class,'postAdd'])->name('post-add')->can('create', Blog::class);
+    Route:: get('/edit/{id}', [BlogController::class,'edit'])->name('edit')->can('update', Blog::class);
+    Route:: post('/edit/{id}', [BlogController::class,'postEdit'])->name('post-edit')->can('update', Blog::class);
+    Route::get('/delete/{id}',[BlogController::class,'delete'])->name('delete')->can('delete', Blog::class);
 });
 
 // Route user
 Route::prefix('/user')->middleware(['auth:admin','can:users'])->name('user.')->group(function(){
     Route:: get('/', [UserController::class,'index'])->name('index');
-    Route::get('/add',[UserController::class,'add'])->name('add');
-    Route:: post('/add', [UserController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [UserController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [UserController::class,'postEdit'])->name('post-edit');
-    Route:: get('/delete/{id}', [UserController::class,'delete'])->name('delete');
+    Route::get('/add',[UserController::class,'add'])->name('add')->can('create', Users::class);
+    Route:: post('/add', [UserController::class,'postAdd'])->name('post-add')->can('create', Users::class);
+    Route:: get('/edit/{id}', [UserController::class,'edit'])->name('edit')->can('update', Users::class);
+    Route:: post('/edit/{id}', [UserController::class,'postEdit'])->name('post-edit')->can('update', Users::class);
+    Route:: get('/delete/{id}', [UserController::class,'delete'])->name('delete')->can('delete', Users::class);
 });
 
 // Route group
 Route::prefix('/group')->middleware(['auth:admin','can:groups'])->name('group.')->group(function(){
     Route:: get('/', [GroupController::class,'index'])->name('index');
-    Route::get('/add',[GroupController::class,'add'])->name('add');
-    Route:: post('/add', [GroupController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [GroupController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [GroupController::class,'postEdit'])->name('post-edit');
-    Route:: get('/delete/{id}', [GroupController::class,'delete'])->name('delete');
+    Route::get('/add',[GroupController::class,'add'])->name('add')->can('create', Groups::class);
+    Route:: post('/add', [GroupController::class,'postAdd'])->name('post-add')->can('create', Groups::class);
+    Route:: get('/edit/{id}', [GroupController::class,'edit'])->name('edit')->can('update', Groups::class);
+    Route:: post('/edit/{id}', [GroupController::class,'postEdit'])->name('post-edit')->can('update', Groups::class);
+    Route:: get('/delete/{id}', [GroupController::class,'delete'])->name('delete')->can('delete', Groups::class);
     Route:: get('/permission/{id}', [GroupController::class,'permission'])->name('permission');
     Route:: post('/permission/{id}', [GroupController::class,'PostPermission'])->name('post-permission');
 });
@@ -164,40 +175,40 @@ Route::prefix('/group')->middleware(['auth:admin','can:groups'])->name('group.')
 // Route Danh mục Blog
 Route::prefix('/cates')->middleware(['auth:admin','can:blog_category'])->name('cates.')->group(function(){
     Route:: get('/', [BlogCategoryController::class,'index'])->name('index');
-    Route:: get('/add', [BlogCategoryController::class,'add'])->name('add');
-    Route:: post('/add', [BlogCategoryController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [BlogCategoryController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [BlogCategoryController::class,'postEdit'])->name('post-edit');
-    Route::get('/delete/{id}',[BlogCategoryController::class,'delete'])->name('delete');
+    Route:: get('/add', [BlogCategoryController::class,'add'])->name('add')->can('create', BlogCategory::class);
+    Route:: post('/add', [BlogCategoryController::class,'postAdd'])->name('post-add')->can('create', BlogCategory::class);
+    Route:: get('/edit/{id}', [BlogCategoryController::class,'edit'])->name('edit')->can('update', BlogCategory::class);
+    Route:: post('/edit/{id}', [BlogCategoryController::class,'postEdit'])->name('post-edit')->can('update', BlogCategory::class);
+    Route::get('/delete/{id}',[BlogCategoryController::class,'delete'])->name('delete')->can('delete', BlogCategory::class);
 });
 // route contacts
 Route::prefix('/contacts')->middleware(['auth:admin','can:contacts'])->name('contacts.')->group(function(){
     Route::get('/',[ContactController::class,'index'])->name('index');
-    Route:: get('/add', [ContactController::class,'add'])->name('add');
-    Route:: post('/add', [ContactController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [ContactController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [ContactController::class,'postEdit'])->name('post-edit');
-    Route::get('/delete/{id}',[ContactController::class,'delete'])->name('delete');
+    Route:: get('/add', [ContactController::class,'add'])->name('add')->can('create', Contacts::class);
+    Route:: post('/add', [ContactController::class,'postAdd'])->name('post-add')->can('create', Contacts::class);
+    Route:: get('/edit/{id}', [ContactController::class,'edit'])->name('edit')->can('update', Contacts::class);
+    Route:: post('/edit/{id}', [ContactController::class,'postEdit'])->name('post-edit')->can('update', Contacts::class);
+    Route::get('/delete/{id}',[ContactController::class,'delete'])->name('delete')->can('delete', Contacts::class);
 
 });
 // route comments
 Route::prefix('/comments')->middleware(['auth:admin','can:comments'])->name('comments.')->group(function(){
     Route::get('/',[CommentController::class,'index'])->name('index');
-    Route:: get('/add', [CommentController::class,'add'])->name('add');
-    Route:: post('/add', [CommentController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [CommentController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [CommentController::class,'postEdit'])->name('post-edit');
-    Route::get('/delete/{id}',[CommentController::class,'delete'])->name('delete');
+    Route:: get('/add', [CommentController::class,'add'])->name('add')->can('create', Comments::class);
+    Route:: post('/add', [CommentController::class,'postAdd'])->name('post-add')->can('create', Comments::class);
+    Route:: get('/edit/{id}', [CommentController::class,'edit'])->name('edit')->can('update', Comments::class);
+    Route:: post('/edit/{id}', [CommentController::class,'postEdit'])->name('post-edit')->can('update', Comments::class);
+    Route::get('/delete/{id}',[CommentController::class,'delete'])->name('delete')->can('delete', Comments::class);
 
 });
 //route reviews
 Route::prefix('/reviews')->middleware(['auth:admin','can:reviews'])->name('reviews.')->group(function(){
     Route::get('/',[ReviewController::class,'index'])->name('index');
-    Route:: get('/add', [ReviewController::class,'add'])->name('add');
-    Route:: post('/add', [ReviewController::class,'postAdd'])->name('post-add');
-    Route:: get('/edit/{id}', [ReviewController::class,'edit'])->name('edit');
-    Route:: post('/edit/{id}', [ReviewController::class,'postEdit'])->name('post-edit');
-    Route::get('/delete/{id}',[ReviewController::class,'delete'])->name('delete');
+    Route:: get('/add', [ReviewController::class,'add'])->name('add')->can('create', Reviews::class);
+    Route:: post('/add', [ReviewController::class,'postAdd'])->name('post-add')->can('create', Reviews::class);
+    Route:: get('/edit/{id}', [ReviewController::class,'edit'])->name('edit')->can('update', Reviews::class);
+    Route:: post('/edit/{id}', [ReviewController::class,'postEdit'])->name('post-edit')->can('update', Reviews::class);
+    Route::get('/delete/{id}',[ReviewController::class,'delete'])->name('delete')->can('delete', Reviews::class);
 
 });
 });
@@ -264,12 +275,19 @@ Route::prefix('/')->name('clients.')->group(function(){
     Route::get('/bill', [HomeController::class,'index'])->name('lists');
     // Route clients sản phẩm
     Route::get('/products',[ProductsController::class,'index'])->name('products');
+    //Route chi tiết sản phẩm
     Route::get('/products/{id}',[ProductsController::class,'show'])->name('product_detail');
+    // Route để hiển thị sản phẩm theo danh mục
+    Route::get('/products/category/{id}', [ProductsController::class, 'productsByCategory'])->name('productsbyCategory');
+    //Đánh giá sản phẩm
+    Route::post('/products/{id}/reviews', [ProductsController::class, 'storeReview'])->name('productsreviewsstore')->middleware('auth:web');
     // Route clients blogs
     Route::get('/blogs',[BlogClientController::class,'index'])->name('blogs');
-    Route::get('/blogs/{id}',[BlogClientController::class,'show'])->name('blogs_detail');
+    //Chỉ tiết bài viết
+    Route::get('/blogs/{id}', [BlogClientController ::class, 'showDetail'])->name('blog_detail');
+    //Bình luận bài viết
+    Route::post('blogs/{id}/comments', [BlogClientController::class, 'storeComments'])->name('blogscommentsstore')->middleware('auth:web');
     // Route clients liên hệ
-    
     Route::get('/contacts',[ContactClientController::class,'index'])->name('contacts');
     Route::post('/contacts',[ContactClientController::class,'postContacts'])->name('post-contacts');
    

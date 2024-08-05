@@ -42,7 +42,7 @@ class LoginClientController extends Controller
 
         if (isClients($credentials['email'])) {
             if (Auth::guard('web')->attempt($credentials)) {
-                return redirect()->intended(RouteServiceProvider::HOME);
+                return redirect()->route('clients.lists');
             } else {
                 return back()->with('msg_warning', 'Email hoặc mật khẩu không đúng');
             }

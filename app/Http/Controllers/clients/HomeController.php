@@ -24,7 +24,7 @@ class HomeController extends Controller
     // Kiểm tra nếu người dùng đã đăng nhập bằng guard 'web'
     if (Auth::guard('web')->check()) {
         // Lấy thông tin người dùng từ guard 'web'
-        $user = Auth::guard('web')->user()->fullname;
+        $user = Auth::guard('web')->user();
         return view('layouts.clients.clients', compact('user','products','allCate','bestSellingProducts','productBanner','nav'));
     }
 

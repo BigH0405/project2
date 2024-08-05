@@ -38,7 +38,6 @@
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
                                 <th>Tin nhắn </th>
-                                <th>User_id</th>
                                 <th>Thời gian tạo</th>
                                 <th>Thời gian cập nhập</th>
                                 <th>Sửa</th>
@@ -54,16 +53,19 @@
                                 <td>{{$item->email}}</td>
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->message}}</td>
-                                <td >{{$item->user_id}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
+                                @can('update', App\Models\admin\Contacts::class)
                                 <td><a href="{{route('admin.contacts.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                @endcan
+                                @can('delete', App\Models\admin\Contacts::class)
                                 <td><a href="{{route('admin.contacts.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                                @endcan
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="13" class="text-center" style="color: red">Không có sản phẩm</td>
+                                <td colspan="9" class="text-center" style="color: red">Không có sản phẩm</td>
                               </tr>
                             @endif
                         </tbody>

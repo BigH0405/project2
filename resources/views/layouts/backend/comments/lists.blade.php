@@ -44,8 +44,12 @@
                                 <td >{{ Str::limit($item->messege, 25) }}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
+                                @can('update', App\Models\admin\Comments::class)
                                 <td><a href="{{route('admin.comments.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                @endcan
+                                @can('delete', App\Models\admin\Comments::class)
                                 <td><a href="{{route('admin.comments.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                                @endcan
                             </tr>
                             @endforeach
                             @else
