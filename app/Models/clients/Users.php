@@ -41,4 +41,7 @@ class Users extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'lastLogin' => 'datetime',
     ];
+    public function donHang(){
+        return $this->hasMany(Bills::class,'user_id');
+    }
 }

@@ -35,4 +35,23 @@ class BlogClientController extends Controller
         // Chuyển hướng tới trang đăng nhập với thông báo cảnh báo
         return view('layouts.clients.blog',compact('allBlogs','messege','allTop','allCate','nav'));
 }
+public function show( $id){
+    $title="Chi tiết bài viết";
+    $blog =  Blogs::find($id);
+    $top = Blogs::query();
+    $messege=Comments::count();
+    $nav = ProductsCate::get();
+    $query = Blogs::query();
+    $allBlogs = $query->orderBy('id','DESC')->paginate(5)->withQueryString();
+    $allTop = $top->orderBy('views','DESC')->paginate(4)->withQueryString();
+    if(!$blog) {
+        return redirect()->route('layouts.clients.product_detail',['id'=>$id])->with('msg_warning', 'Bài viết không tồn tại');
+    }
+    if (Auth::guard('web')->check()) {
+        // Lấy thông tin người dùng từ guard 'web'
+        $user = Auth::guard('web')->user()->fullname;
+        return view('layouts.clients.blog_detail',['id'=>$id],compact('user','blog','nav','title','messege','allTop','allBlogs'));
+    }
+    return view('layouts.clients.blog_detail',['id'=>$id],compact('blog','nav','title','messege','allTop','allBlogs'));
+}
 }

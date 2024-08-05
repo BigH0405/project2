@@ -50,6 +50,9 @@
             <!-- End Filter Bar -->
             <!-- Start Best Seller -->
             <section class="lattest-product-area pb-40 category-list">
+                @if (session('msg'))
+                <div class="alert alert-success">{{ session('msg') }}</div>
+            @endif
                 <div class="row">
                     @if(!empty($allProducts))
                     @foreach($allProducts as $item)
@@ -60,18 +63,22 @@
                             <div class="product-details">
                                 <a href="{{route('clients.product_detail',$item->id)}}"><h6>{{$item->name}}</h6></a>
                                 <div class="price">
-                                    <h6>{{$item->price}}</h6>
+                                    <h6>{{number_format($item->price,0,'','.')}}đ</h6>
                                 </div>
                                 <div class="prd-bottom">
-
+                                    <form action="{{route('clients.cart.add')}}" method="POST">
+                                        @csrf
                                     <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">Giỏ hàng</p>
+                                        <input type="hidden" name="quanlity" value="1">
+                                        <input type="hidden" name="product_id" value="{{$item->id}}">
+                                       <button type="submit" style="border:none"> <span class="ti-bag"></span>
+                                        <p class="hover-text">Giỏ hàng</p></button>
                                     </a>
+
                                     <a href="{{route('clients.product_detail',$item->id)}}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                         <p class="hover-text">xem chi tiết</p>
-                                    </a>
+                                    </a>                                </form>
                                 </div>
                             </div>
                         </div>

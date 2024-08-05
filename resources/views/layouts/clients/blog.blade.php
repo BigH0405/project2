@@ -44,7 +44,7 @@
                         <div class="categories_details">
                             <div class="categories_text">
                                 <a href="blog-details.html">
-                                    <h5>{{$item->name}}</h5>
+                                    <h5><a>{{$item->name}}</a></h5>
                                 </a>
                                 <div class="border_line"></div>
                                 <p>{{$item->short_description}}</p>
@@ -97,10 +97,10 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="blog_post">
-                                    <img src="{{asset('clients/img/blog/main-blog/m-blog-1.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{ $item->image ? asset($item->image) : 'Không có ảnh' }}" alt="">
                                     <div class="blog_details">
                                         <a href="single-blog.html">
-                                            <h2>{{$item->title}}</h2>
+                                            <h2><a href="{{route('clients.blogs_detail',$item->id)}}">{{$item->title}}</a></h2>
                                         </a>
                                         <p>{{$item->short_description}}</p>
                                         <a href="single-blog.html" class="white_bg_btn">View More</a>
@@ -134,21 +134,6 @@
                         </form><!-- /input-group -->
                             <div class="br"></div>
                         </aside>
-                        {{-- <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="{{asset('clients/img/blog/author.png')}}" alt="">
-                            <h4>Charlie Barber</h4>
-                            <p>Senior blog writer</p>
-                            <div class="social_icon">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-github"></i></a>
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                            </div>
-                            <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get. Boot camps have itssuppor
-                                ters andits detractors.</p>
-                            <div class="br"></div>
-                        </aside> --}}
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Popular Posts</h3>
                         @foreach($allTop as $item)
