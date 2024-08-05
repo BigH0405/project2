@@ -55,13 +55,17 @@
                                 <td>{{$item->message}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
+                                @can('update', App\Models\admin\Contacts::class)
                                 <td><a href="{{route('admin.contacts.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                                @endcan
+                                @can('delete', App\Models\admin\Contacts::class)
                                 <td><a href="{{route('admin.contacts.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                                @endcan
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="13" class="text-center" style="color: red">Không có sản phẩm</td>
+                                <td colspan="9" class="text-center" style="color: red">Không có sản phẩm</td>
                               </tr>
                             @endif
                         </tbody>

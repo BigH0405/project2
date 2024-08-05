@@ -73,7 +73,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="13" class="text-center" style="color: red">Không có sản phẩm</td>
+                                <td colspan="12" class="text-center" style="color: red">Không có sản phẩm</td>
                               </tr>
                             @endif
                         </tbody>

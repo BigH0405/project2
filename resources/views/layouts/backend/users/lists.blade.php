@@ -11,7 +11,9 @@
                 @if (session('msg_warning'))
                 <div class="alert alert-danger">{{session('msg_warning')}}</div>
                 @endif
+                @can('create',App\Models\admin\Users::class)
                 <a href="{{route('admin.user.add')}}" class="btn btn-primary mb-3">Thêm mới</a>
+                @endcan
                 <form action="" method="GET">
                     <div class="row">
                         <div class="col-3">
@@ -71,8 +73,12 @@
                             <td>{{$item->Group ? $item->Group->name : 'Không có nhóm'}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>
+                            @can('update', App\Models\admin\Users::class)
                             <td><a href="{{route('admin.user.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                            @endcan
+                            @can('delete',App\Models\admin\Users::class)
                             <td><a href="{{route('admin.user.delete',['id'=>$item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>   
+                            @endcan
                         </tr>
                         @endforeach
                         @else

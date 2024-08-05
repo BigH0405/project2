@@ -11,7 +11,9 @@
                 @if (session('msg_warning'))
                 <div class="alert alert-danger">{{session('msg_warning')}}</div>
                 @endif
+                @can('create',App\Models\admin\BlogCategory::class)
                 <a href="{{route('admin.cates.add')}}" class="btn btn-primary mb-3">Thêm danh mục bài viết</a>
+                @endcan
                 <form action="" method="GET">
                     <div class="row">
                         <div class="col-4">
@@ -43,8 +45,12 @@
                             <td>{{$item->short_description}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>
+                            @can('update',App\Models\admin\BlogCategory::class)
                             <td><a href="{{route('admin.cates.edit',['id' => $item->id])}}" class="btn btn-warning sm-2">Sửa</a></td>
+                            @endcan
+                            @can('delete',App\Models\admin\BlogCategory::class)
                             <td><a href="{{route('admin.cates.delete',['id' => $item->id])}}" class="btn btn-danger sm-2" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>
+                            @endcan
                         </tr>
                         @endforeach
                         @else
