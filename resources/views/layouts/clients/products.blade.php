@@ -53,7 +53,7 @@
                 <form action="" method="GET">
                     <div class="row mt-3">
                         <div class="col-8">
-                                <input type="search" name="keywords" id="" class="form-control mb-3" placeholder="Nhập từ khóa tìm kiếm..." value="{{request()->keywords}}">
+                                <input ytype="search" name="keywords" id="" class="form-control mb-3" placeholder="Nhập từ khóa tìm kiếm..." value="{{request()->keywords}}">
                                 </div>
                                 <div class="col-3">
                                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
@@ -61,12 +61,6 @@
                 </div>
                 </form>
         </div>
-                @if(!empty($title1))
-                    <h3>{{ $title1 }}</h3>
-                @else
-                <h1>{{ $title }}</h1>
-                @endif
-            </div>
             <!-- End Filter Bar -->
             <!-- Start Product List -->
             <section class="lattest-product-area pb-40 category-list">
