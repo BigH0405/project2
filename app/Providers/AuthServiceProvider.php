@@ -5,6 +5,7 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 
+use App\Policies\BillPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -33,6 +34,7 @@ use App\Models\admin\Contacts;
 use App\Models\admin\Coupons;
 use App\Models\admin\ProductCategory;
 use App\Models\admin\Reviews;
+use App\Models\admin\Bill;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -52,6 +54,7 @@ class AuthServiceProvider extends ServiceProvider
         Users::class => UsersPolicy::class,
         Groups::class => GroupsPolicy::class,
         ProductCategory::class => ProductCatePolicy::class,
+        Bill::class => BillPolicy::class
     ];
 
     /**

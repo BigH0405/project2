@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\BillsController;
 use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\clients\UserClientsController;
 use App\Http\Controllers\clients\BillController;
+use App\Models\admin\Bill;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductCategoryController;
@@ -215,6 +217,15 @@ Route::prefix('/reviews')->middleware(['auth:admin','can:reviews'])->name('revie
     Route:: post('/edit/{id}', [ReviewController::class,'postEdit'])->name('post-edit')->can('update', Reviews::class);
     Route::get('/delete/{id}',[ReviewController::class,'delete'])->name('delete')->can('delete', Reviews::class);
 
+});
+Route::prefix('/bills')->middleware(['auth:admin','can:bills'])->name('bills.')->group(function(){
+    Route::get('/',[BillsController::class,'index'])->name('index');
+    Route::post('bills/{id}/update-status', [BillsController::class, 'updateStatus'])->name('billsupdateStatus');
+    Route:: get('/add', [BillsController::class,'add'])->name('add')->can('create', Bill::class);
+    Route:: post('/add', [BillsController::class,'postAdd'])->name('post-add')->can('create', Reviews::class);
+    Route:: get('/edit/{id}', [BillsController::class,'edit'])->name('edit')->can('update', Bill::class);
+    Route:: post('/edit/{id}', [BillsController::class,'postEdit'])->name('post-edit')->can('update', Bill::class);
+    Route::get('/delete/{id}',[BillsController::class,'delete'])->name('delete')->can('delete', Bill::class);
 });
 });
 
