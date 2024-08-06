@@ -19,9 +19,17 @@
 <!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
-        @if (session('error'))
-            <div class="alert alert-warning">{{ session('error') }}</div>
+        @if(session('login'))
+    <div class="alert alert-danger">
+        {{ session('login') }}
+    </div>
         @endif
+        @if (session('msg'))
+            <div class="alert alert-success">{{ session('msg') }}</div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-warning">{{ session('error') }}</div>
+    @endif
         <div class="cart_inner">
             <form action="{{ route('clients.cart.update') }}" method="post">
                 @csrf
@@ -36,6 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if(!@empty($cart))                                
                             @foreach ($cart as $key => $item)
                                 <tr>
                                     <td>
@@ -44,10 +53,11 @@
                                                 <img src="img/cart.jpg" alt="">
                                             </div>
                                             <div class="media-body">
+                                                <h4>
                                                 <a
-                                                    href="{{ route('clients.product_detail', $key) }}">{{ $item['name'] }}</a>
+                                                  style="color: black"  href="{{ route('clients.product_detail', $key) }}">{{ $item['name'] }}</a>
                                                 <input type="hidden" name="cart[{{ $key }}][name]"
-                                                    value="{{ $item['name'] }}">
+                                                    value="{{ $item['name'] }}"></h4>
                                             </div>
                                         </div>
                                     </td>
@@ -78,6 +88,14 @@
                                     <td><a href="#" class="lnr lnr-cross" onclick="removeItem(this)"></a></td>
                                 </tr>
                             @endforeach
+                            @else
+                            <td>
+                            <h4>Không có sản phẩm nào</h4>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                            @endif
                             <tr class="bottom_button">
                                 <td>
                                     <button type="submit" class="gray_btn">Update Cart</button>
@@ -128,8 +146,8 @@
                                 <td></td>
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="{{ route('clients.products') }}">Continue Shopping</a>
-                                        <a class="primary-btn" href="{{ route('clients.bill.create') }}">Proceed to checkout</a>
+                                        <a class="gray_btn" href="{{ route('clients.products') }}">Tiếp tục mua hàng</a>
+                                        <a class="primary-btn" href="{{ route('clients.bill.create') }}">Thanh toán</a>
                                     </div>
                                 </td>
                             </tr>

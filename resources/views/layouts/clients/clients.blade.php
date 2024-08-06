@@ -15,10 +15,15 @@
 								<div class="banner-content">
 									<h1>{{$item->name}}</h1>
 									<p>{{$item->short_description}}</p>
-									<div class="add-bag d-flex align-items-center">
-										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
+									<form action="{{route('clients.cart.add')}}" method="POST">
+										@csrf
+										<input type="hidden" name="quanlity" value="1">
+										<input type="hidden" name="product_id" value="{{$item->id}}">
+										<button type="submit" style="border: none"><a class="add-btn" href=""><div class="add-bag d-flex align-items-center">
+										<span class="lnr lnr-cross"></span></a>
 										<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
-									</div>
+									</div></button>
+								</form>
 								</div>
 							</div>
 							<div class="col-lg-7">

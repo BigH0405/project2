@@ -84,7 +84,7 @@
                                             <h6>{{ $item->name }}</h6>
                                         </a>
                                         <div class="price">
-                                            <h6>{{ $item->price }}</h6>
+                                            <h6>{{ number_format($item->price, 0, '', '.') }}đ</h6>
                                         </div>
                                         <div class="prd-bottom">
                                             <form action="{{route('clients.cart.add')}}" method="POST">

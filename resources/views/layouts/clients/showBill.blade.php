@@ -15,6 +15,7 @@
 <!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
+        <a style="color: white" href="{{route('clients.bills')}}"><button type="submit" class="btn btn-primary">Quay lại</button></a>
         <div class="cart_inner">
             <div class="table-responsive">
                 <table class="table">
