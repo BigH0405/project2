@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\ProductCategoryRequest;
-use App\Models\admin\ProductCategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\admin\ProductCategory;
+use App\Http\Requests\admin\ProductCategoryRequest;
+use Illuminate\Support\Facades\Auth;
 
-class ProductCate extends Controller
+class ProductCategoryController extends Controller
 {
     public function index(Request $request)
     {
@@ -42,7 +43,10 @@ class ProductCate extends Controller
         ];
         $category = ProductCategory::create($dataInsert);
 
-        return response()->json($category, 201);
+        return response()->json([
+            'message' => 'Danh mục sản phẩm đã được thêm thành công',
+            'category' => $category
+        ], 201);
     }
 
     public function update(ProductCategoryRequest $request, $id)
