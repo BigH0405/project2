@@ -42,6 +42,13 @@
                     ])
                 @endcan
 
+                @can('bills')
+                @include('parts.backend.menu_item', [
+                    'title' => 'Quản lý đơn hàng',
+                    'name' => 'bills',
+                    ])
+                @endcan
+
                 @can('users')
                 @include('parts.backend.menu_item', [
                     'title' => 'Danh sách người dùng',
@@ -76,6 +83,8 @@
                     'name' => 'reviews',
                     ])  
                 @endcan
+
+                
             </div>
         </div>
         <div class="sb-sidenav-footer">
