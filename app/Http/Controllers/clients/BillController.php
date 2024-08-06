@@ -37,21 +37,32 @@ class BillController extends Controller
             $shipping = 30000;
             $total = $subTotal + $shipping;
         }
-
+        else{
+        return redirect()->route('clients.cart')->with('error','Không có sản phẩm nào');
+        }
         $nav = ProductsCate::get();
         if (Auth::guard('web')->check()) {
             $user = Auth::guard('web')->user();
             return view('layouts.clients.checkout', compact('user', 'nav', 'subTotal', 'shipping', 'total', 'cart'));
         }
-        return redirect()->route('clients.lists')->with('msg','Đăng nhập để tiếp tục');
+        return redirect()->route('clients.cart')->with('error','vui lòng đăng nhập');
     }
     function generateUniqueOrderCode(){
         do {
-            $orderCode = 'ORD' . Auth::id() . '-' . now()->timestamp;
+            $orderCode = 'KAR' . Auth::id() . '-' . now()->timestamp;
         } while (Bills::where('code', $orderCode)->exists());
 
         return $orderCode;
     }
+    public function success(){
+        $nav = ProductsCate::get();
+        if (Auth::guard('web')->check()) {
+            $user = Auth::guard('web')->user();
+            return view('layouts.clients.success', compact('user', 'nav'));
+        }
+        return view('layouts.clients.success', compact('nav'));
+
+    } 
 
     public function store(BillRequest $request)
     {
@@ -69,7 +80,7 @@ class BillController extends Controller
         
                 // Tạo đơn hàng mới
                 $bill = Bills::create($params);
-        
+                if(!empty($cart)){
                 // Lưu chi tiết đơn hàng
                 foreach ($cart as $productId => $item) {
                     // Kiểm tra dữ liệu giỏ hàng
@@ -89,7 +100,11 @@ class BillController extends Controller
                 session()->put('cart', []);
                 DB::commit();
         
-                return redirect()->route('clients.cart');
+                return redirect()->route('clients.success');
+            }
+            else{
+                return redirect()->route('clients.cart')->with('msg','không có sản phẩm nào');
+            }
             } 
             // catch (\Exception $e) {
             //     DB::rollBack();

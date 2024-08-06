@@ -74,7 +74,7 @@
                             <p>Thanh toán bằng tiền mặt khi giao hàng.</p>
                         </div>
                         
-                      <button type="submit" class="primary-btn" >Proceed to Paypal</button>
+                      <button type="submit" class="primary-btn" >Đặt hàng</button>
                     </div>
                 </div>
             </div>

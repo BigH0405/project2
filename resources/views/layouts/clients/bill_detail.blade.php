@@ -41,7 +41,7 @@
                                             <img src="img/cart.jpg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>{{$item->code}}</p>
+                                            <a style="color: black" href="{{route('clients.bills.show',$item->id)}}"><h3>{{$item->code}}</h3></a>
                                         </div>
                                     </div>
                                 </td>
@@ -55,7 +55,7 @@
                                     <h4>Đang xử lý </h4>
                                 </td>
                                 <td>
-                                    <button class="primary-btn"><a style="color: black" href="{{route('clients.bills.show',$item->id)}}">Xem chi tiết</a></button>
+                                    <a style="color: black" href="{{route('clients.bills.show',$item->id)}}"><button style="border: none" class="primary-btn">Xem chi tiết</button></a>
                                 </td>
 
                             </tr>

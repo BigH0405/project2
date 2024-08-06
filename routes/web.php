@@ -319,12 +319,12 @@ Route::prefix('/')->name('clients.')->group(function(){
     Route::post('/update-add',[CartController::class,'updateCraft'])->name('cart.update');
    
     //route hóa đơn
-    Route::get('/bill-detail',[BillController::class,'index'])->middleware('auth:web')->name('bills');
-    Route::get('/bill-detail/{id}',[BillController::class,'show'])->middleware('auth:web')->name('bills.show');
-    Route::get('/bill',[BillController::class,'create'])->middleware('auth:web')->name('bill.create');
-    Route::post('/bill',[BillController::class,'store'])->middleware('auth:web')->name('bill.store');
+    Route::get('/bill-detail',[BillController::class,'index'])->middleware('checkauth')->name('bills');
+    Route::get('/bill-detail/{id}',[BillController::class,'show'])->middleware('checkauth')->name('bills.show');
+    Route::get('/bill',[BillController::class,'create'])->middleware('checkauth')->name('bill.create');
+    Route::post('/bill',[BillController::class,'store'])->middleware('checkauth')->name('bill.store');
 
-
+    Route::get('/success',[BillController::class,'success'])->name('success');
 });
 // Kết thúc route clients
 
